@@ -133,7 +133,7 @@ nav.main{position:sticky;top:0;z-index:50;background:rgba(253,252,250,.92);backd
 .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
 .hero p.lead{font-size:var(--fs-lg);color:var(--text-muted);max-width:46ch;margin-top:14px}
 .trust{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
-.trust span{font-size:var(--fs-xs);color:var(--text-muted);background:var(--surface-card);border:1px solid var(--border-subtle);border-radius:var(--radius-sm);padding:6px 11px}
+.trust span{font-size:var(--fs-xs);color:var(--text-body);background:var(--surface-brand-soft);border:1px solid var(--orange-100);border-radius:var(--radius-md);padding:7px 13px}
 .trust b{color:var(--text-strong)}
 .trust .star{color:var(--orange-500)}
 .imgph{background:linear-gradient(150deg,var(--orange-100),var(--green-100));border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;color:var(--gray-500);font-size:11px;letter-spacing:.1em;text-transform:uppercase;text-align:center;padding:12px}
@@ -171,8 +171,10 @@ nav.main{position:sticky;top:0;z-index:50;background:rgba(253,252,250,.92);backd
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:var(--grid-gutter)}
 @media(max-width:960px){.grid4,.grid3{grid-template-columns:1fr 1fr}}
 @media(max-width:600px){.grid4,.grid3,.grid2{grid-template-columns:1fr}}
-.svc{background:var(--surface-card);border:1px solid var(--border-subtle);border-radius:var(--radius-md);box-shadow:var(--shadow-xs);padding:var(--space-6);display:flex;flex-direction:column;min-height:200px;transition:box-shadow var(--dur-fast) var(--ease-out);text-decoration:none!important;color:inherit}
-.svc:hover{box-shadow:var(--shadow-md)}
+.svc{background:var(--surface-card);border:1px solid var(--border-subtle);border-radius:var(--radius-lg);box-shadow:var(--shadow-xs);padding:var(--space-6);display:flex;flex-direction:column;min-height:200px;transition:box-shadow var(--dur-base) var(--ease-out),transform var(--dur-base) var(--ease-out),border-color var(--dur-base) var(--ease-out);text-decoration:none!important;color:inherit}
+.svc:hover{box-shadow:var(--shadow-md);transform:translateY(-3px);border-color:var(--orange-200)}
+.svc:hover .ic{background:var(--orange-100)}
+.svc .ic{transition:background var(--dur-base) var(--ease-out)}
 .svc .ic{width:44px;height:44px;border-radius:var(--radius-md);background:var(--surface-brand-soft);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
 .svc .ic .svgi{stroke:var(--orange-600)}
 .svc h3{font-size:var(--fs-h4);margin-bottom:6px}
@@ -184,7 +186,8 @@ nav.main{position:sticky;top:0;z-index:50;background:rgba(253,252,250,.92);backd
 .slot .dot{width:5px;height:5px;border-radius:50%;background:var(--green-500)}
 .card{padding:var(--space-6)}
 .pcard{background:var(--surface-card);border:1px solid var(--border-subtle);border-radius:var(--radius-md);box-shadow:var(--shadow-xs);overflow:hidden;display:flex;flex-direction:column;transition:box-shadow var(--dur-fast) var(--ease-out);text-decoration:none!important;color:inherit}
-.pcard:hover{box-shadow:var(--shadow-md)}
+.pcard{transition:box-shadow var(--dur-base) var(--ease-out),transform var(--dur-base) var(--ease-out),border-color var(--dur-base) var(--ease-out)}
+.pcard:hover{box-shadow:var(--shadow-md);transform:translateY(-3px);border-color:var(--orange-200)}
 .pcard .img{aspect-ratio:16/10;border-radius:0}
 .pcard .body{padding:var(--space-5);display:flex;flex-direction:column;flex:1}
 .pcard.feature{grid-column:span 3;flex-direction:row}
@@ -364,3 +367,31 @@ footer.site{background:var(--surface-card);border-top:1px solid var(--border-sub
 .toast-live{position:fixed;bottom:20px;inset-inline-end:20px;z-index:80;animation:toastIn var(--dur-base) var(--ease-out)}
 @keyframes toastIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:900px){.has-mbar-page{padding-bottom:74px}}
+
+/* ==========================================================================
+   Welcoming warmth — soft brand-palette tints only (Orange / Green / Warm White)
+   ========================================================================== */
+/* Gentle warm glow behind the top of key pages */
+.homehero{
+  background:
+    radial-gradient(circle at 8% -20%, rgba(217,127,52,.12), transparent 40%),
+    radial-gradient(circle at 96% -10%, rgba(115,160,96,.12), transparent 44%),
+    linear-gradient(180deg, var(--orange-50) 0%, var(--surface-page) 62%);
+  padding-block:24px 12px;
+}
+.pagehd.warmtop{
+  background:linear-gradient(180deg, var(--orange-50) 0%, var(--surface-page) 100%);
+  border-radius:0 0 var(--radius-lg) var(--radius-lg);
+}
+/* Hero card: warm two-tone accent strip + softer feel */
+.hero-solo{position:relative;overflow:hidden;border-radius:var(--radius-xl)}
+.hero-solo::before{content:"";position:absolute;top:0;inset-inline:0;height:5px;background:linear-gradient(90deg,var(--orange-500),var(--red-500) 55%,var(--green-500))}
+.hero-solo .eyebrow{display:inline-flex;align-items:center;gap:8px}
+.hero-solo .eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--green-500);box-shadow:0 0 0 4px var(--surface-care-soft)}
+/* Friendlier "how it works" band */
+.steps.warm{border:1px solid var(--orange-100);border-block:1px solid var(--orange-100);background:var(--surface-brand-soft);border-radius:var(--radius-lg);padding:20px 28px}
+.steps.warm .s{color:var(--text-body)}
+/* Warmer section-number badges keep brand orange; add a soft ring */
+.gsec .num,.sec-hd .num{box-shadow:0 0 0 4px var(--surface-brand-soft)}
+/* Testimonial: a touch of warmth */
+.quoteband{background:linear-gradient(180deg,var(--surface-card),var(--orange-50))}

@@ -7,13 +7,14 @@ export default function HomePage() {
   return (
     <>
       {/* HERO */}
+      <div className="homehero">
       <div className="wrap">
         <header className="hero-solo">
-          <span className="eyebrow">Home healthcare · Dubai</span>
+          <span className="eyebrow">Welcome · Home healthcare in Dubai</span>
           <h1>Hospital-grade care, in the comfort of home.</h1>
           <p className="lead">
             DHA-licensed doctors, nurses and physiotherapists at your door — often the same day.
-            No queues, no waiting rooms.
+            No queues, no waiting rooms. Just warm, expert care where you feel most at ease.
           </p>
           <div className="trust">
             <span>Caring for Dubai homes since <b>{COMPANY.since}</b></span>
@@ -23,6 +24,7 @@ export default function HomePage() {
           </div>
           <BookingWidget />
         </header>
+      </div>
       </div>
 
       {/* SERVICES */}
@@ -63,10 +65,10 @@ export default function HomePage() {
 
       {/* STEPS */}
       <div className="wrap">
-        <div className="steps">
+        <div className="steps warm">
           <div className="s"><span className="n">1</span><span>Choose service &amp; time</span></div>
           <div className="s"><span className="n">2</span><span>Confirm address · pay now or on visit</span></div>
-          <div className="s"><span className="n">3</span><span>Open the door — clinician arrives</span></div>
+          <div className="s"><span className="n">3</span><span>Open the door — a friendly clinician arrives</span></div>
         </div>
       </div>
 
