@@ -7,7 +7,11 @@
       "Bash(curl -s -o /dev/null -w \"home:%{http_code}  services/[slug]:\" http://localhost:3200/)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3200/services/nad-therapy)",
       "Bash(git init *)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(git -c user.name=HealthServe -c user.email=ahamedroshanali@gmail.com commit -q -m 'Initial commit: HealthServe Next.js app *)",
+      "Bash(git branch *)",
+      "Bash(GITHUB_PAGES=true npm run build)",
+      "Bash(git -c user.name=HealthServe -c user.email=ahamedroshanali@gmail.com commit -q -m 'Add GitHub Pages static export + deploy workflow *)"
     ]
   }
 }
