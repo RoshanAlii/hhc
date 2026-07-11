@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { loadOrder, type Order } from "@/lib/cart";
-import { formatAED } from "@/lib/data";
+import { formatAED, formatSlot } from "@/lib/data";
 
 export default function ConfirmationView() {
   const [order, setOrder] = useState<Order | null | undefined>(undefined);
@@ -37,14 +37,19 @@ export default function ConfirmationView() {
       </div>
       <h1 style={{ fontSize: 30, fontWeight: "var(--fw-extra)" }}>You&rsquo;re booked.</h1>
       <p className="muted" style={{ marginTop: 8 }}>
-        Confirmation sent on WhatsApp. Your clinician arrives {order.slot.toLowerCase()} — we&rsquo;ll message when they&rsquo;re on the way.
+        Confirmation sent on WhatsApp. Your clinician arrives on <b>{order.slot}</b> — we&rsquo;ll message when they&rsquo;re on the way.
       </p>
 
       <div className="receipt">
         <div className="srow"><span>Order</span><b>{order.id}</b></div>
         {order.items.map((it) => (
           <div className="srow" key={it.key}>
-            <span>{it.name}{it.qty > 1 ? ` × ${it.qty}` : ""}</span>
+            <span>
+              {it.name}{it.qty > 1 ? ` × ${it.qty}` : ""}
+              {it.kind === "service" && (it.date || it.time) && (
+                <><br /><small className="muted">{formatSlot(it.date, it.time)}</small></>
+              )}
+            </span>
             <span>{formatAED(it.price * it.qty)}</span>
           </div>
         ))}

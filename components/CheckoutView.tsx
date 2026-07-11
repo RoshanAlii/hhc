@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCart, saveOrder, type Order } from "@/lib/cart";
-import { formatAED } from "@/lib/data";
+import { formatAED, formatSlot, localDate } from "@/lib/data";
 
 const METHODS = [
   { id: "card", label: "Card · Visa / Mastercard" },
@@ -14,11 +14,14 @@ const METHODS = [
 
 export default function CheckoutView() {
   const router = useRouter();
-  const { items, subtotal, vat, total, clear, ready } = useCart();
+  const { items, subtotal, vat, total, updateItem, clear, ready } = useCart();
   const [method, setMethod] = useState("card");
   const [form, setForm] = useState({ name: "", mobile: "", address: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
+  const [today, setToday] = useState("");
+
+  useEffect(() => setToday(localDate()), []);
 
   if (ready && items.length === 0) {
     return (
@@ -36,11 +39,14 @@ export default function CheckoutView() {
     setForm((f) => ({ ...f, [field]: value }));
   }
 
+  const appointments = items.filter((i) => i.kind === "service");
+
   function validate() {
     const e: Record<string, string> = {};
     if (!form.name.trim()) e.name = "Please enter your name.";
     if (!/^[+\d][\d\s]{7,}$/.test(form.mobile.trim())) e.mobile = "Enter a valid mobile number.";
     if (!form.address.trim()) e.address = "Please enter your address.";
+    if (appointments.some((i) => !i.date || !i.time)) e.slot = "Please set a date and time for every appointment.";
     setErrors(e);
     return Object.keys(e).length === 0;
   }
@@ -48,6 +54,7 @@ export default function CheckoutView() {
   function confirm() {
     if (!validate()) return;
     setSubmitting(true);
+    const first = appointments[0] ?? items[0];
     const order: Order = {
       id: "HS-" + Math.floor(10000 + Math.random() * 90000),
       items,
@@ -56,7 +63,7 @@ export default function CheckoutView() {
       total,
       payment: METHODS.find((m) => m.id === method)!.label,
       card: method === "card" ? "····4291" : undefined,
-      slot: "Today 6:00 PM",
+      slot: formatSlot(first?.date, first?.time),
       createdAt: Date.now(),
     };
     saveOrder(order);
@@ -83,13 +90,37 @@ export default function CheckoutView() {
             </div>
           </div>
 
-          <div className="stephd"><span className="sn done">✓</span><b>Address &amp; time</b></div>
+          <div className="stephd"><span className="sn done">✓</span><b>Address &amp; appointment</b></div>
           <div className={`field${errors.address ? " invalid" : ""}`}>
             <label>Address · Oud Metha</label>
             <input value={form.address} onChange={(e) => set("address", e.target.value)} placeholder="Villa / apartment, street" />
             {errors.address && <span className="err">{errors.address}</span>}
           </div>
-          <span className="tag"><span className="dot" />Serviceable · Today 6:00 PM confirmed</span>
+
+          {appointments.length > 0 && (
+            <>
+              <div className="lbl" style={{ marginTop: 14 }}>{appointments.length > 1 ? "Appointments" : "Appointment"}</div>
+              {appointments.map((it) => (
+                <div key={it.key} style={{ marginBottom: 12 }}>
+                  <div style={{ fontSize: 13, fontWeight: "var(--fw-bold)", color: "var(--text-strong)", marginBottom: 6 }}>
+                    {it.name}{it.meta ? ` · ${it.meta}` : ""}
+                  </div>
+                  <div className="grid2">
+                    <div className="field" style={{ marginBottom: 0 }}>
+                      <label>Date</label>
+                      <input type="date" min={today} value={it.date ?? ""} onChange={(e) => updateItem(it.key, { date: e.target.value })} />
+                    </div>
+                    <div className="field" style={{ marginBottom: 0 }}>
+                      <label>Time</label>
+                      <input type="time" value={it.time ?? ""} onChange={(e) => updateItem(it.key, { time: e.target.value })} />
+                    </div>
+                  </div>
+                </div>
+              ))}
+              {errors.slot && <span className="err" style={{ color: "var(--danger)", fontSize: 13 }}>{errors.slot}</span>}
+              <span className="tag"><span className="dot" />Serviceable · times confirmed on booking</span>
+            </>
+          )}
 
           <div className="stephd"><span className="sn">3</span><b>Payment</b></div>
           {METHODS.map((m) => (
@@ -109,7 +140,12 @@ export default function CheckoutView() {
           <div className="lbl">Order</div>
           {items.map((it) => (
             <div className="srow" key={it.key}>
-              <span>{it.name}{it.qty > 1 ? ` × ${it.qty}` : ""}</span>
+              <span>
+                {it.name}{it.qty > 1 ? ` × ${it.qty}` : ""}
+                {it.kind === "service" && (it.date || it.time) && (
+                  <><br /><small className="muted">{formatSlot(it.date, it.time)}</small></>
+                )}
+              </span>
               <span>{formatAED(it.price * it.qty)}</span>
             </div>
           ))}

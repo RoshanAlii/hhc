@@ -4,7 +4,9 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { coreServiceList } from "@/lib/data";
 
-const bookable = coreServiceList.filter((s) => s.priceType !== "enquire");
+// Only services with a real price can be booked directly; program/enquire
+// services (e.g. chronic disease, travel medical) go through enquiry instead.
+const bookable = coreServiceList.filter((s) => s.price != null);
 
 export default function BookingWidget() {
   const router = useRouter();

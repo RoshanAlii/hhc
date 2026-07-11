@@ -2,19 +2,31 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCart } from "@/lib/cart";
-import { COMPANY, formatAED, type Service } from "@/lib/data";
+import { COMPANY, formatAED, formatSlot, localDate, type Service } from "@/lib/data";
 
 export default function ServiceDetailClient({ service }: { service: Service }) {
   const router = useRouter();
   const { addItem } = useCart();
   const [variantId, setVariantId] = useState(service.variants?.[0]?.id ?? "");
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("18:00");
+  const [today, setToday] = useState("");
+  const [error, setError] = useState("");
   const [toast, setToast] = useState(false);
 
   const variant = service.variants?.find((v) => v.id === variantId);
   const activePrice = variant?.price ?? service.price;
   const bookable = activePrice != null && service.priceType !== "enquire" && service.priceType !== "program";
+
+  // Prefill the date on the client. Honour the ?when= hint from the home
+  // booking widget (Today / Tomorrow); default to today otherwise.
+  useEffect(() => {
+    setToday(localDate());
+    const when = new URLSearchParams(window.location.search).get("when");
+    setDate(localDate(when === "Tomorrow" ? 1 : 0));
+  }, []);
 
   const priceMain = bookable
     ? (service.priceType === "from" && !variant ? "from " : "") + formatAED(activePrice!)
@@ -22,18 +34,27 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
       ? "Program"
       : "Enquire";
 
+  const slotLabel = formatSlot(date, time);
+
   function addToBooking(goToCart: boolean) {
     if (!bookable) {
       window.open(COMPANY.whatsapp, "_blank");
       return;
     }
+    if (!date || !time) {
+      setError("Please choose a date and time for your appointment.");
+      return;
+    }
+    setError("");
     addItem({
       key: `${service.slug}:${variantId || "std"}`,
       slug: service.slug,
       name: service.name,
-      meta: [variant?.name, service.nextSlot].filter(Boolean).join(" · "),
+      meta: variant?.name,
       price: activePrice!,
       kind: "service",
+      date,
+      time,
     });
     if (goToCart) {
       router.push("/cart");
@@ -64,7 +85,7 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
               ))}
             </div>
           )}
-          <span className="tag"><span className="dot" />Next: {service.nextSlot}</span>
+          <span className="tag"><span className="dot" />{bookable ? slotLabel : `Next: ${service.nextSlot}`}</span>
           <div className="cta">
             <button className="btn btn-primary btn-lg" onClick={() => addToBooking(true)} type="button">
               {bookable ? "See available times" : "Enquire now"}
@@ -100,23 +121,36 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
         </main>
 
         <aside className="aside">
-          <div className="lbl">Booking summary</div>
+          <div className="lbl">{bookable ? "Book your appointment" : "Booking summary"}</div>
           <div className="srow"><span>Service</span><b>{variant?.name ?? service.shortName}</b></div>
           <div className="srow"><span>{bookable ? "Price" : "Pricing"}</span><b>{priceMain}</b></div>
-          <div className="srow"><span>Next slot</span><b>{service.nextSlot}</b></div>
+
           {bookable ? (
             <>
-              <button className="btn btn-primary btn-full" style={{ marginTop: 12 }} onClick={() => addToBooking(false)} type="button">
+              <div className="field" style={{ marginTop: 12, marginBottom: 10 }}>
+                <label>Appointment date</label>
+                <input type="date" min={today} value={date} onChange={(e) => setDate(e.target.value)} />
+              </div>
+              <div className="field" style={{ marginBottom: 4 }}>
+                <label>Preferred time</label>
+                <input type="time" value={time} onChange={(e) => setTime(e.target.value)} />
+              </div>
+              <p className="muted" style={{ fontSize: 12, marginBottom: 8 }}>Selected: <b>{slotLabel}</b></p>
+              {error && <p className="err" style={{ color: "var(--danger)", fontSize: 13, marginBottom: 8 }}>{error}</p>}
+              <button className="btn btn-primary btn-full" onClick={() => addToBooking(false)} type="button">
                 Add to booking
               </button>
               <button className="btn btn-outline btn-full" style={{ marginTop: 8 }} onClick={() => addToBooking(true)} type="button">
-                See available times
+                Book &amp; go to cart
               </button>
             </>
           ) : (
-            <a className="btn btn-primary btn-full" style={{ marginTop: 12 }} href={COMPANY.whatsapp} target="_blank" rel="noreferrer">
-              Enquire on WhatsApp
-            </a>
+            <>
+              <div className="srow"><span>Next slot</span><b>{service.nextSlot}</b></div>
+              <a className="btn btn-primary btn-full" style={{ marginTop: 12 }} href={COMPANY.whatsapp} target="_blank" rel="noreferrer">
+                Enquire on WhatsApp
+              </a>
+            </>
           )}
           <p className="muted" style={{ textAlign: "center", fontSize: 12, marginTop: 10 }}>Card · Tabby · Pay on visit</p>
           <div className="truststrip">{COMPANY.dha} · MOHAP approved<br />Caring for Dubai homes since {COMPANY.since}</div>
@@ -124,8 +158,8 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
       </div>
 
       <div className="mbar">
-        <span className="p"><b>{priceMain}</b> · {variant?.name ?? service.shortName}</span>
-        <button className="btn" onClick={() => addToBooking(true)} type="button">{bookable ? "See times" : "Enquire"}</button>
+        <span className="p"><b>{priceMain}</b> · {bookable ? slotLabel : (variant?.name ?? service.shortName)}</span>
+        <button className="btn" onClick={() => addToBooking(true)} type="button">{bookable ? "Book" : "Enquire"}</button>
       </div>
 
       {toast && (
@@ -136,7 +170,7 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
             </div>
             <div>
               <div className="t">Added to your booking</div>
-              <div className="s">{variant?.name ?? service.shortName} · <Link href="/cart">View cart →</Link></div>
+              <div className="s">{variant?.name ?? service.shortName} · {slotLabel} · <Link href="/cart">View cart →</Link></div>
             </div>
           </div>
         </div>

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useCart } from "@/lib/cart";
-import { formatAED, VAT_RATE } from "@/lib/data";
+import { formatAED, formatSlot, VAT_RATE } from "@/lib/data";
 
 const PROMO_CODES: Record<string, number> = { WELCOME10: 0.1, HEALTH15: 0.15 };
 
@@ -59,7 +59,7 @@ export default function CartView() {
               <div className="imgph th" />
               <div className="m">
                 <div className="t">{it.name}</div>
-                {it.meta && <div className="sub">{it.meta}</div>}
+                <div className="sub">{[it.meta, it.kind === "service" ? formatSlot(it.date, it.time) : null].filter(Boolean).join(" · ")}</div>
                 {it.kind === "service" && it.slug !== "doctor-visit" ? (
                   <div className="qty">
                     <button onClick={() => setQty(it.key, it.qty - 1)} aria-label="Decrease">−</button>

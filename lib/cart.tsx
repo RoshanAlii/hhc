@@ -11,6 +11,8 @@ export interface CartItem {
   price: number;
   qty: number;
   kind: "service" | "package";
+  date?: string; // yyyy-mm-dd appointment date
+  time?: string; // HH:MM appointment time
 }
 
 interface CartContextValue {
@@ -23,6 +25,7 @@ interface CartContextValue {
   addItem: (item: Omit<CartItem, "qty"> & { qty?: number }) => void;
   removeItem: (key: string) => void;
   setQty: (key: string, qty: number) => void;
+  updateItem: (key: string, patch: Partial<CartItem>) => void;
   clear: () => void;
 }
 
@@ -72,14 +75,18 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     );
   }, []);
 
+  const updateItem = useCallback((key: string, patch: Partial<CartItem>) => {
+    setItems((prev) => prev.map((i) => (i.key === key ? { ...i, ...patch } : i)));
+  }, []);
+
   const clear = useCallback(() => setItems([]), []);
 
   const value = useMemo<CartContextValue>(() => {
     const subtotal = items.reduce((sum, i) => sum + i.price * i.qty, 0);
     const vat = Math.round(subtotal * VAT_RATE);
     const count = items.reduce((sum, i) => sum + i.qty, 0);
-    return { items, count, subtotal, vat, total: subtotal + vat, ready, addItem, removeItem, setQty, clear };
-  }, [items, ready, addItem, removeItem, setQty, clear]);
+    return { items, count, subtotal, vat, total: subtotal + vat, ready, addItem, removeItem, setQty, updateItem, clear };
+  }, [items, ready, addItem, removeItem, setQty, updateItem, clear]);
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }

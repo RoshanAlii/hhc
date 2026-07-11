@@ -439,6 +439,27 @@ export function formatAED(n: number): string {
   return "AED " + n.toLocaleString("en-AE");
 }
 
+// Format an appointment (yyyy-mm-dd + HH:MM) as "Fri 11 Jul · 6:00 PM".
+export function formatSlot(date?: string, time?: string): string {
+  if (!date || !time) return "Time not set";
+  const d = new Date(`${date}T${time}`);
+  if (isNaN(d.getTime())) return "Time not set";
+  const day = d.toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short" });
+  const t = d.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
+  return `${day} · ${t}`;
+}
+
+// Local yyyy-mm-dd for today (+ optional day offset). Client-side only to
+// avoid SSR/hydration timezone mismatches.
+export function localDate(offsetDays = 0): string {
+  const d = new Date();
+  d.setDate(d.getDate() + offsetDays);
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
+}
+
 export function priceLabel(s: Service): string {
   if (s.priceType === "enquire") return "Enquire";
   if (s.priceType === "program") return "Program";
