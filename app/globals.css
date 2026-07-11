@@ -114,6 +114,9 @@ nav.main{position:sticky;top:0;z-index:50;background:rgba(253,252,250,.92);backd
 .links{display:flex;gap:24px}
 .links a{color:var(--text-muted);font-size:var(--fs-sm);font-weight:var(--fw-bold);text-decoration:none!important}
 .links a:hover,.links a[aria-current]{color:var(--text-strong)}
+.links a.parked{cursor:default}
+.links a.parked:hover{color:var(--text-muted)}
+.mobilemenu a.parked{cursor:default}
 .navact{margin-inline-start:auto;display:flex;gap:10px;align-items:center}
 .iconbtn{width:40px;height:40px;border:1px solid var(--border-subtle);border-radius:var(--radius-md);background:var(--surface-card);display:flex;align-items:center;justify-content:center;position:relative;cursor:pointer}
 .iconbtn .cnt{position:absolute;top:-5px;inset-inline-end:-5px;background:var(--brand-primary);color:#fff;font-size:10px;font-weight:var(--fw-bold);min-width:16px;height:16px;border-radius:8px;display:flex;align-items:center;justify-content:center;padding:0 4px}

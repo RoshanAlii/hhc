@@ -13,7 +13,9 @@
       "Bash(GITHUB_PAGES=true npm run build)",
       "Bash(git -c user.name=HealthServe -c user.email=ahamedroshanali@gmail.com commit -q -m 'Add GitHub Pages static export + deploy workflow *)",
       "Bash(sips -g pixelWidth -g pixelHeight logo.png)",
-      "Bash(git -c user.name=HealthServe -c user.email=ahamedroshanali@gmail.com commit -q -m 'Use official HealthServe logo PNG instead of SVG recreation *)"
+      "Bash(git -c user.name=HealthServe -c user.email=ahamedroshanali@gmail.com commit -q -m 'Use official HealthServe logo PNG instead of SVG recreation *)",
+      "Bash(curl -s http://localhost:3200/)",
+      "Bash(git -c user.name=HealthServe -c user.email=ahamedroshanali@gmail.com commit -q -m 'Fix primary nav to match spec *)"
     ]
   }
 }

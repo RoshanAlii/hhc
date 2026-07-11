@@ -8,10 +8,13 @@ import Icon from "./Icon";
 import { useCart } from "@/lib/cart";
 import { COMPANY, PROMOS } from "@/lib/data";
 
-const NAV = [
+type NavItem = { label: string; href?: string; parked?: string };
+
+const NAV: NavItem[] = [
   { href: "/", label: "Home Care" },
+  { label: "The Dispensary", parked: "Coming soon" },
   { href: "/services", label: "All Services" },
-  { href: "/packages", label: "Packages" },
+  { label: "Your Health", parked: "Coming soon" },
   { href: "/journal", label: "Journal" },
 ];
 
@@ -50,11 +53,17 @@ export default function Header() {
               <Logo width={186} />
             </Link>
             <div className="links">
-              {NAV.map((n) => (
-                <Link key={n.href} href={n.href} aria-current={isActive(n.href) ? "page" : undefined}>
-                  {n.label}
-                </Link>
-              ))}
+              {NAV.map((n) =>
+                n.href ? (
+                  <Link key={n.label} href={n.href} aria-current={isActive(n.href) ? "page" : undefined}>
+                    {n.label}
+                  </Link>
+                ) : (
+                  <a key={n.label} href="#" className="parked" title={n.parked} onClick={(e) => e.preventDefault()}>
+                    {n.label}
+                  </a>
+                ),
+              )}
             </div>
             <div className="navact">
               <a className="btn btn-quiet btn-sm" href={COMPANY.whatsapp} target="_blank" rel="noreferrer">WhatsApp</a>
@@ -78,11 +87,17 @@ export default function Header() {
             </div>
           </div>
           <div className={`mobilemenu${open ? " open" : ""}`}>
-            {NAV.map((n) => (
-              <Link key={n.href} href={n.href} onClick={() => setOpen(false)}>
-                {n.label}
-              </Link>
-            ))}
+            {NAV.map((n) =>
+              n.href ? (
+                <Link key={n.label} href={n.href} onClick={() => setOpen(false)}>
+                  {n.label}
+                </Link>
+              ) : (
+                <a key={n.label} href="#" className="parked" title={n.parked} onClick={(e) => e.preventDefault()}>
+                  {n.label} <span className="muted" style={{ fontSize: 12 }}>· soon</span>
+                </a>
+              ),
+            )}
             <Link href="/about" onClick={() => setOpen(false)}>About</Link>
             <Link href="/contact" onClick={() => setOpen(false)}>Contact</Link>
           </div>
