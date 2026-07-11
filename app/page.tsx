@@ -1,7 +1,10 @@
 import Link from "next/link";
 import BookingWidget from "@/components/BookingWidget";
 import Icon from "@/components/Icon";
-import { coreServiceList, priceLabel, COMPANY } from "@/lib/data";
+import { coreServiceList, priceLabel, COMPANY, type Category } from "@/lib/data";
+
+const catClass = (c: Category) =>
+  c === "Medical" ? "cat-medical" : c === "Nursing & care" ? "cat-nursing" : "cat-therapy";
 
 export default function HomePage() {
   return (
@@ -39,7 +42,7 @@ export default function HomePage() {
         <div className="grid4">
           {coreServiceList.map((s) => (
             <Link className="svc" key={s.slug} href={s.slug === "wellness" ? "/services/wellness" : `/services/${s.slug}`}>
-              <span className="ic"><Icon name={s.icon} /></span>
+              <span className={`ic ${catClass(s.category)}`}><Icon name={s.icon} /></span>
               <h3>{s.shortName}</h3>
               <p>{s.blurb}</p>
               <div className="foot">
@@ -52,7 +55,7 @@ export default function HomePage() {
             </Link>
           ))}
           <Link className="svc" href="/services/wellness">
-            <span className="ic"><Icon name="wellness" /></span>
+            <span className="ic cat-therapy"><Icon name="wellness" /></span>
             <h3>Wellness services</h3>
             <p>IV drips, NAD+, panels &amp; more.</p>
             <div className="foot">
@@ -85,7 +88,7 @@ export default function HomePage() {
 
       {/* STATS */}
       <section className="wrap" style={{ paddingBlock: "40px 0" }}>
-        <div className="band">
+        <div className="band ink">
           <div className="stat"><div className="big">{COMPANY.since}</div><div className="lb">Serving Dubai homes</div></div>
           <div className="stat"><div className="big">DHA</div><div className="lb">FL-0064861</div></div>
           <div className="stat"><div className="big">MOHAP</div><div className="lb">ZM0ETT1A-090224</div></div>
@@ -96,7 +99,7 @@ export default function HomePage() {
       </section>
 
       {/* TESTIMONIAL */}
-      <section className="wrap" style={{ paddingBlock: "24px 56px" }}>
+      <section className="wrap" style={{ paddingBlock: "24px 40px" }}>
         <div className="quoteband">
           <span className="stars" aria-label="5 stars">★★★★★</span>
           <p>
@@ -104,6 +107,20 @@ export default function HomePage() {
             completely at ease.&rdquo;
           </p>
           <cite>Google review · verified family</cite>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="wrap" style={{ paddingBlock: "8px 64px" }}>
+        <div className="ctaband">
+          <div className="txt">
+            <h2>Ready when you are.</h2>
+            <p>Book a DHA-licensed doctor, nurse or physiotherapist to your door — often the same day.</p>
+          </div>
+          <div className="actions">
+            <Link className="btn btn-white btn-lg" href="/services">Book a visit</Link>
+            <a className="btn btn-clear btn-lg" href={COMPANY.whatsapp} target="_blank" rel="noreferrer">WhatsApp us</a>
+          </div>
         </div>
       </section>
     </>

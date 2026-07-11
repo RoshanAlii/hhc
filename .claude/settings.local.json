@@ -22,7 +22,8 @@
       "Bash(curl -sL http://localhost:3200/journal/healthserve-khaleej-times/)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3200/services/doctor-visit/)",
       "Bash(git -c user.name=HealthServe -c user.email=ahamedroshanali@gmail.com commit -q -m 'Add appointment date/time picker to the booking flow *)",
-      "Bash(git -c user.name=HealthServe -c user.email=ahamedroshanali@gmail.com commit -q -m 'Warmer, more welcoming UI within the brand palette *)"
+      "Bash(git -c user.name=HealthServe -c user.email=ahamedroshanali@gmail.com commit -q -m 'Warmer, more welcoming UI within the brand palette *)",
+      "Bash(git -c user.name=HealthServe -c user.email=ahamedroshanali@gmail.com commit -q -m 'More colourful, polished UI within the brand palette *)"
     ]
   }
 }

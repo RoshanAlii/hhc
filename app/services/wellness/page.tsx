@@ -20,7 +20,7 @@ export default function WellnessPage() {
         <div className="grid4" style={{ marginTop: 24 }}>
           {wellnessServiceList.map((s) => (
             <article className="svc" key={s.slug}>
-              <span className="ic"><Icon name={s.icon} /></span>
+              <span className="ic cat-therapy"><Icon name={s.icon} /></span>
               <h3>{s.name}</h3>
               <p>{s.blurb}</p>
               <div className="foot">

@@ -173,8 +173,12 @@ nav.main{position:sticky;top:0;z-index:50;background:rgba(253,252,250,.92);backd
 @media(max-width:600px){.grid4,.grid3,.grid2{grid-template-columns:1fr}}
 .svc{background:var(--surface-card);border:1px solid var(--border-subtle);border-radius:var(--radius-lg);box-shadow:var(--shadow-xs);padding:var(--space-6);display:flex;flex-direction:column;min-height:200px;transition:box-shadow var(--dur-base) var(--ease-out),transform var(--dur-base) var(--ease-out),border-color var(--dur-base) var(--ease-out);text-decoration:none!important;color:inherit}
 .svc:hover{box-shadow:var(--shadow-md);transform:translateY(-3px);border-color:var(--orange-200)}
-.svc:hover .ic{background:var(--orange-100)}
-.svc .ic{transition:background var(--dur-base) var(--ease-out)}
+.svc .ic{transition:transform var(--dur-base) var(--ease-out)}
+.svc:hover .ic{transform:scale(1.06) rotate(-3deg)}
+/* Category-coloured icon tiles (brand palette) */
+.ic.cat-medical{background:var(--orange-100)} .ic.cat-medical .svgi{stroke:var(--orange-600)}
+.ic.cat-nursing{background:var(--green-100)} .ic.cat-nursing .svgi{stroke:var(--green-700)}
+.ic.cat-therapy{background:var(--red-50)} .ic.cat-therapy .svgi{stroke:var(--red-600)}
 .svc .ic{width:44px;height:44px;border-radius:var(--radius-md);background:var(--surface-brand-soft);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
 .svc .ic .svgi{stroke:var(--orange-600)}
 .svc h3{font-size:var(--fs-h4);margin-bottom:6px}
@@ -395,3 +399,42 @@ footer.site{background:var(--surface-card);border-top:1px solid var(--border-sub
 .gsec .num,.sec-hd .num{box-shadow:0 0 0 4px var(--surface-brand-soft)}
 /* Testimonial: a touch of warmth */
 .quoteband{background:linear-gradient(180deg,var(--surface-card),var(--orange-50))}
+
+/* Richer hero glow */
+.homehero{
+  background:
+    radial-gradient(circle at 6% -18%, rgba(217,127,52,.20), transparent 38%),
+    radial-gradient(circle at 98% -8%, rgba(115,160,96,.20), transparent 42%),
+    radial-gradient(circle at 78% 120%, rgba(216,35,44,.08), transparent 40%),
+    linear-gradient(180deg, var(--orange-50) 0%, var(--surface-page) 66%);
+}
+
+/* Bold dark stats band with coloured figures */
+.band.ink{background:linear-gradient(135deg,var(--gray-900) 0%,#2E2A24 58%,#3D3020 100%);border:none;color:#fff;box-shadow:var(--shadow-lg)}
+.band.ink .stat .big{color:#fff}
+.band.ink .stat:nth-child(1) .big{color:var(--orange-400)}
+.band.ink .stat:nth-child(2) .big{color:var(--green-400)}
+.band.ink .stat:nth-child(3) .big{color:var(--orange-300)}
+.band.ink .stat .lb{color:rgba(255,255,255,.68)}
+.band.ink .insurers span{color:rgba(255,255,255,.82);border-color:rgba(255,255,255,.18);background:rgba(255,255,255,.06)}
+
+/* Vivid gradient call-to-action band */
+.ctaband{background:linear-gradient(120deg,var(--orange-600) 0%,var(--orange-500) 38%,var(--green-600) 100%);color:#fff;border-radius:var(--radius-xl);padding:44px 48px;display:flex;justify-content:space-between;align-items:center;gap:28px;flex-wrap:wrap;box-shadow:var(--shadow-lg);position:relative;overflow:hidden}
+.ctaband::after{content:"";position:absolute;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.16),transparent 62%);top:-140px;inset-inline-end:-60px}
+.ctaband .txt{position:relative;z-index:1;max-width:46ch}
+.ctaband h2{color:#fff;font-size:clamp(24px,2.6vw,32px);font-weight:var(--fw-extra)}
+.ctaband p{color:rgba(255,255,255,.92);margin-top:8px}
+.ctaband .actions{position:relative;z-index:1;display:flex;gap:12px;flex-wrap:wrap}
+.btn-white{background:#fff;color:var(--orange-700)}
+.btn-white:hover{filter:brightness(.96)}
+.btn-clear{background:rgba(255,255,255,.14);color:#fff;border-color:rgba(255,255,255,.5)}
+.btn-clear:hover{background:rgba(255,255,255,.22)}
+
+/* Primary CTA depth */
+.btn-primary.btn-lg{box-shadow:0 8px 20px rgba(217,127,52,.28)}
+.btn-primary.btn-lg:hover{box-shadow:0 10px 24px rgba(217,127,52,.34)}
+.book .btn-primary{box-shadow:0 8px 20px rgba(217,127,52,.26)}
+
+/* Footer tri-colour accent strip */
+footer.site{position:relative}
+footer.site::before{content:"";position:absolute;top:0;inset-inline:0;height:4px;background:linear-gradient(90deg,var(--orange-500),var(--red-500) 55%,var(--green-500))}
