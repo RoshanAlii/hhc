@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s -o /dev/null -w \"home:%{http_code}\\\\n\" http://localhost:3200/)",
+      "Bash(curl -s -o /dev/null -w \"services:%{http_code}\\\\n\" http://localhost:3200/services)",
+      "Bash(npm run *)",
+      "Bash(curl -s -o /dev/null -w \"home:%{http_code}  services/[slug]:\" http://localhost:3200/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3200/services/nad-therapy)",
+      "Bash(git init *)",
+      "Bash(git add *)"
+    ]
+  }
+}

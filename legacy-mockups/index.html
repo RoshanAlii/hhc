@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HealthServe — Mock Screens Gallery | v1.1</title>
+<link rel="stylesheet" href="healthserve.css">
+<style>
+body{background:var(--gray-25)}
+/* hero */
+.ghero{background:linear-gradient(135deg,var(--gray-900) 0%,#2E2A24 60%,#3D3020 100%);color:#fff;padding:72px 0 64px;position:relative;overflow:hidden}
+.ghero::before{content:"";position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(217,127,52,.28),transparent 65%);top:-160px;inset-inline-end:-120px}
+.ghero::after{content:"";position:absolute;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(115,160,96,.22),transparent 65%);bottom:-180px;inset-inline-start:-100px}
+.ghero .wrap{position:relative;z-index:1}
+.ghero .kick{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:var(--fw-bold);color:var(--orange-300);border:1px solid rgba(217,127,52,.45);border-radius:var(--radius-md);padding:7px 14px;background:rgba(217,127,52,.1)}
+.ghero h1{color:#fff;font-size:clamp(34px,4.6vw,56px);font-weight:var(--fw-extra);line-height:1.08;margin:22px 0 14px;max-width:18ch}
+.ghero h1 em{font-style:normal;color:var(--orange-400)}
+.ghero p{color:#C9C4BB;font-size:var(--fs-lg);max-width:56ch}
+.gstats{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.gstats span{font-size:13px;color:#DDD8CF;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:var(--radius-md);padding:9px 16px}
+.gstats b{color:#fff}
+.gstats .o{color:var(--orange-300)}
+.gstats .g{color:var(--green-300)}
+/* section headers */
+.gsec{padding:56px 0 8px}
+.gsec .num{display:inline-flex;width:30px;height:30px;border-radius:50%;background:var(--brand-primary);color:#fff;font-weight:var(--fw-bold);font-size:14px;align-items:center;justify-content:center;margin-inline-end:12px}
+.gsec h2{display:flex;align-items:center;font-size:clamp(22px,2.6vw,30px);font-weight:var(--fw-extra)}
+.gsec p{color:var(--text-muted);margin-top:8px;max-width:64ch}
+.gsec .flow{margin-top:10px;font-size:13px;color:var(--text-muted)}
+.gsec .flow b{color:var(--orange-600)}
+/* preview cards */
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;padding:28px 0 8px}
+@media(max-width:1020px){.gallery{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.gallery{grid-template-columns:1fr}}
+.shotcard{background:var(--surface-card);border:1px solid var(--border-subtle);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm);text-decoration:none!important;display:flex;flex-direction:column;transition:transform var(--dur-base) var(--ease-out),box-shadow var(--dur-base) var(--ease-out);position:relative}
+.shotcard:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
+.shot{position:relative;height:250px;overflow:hidden;background:var(--gray-50);border-bottom:1px solid var(--border-subtle)}
+.shot iframe{width:1280px;height:1100px;transform:scale(.30);transform-origin:top left;border:0;pointer-events:none;position:absolute;top:0;left:0}
+.shot::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,transparent 72%,rgba(35,35,35,.06))}
+.shot .open{position:absolute;bottom:12px;inset-inline-end:12px;background:var(--brand-primary);color:#fff;font-size:12px;font-weight:var(--fw-bold);letter-spacing:.04em;border-radius:var(--radius-md);padding:8px 14px;opacity:0;transform:translateY(6px);transition:all var(--dur-fast) var(--ease-out);box-shadow:var(--shadow-brand);z-index:2}
+.shotcard:hover .open{opacity:1;transform:translateY(0)}
+.meta{padding:16px 18px;display:flex;align-items:center;gap:12px}
+.meta .n{font-weight:var(--fw-bold);color:var(--text-strong);font-size:15px}
+.meta .u{font-size:12px;color:var(--text-muted);margin-top:2px;display:block}
+.pill{margin-inline-start:auto;font-size:10px;font-weight:var(--fw-bold);letter-spacing:.06em;border-radius:var(--radius-sm);padding:4px 9px;flex:none}
+.pill.r1{background:var(--surface-care-soft);color:var(--green-700)}
+.pill.r2{background:var(--gray-900);color:#fff}
+.pill.gap{background:var(--surface-brand-soft);color:var(--orange-700)}
+.stepno{position:absolute;top:12px;inset-inline-start:12px;z-index:2;width:28px;height:28px;border-radius:50%;background:var(--gray-900);color:#fff;font-size:13px;font-weight:var(--fw-bold);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-md)}
+/* footer */
+.gfoot{margin-top:72px;background:var(--gray-900);color:var(--gray-300);padding:32px 0;font-size:13px}
+.gfoot .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.gfoot b{color:#fff}
+.gfoot a{color:var(--orange-300)}
+</style>
+</head>
+<body>
+
+<header class="ghero">
+  <div class="wrap">
+    <span class="kick">HealthServe · website redesign · concept v1.1</span>
+    <h1>Every screen of the new <em>healthservehhc.co</em> — live, in brand.</h1>
+    <p>21 high-fidelity screens rendered with the confirmed brand tokens: Healthserve Orange, Life Green, Lato, soft 8px corners on warm white. Hover any card to open the full screen — the commerce journey is clickable end-to-end.</p>
+    <div class="gstats">
+      <span><b>21</b> screens</span>
+      <span><b class="o">17</b> in first release (R1)</span>
+      <span><b>3</b> account screens · R2</span>
+      <span><b class="g">4</b> gap screens added (0.5)</span>
+      <span>Prices &amp; photos: placeholders pending <b>D3</b> / shoot</span>
+    </div>
+  </div>
+</header>
+
+<section class="gsec wrap">
+  <h2><span class="num">1</span>The buying journey</h2>
+  <p>The path that earns revenue — from landing to paid confirmation. Follow the numbers; every card links into the next step.</p>
+  <p class="flow">Home → Services → Detail → Cart → Checkout → <b>Confirmed ✓</b></p>
+</section>
+<div class="gallery wrap">
+  <a class="shotcard" href="home.html"><span class="stepno">1</span><span class="shot"><iframe src="home.html" loading="lazy" tabindex="-1" title="Home preview"></iframe><span class="open">Open screen →</span></span><span class="meta"><span><span class="n">Home</span><span class="u">/ · booking widget, 8 services, trust band</span></span><span class="pill r1">R1</span></span></a>
+  <a class="shotcard" href="services.html"><span class="stepno">2</span><span class="shot"><iframe src="services.html" loading="lazy" tabindex="-1" title="Services preview"></iframe><span class="open">Open screen →</span></span><span class="meta"><span><span class="n">Services hub</span><span class="u">/services · filters + featured card</span></span><span class="pill r1">R1</span></span></a>
+  <a class="shotcard" href="service-detail.html"><span class="stepno">3</span><span class="shot"><iframe src="service-detail.html" loading="lazy" tabindex="-1" title="Service detail preview"></iframe><span class="open">Open screen →</span></span><span class="meta"><span><span class="n">Service detail</span><span class="u">/services/… · buy-bar template ×9</span></span><span class="pill r1">R1</span></span></a>
+  <a class="shotcard" href="cart.html"><span class="stepno">4</span><span class="shot"><iframe src="cart.html" loading="lazy" tabindex="-1" title="Cart preview"></iframe><span class="open">Open screen →</span></span><span class="meta"><span><span class="n">Cart</span><span class="u">/cart · VAT, promo, reschedule</span></span><span class="pill r1">R1</span></span></a>
+  <a class="shotcard" href="checkout.html"><span class="stepno">5</span><span class="shot"><iframe src="checkout.html" loading="lazy" tabindex="-1" title="Checkout preview"></iframe><span class="open">Open screen →</span></span><span class="meta"><span><span class="n">Checkout</span><span class="u">/checkout · guest OTP · card / Tabby / on-visit</span></span><span class="pill r1">R1</span></span></a>
+  <a class="shotcard" href="confirmation.html"><span class="stepno">6</span><span class="shot"><iframe src="confirmation.html" loading="lazy" tabindex="-1" title="Confirmation preview"></iframe><span class="open">Open screen →</span></span><span class="meta"><span><span class="n">Order confirmation</span><span class="u">/order/:id · receipt + package upsell</span></span><span class="pill r1">R1</span></span></a>
+</div>
+
+<section class="gsec wrap">
+  <h2><span class="num">2</span>Discover &amp; trust</h2>
+  <p>Where Sara checks credentials, Omar browses wellness, Priya reads guides — and organizations find their door.</p>
+</section>
+<div class="gallery wrap">
+  <a class="shotcard" href="wellness.html"><span class="shot"><iframe src="wellness.html" loading="lazy" tabindex="-1" title="Wellness preview"></iframe><span class="open">Open screen →</span></span><span class="meta"><span><span class="n">Wellness sub-hub</span><span class="u">/services/wellness · 8 children</span></span><span class="pill r1">R1</span></span></a>
+  <a class="shotcard" href="packages.html"><span class="shot"><iframe src="packages.html" loading="lazy" tabindex="-1" title="Packages preview"></iframe><span class="open">Open screen →</span></span><span class="meta"><span><span class="n">Packages</span><span class="u">/packages · 3 plans, best-value ribbon</span></span><span class="pill r1">R1</span></span></a>
+  <a class="shotcard" href="about.html"><span class="shot"><iframe src="about.html" loading="lazy" tabindex="-1" title="About preview"></iframe><span class="open">Open screen →</span></span><span class="meta"><span><span class="n">About</span><span class="u">/about · credentials, partners, press</span></span><span class="pill r1">R1</span></span></a>
+  <a class="shotcard" href="journal.html"><span class="shot"><iframe src="journal.html" loading="lazy" tabindex="-1" title="Journal preview"></iframe><span class="open">Open screen →</span></span><span class="meta"><span><span class="n">Journal index</span><span class="u">/journal · SEO home for 23 posts</span></span><span class="pill gap">GAP → R1</span></span></a>
+  <a class="shotcard" href="journal-article.html"><span class="shot"><iframe src="journal-article.html" loading="lazy" tabindex="-1" title="Article preview"></iframe><span class="open">Open screen →</span></span><span class="meta"><span><span class="n">Journal article</span><span class="u">/journal/slug · related-service CTA</span></span><span class="pill gap">GAP → R1</span></span></a>
+  <a class="shotcard" href="contact.html"><span class="shot"><iframe src="contact.html" loading="lazy" tabindex="-1" title="Contact preview"></iframe><span class="open">Open screen →</span></span><span class="meta"><span><span class="n">Contact</span><span class="u">/contact · form + direct channels</span></span><span class="pill r1">R1</span></span></a>
+  <a class="shotcard" href="careers.html"><span class="shot"><iframe src="careers.html" loading="lazy" tabindex="-1" title="Careers preview"></iframe><span class="open">Open screen →</span></span><span class="meta"><span><span class="n">Careers</span><span class="u">/careers · 8 live roles</span></span><span class="pill gap">GAP → R1</span></span></a>
+  <a class="shotcard" href="organizations.html"><span class="shot"><iframe src="organizations.html" loading="lazy" tabindex="-1" title="Organizations preview"></iframe><span class="open">Open screen →</span></span><span class="meta"><span><span class="n">For Organizations</span><span class="u">/for-organizations · B2B enquiry</span></span><span class="pill gap">GAP → R1</span></span></a>
+</div>
+
+<section class="gsec wrap">
+  <h2><span class="num">3</span>Support &amp; legal</h2>
+  <p>The trust infrastructure: help, privacy with health-data consent, and the cancellation tiers mirrored at checkout.</p>
+</section>
+<div class="gallery wrap">
+  <a class="shotcard" href="help.html"><span class="shot"><iframe src="help.html" loading="lazy" tabindex="-1" title="Help preview"></iframe><span class="open">Open screen →</span></span><span class="meta"><span><span class="n">Help centre</span><span class="u">/help · 6 categories + callback</span></span><span class="pill r1">R1</span></span></a>
+  <a class="shotcard" href="privacy.html"><span class="shot"><iframe src="privacy.html" loading="lazy" tabindex="-1" title="Privacy preview"></iframe><span class="open">Open screen →</span></span><span class="meta"><span><span class="n">Policy template</span><span class="u">/privacy-policy · health data &amp; consent</span></span><span class="pill r1">R1</span></span></a>
+  <a class="shotcard" href="cancellation.html"><span class="shot"><iframe src="cancellation.html" loading="lazy" tabindex="-1" title="Cancellation preview"></iframe><span class="open">Open screen →</span></span><span class="meta"><span><span class="n">Cancellation &amp; refund</span><span class="u">/cancellation-refund · 3 tiers</span></span><span class="pill r1">R1</span></span></a>
+</div>
+
+<section class="gsec wrap">
+  <h2><span class="num">4</span>Accounts — second release preview</h2>
+  <p>OTP login, dashboard and profile ship in R2, but every R1 template is already account-aware. Shown now so the end-state is agreed early.</p>
+</section>
+<div class="gallery wrap">
+  <a class="shotcard" href="login.html"><span class="shot"><iframe src="login.html" loading="lazy" tabindex="-1" title="Login preview"></iframe><span class="open">Open screen →</span></span><span class="meta"><span><span class="n">Login &amp; OTP</span><span class="u">/login · passwordless, auto-account</span></span><span class="pill r2">R2</span></span></a>
+  <a class="shotcard" href="dashboard.html"><span class="shot"><iframe src="dashboard.html" loading="lazy" tabindex="-1" title="Dashboard preview"></iframe><span class="open">Open screen →</span></span><span class="meta"><span><span class="n">Customer dashboard</span><span class="u">/account · bookings, hours, results</span></span><span class="pill r2">R2</span></span></a>
+  <a class="shotcard" href="profile.html"><span class="shot"><iframe src="profile.html" loading="lazy" tabindex="-1" title="Profile preview"></iframe><span class="open">Open screen →</span></span><span class="meta"><span><span class="n">Profile</span><span class="u">/account/profile · addresses, language</span></span><span class="pill r2">R2</span></span></a>
+  <a class="shotcard" href="components.html"><span class="shot"><iframe src="components.html" loading="lazy" tabindex="-1" title="Components preview"></iframe><span class="open">Open screen →</span></span><span class="meta"><span><span class="n">Overlay components</span><span class="u">toasts · notifications · search</span></span><span class="pill r1">R1/R2</span></span></a>
+</div>
+
+<footer class="gfoot">
+  <div class="wrap">
+    <span><b>HealthServe redesign</b> · Gate 1 review package · brand tokens v1.0 applied untouched</span>
+    <span>Review on your phone too — every screen is responsive.</span>
+  </div>
+</footer>
+</body>
+</html>

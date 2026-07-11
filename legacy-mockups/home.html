@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home healthcare in Dubai | HealthServe mockup — wireframe-strict</title>
+<link rel="stylesheet" href="healthserve.css">
+<style>
+/* wireframe-strict home additions */
+.hs-logo{display:inline-flex;align-items:center;text-decoration:none!important}
+.hero-solo{background:var(--surface-card);border:1px solid var(--border-subtle);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);padding:44px 40px;margin-top:28px}
+@media(max-width:600px){.hero-solo{padding:28px 20px}}
+.hero-solo h1{font-size:clamp(34px,4.4vw,52px);font-weight:var(--fw-extra);line-height:1.1;max-width:22ch;margin-top:12px}
+.hero-solo .lead{font-size:var(--fs-lg);color:var(--text-muted);max-width:52ch;margin-top:12px}
+.wellphoto{position:relative;height:200px;border-radius:var(--radius-lg);overflow:hidden;background:linear-gradient(120deg,var(--green-200),var(--green-400) 55%,var(--green-600));display:flex;align-items:center;justify-content:center}
+.wellphoto .ph{color:var(--green-800);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.wellphoto .ovl{position:absolute;inset-inline-start:32px;top:50%;transform:translateY(-50%);text-align:start}
+.wellphoto .ovl b{display:block;font-size:24px;font-weight:var(--fw-extra);color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.25)}
+.wellphoto .ovl .btn{margin-top:12px}
+.quoteband{background:var(--surface-card);border:1px solid var(--border-subtle);border-radius:var(--radius-md);box-shadow:var(--shadow-xs);padding:20px 28px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.quoteband .stars{color:var(--orange-500);letter-spacing:3px;font-size:15px;flex:none}
+.quoteband p{font-size:var(--fs-sm);color:var(--text-body);flex:1;min-width:240px}
+.quoteband cite{font-style:normal;font-size:var(--fs-xs);color:var(--text-muted);flex:none}
+.foot-links{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:var(--fs-xs);color:var(--text-muted)}
+.foot-links a{color:var(--text-muted);text-decoration:none!important}
+.foot-links a:hover{color:var(--brand-primary)}
+</style>
+</head>
+<body>
+<div class="review"><b>Home — wireframe-strict rebuild v1.2</b> · structure per healthservehhc_wireframe.pdf screen 1 · official logo placed (SVG recreation — swap with brand PNG in build) · prices sample pending D3</div>
+
+<!-- top chrome: promo marquee + utility bar (wireframe order) -->
+<div class="promo" aria-label="Offers"><div class="track"><span>Free first doctor consultation on home visits</span><span>Same-day home nursing across Dubai</span><span>New wellness &amp; IV packages now open</span><span>Book before 6 PM for same-evening visits</span><span>Free first doctor consultation on home visits</span><span>Same-day home nursing across Dubai</span><span>New wellness &amp; IV packages now open</span><span>Book before 6 PM for same-evening visits</span></div></div>
+<div class="wrap"><div class="util"><span class="lft"><a href="tel:+97143577657">04 357 7657</a></span><button class="sel">Dubai ▾</button><button class="sel">English ▾</button></div></div>
+
+<!-- nav: exact wireframe items -->
+<nav class="main"><div class="wrap navrow">
+  <a class="hs-logo" href="home.html" aria-label="HealthServe — Home Healthcare">
+    <svg width="196" height="52" viewBox="0 0 300 84" role="img" aria-label="HealthServe logo">
+      <rect x="57" y="10" width="10" height="18" fill="#D97F34"/>
+      <path d="M4 40 L42 6 L80 40" fill="none" stroke="#D97F34" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M14 40 h56 v40 h-56 z" fill="#FFFFFF" stroke="#CCCCCC" stroke-width="2"/>
+      <path d="M20 70 q22 14 44 0 l0 7 q-22 10 -44 0 z" fill="#73A060"/>
+      <path d="M42 68 C30 58 26 50 31 44.5 c4-4.5 10-3 11 1 c1-4 7-5.5 11-1 c5 5.5 1 13.5 -11 23.5 z" fill="#D8232C"/>
+      <text x="298" y="14" text-anchor="end" font-family="Lato,sans-serif" font-style="italic" font-weight="700" font-size="12" fill="#73A060" letter-spacing="1">HEALING LIVES</text>
+      <text x="92" y="50" font-family="Lato,sans-serif" font-weight="900" font-size="31" fill="#575757" letter-spacing=".5">HEALTH<tspan font-weight="700">Serve</tspan></text>
+      <path d="M120 22 q4 -7 9 -3 q-5 1 -9 3z" fill="#73A060"/>
+      <text x="94" y="76" font-family="'Segoe Script','Brush Script MT',cursive" font-size="20" font-style="italic" fill="#6E6E6E">Home Healthcare</text>
+    </svg>
+  </a>
+  <div class="links">
+    <a href="home.html" aria-current="page">Home Care</a>
+    <a href="#" title="Parked — R3">The Dispensary</a>
+    <a href="services.html">All Services</a>
+    <a href="#" title="R2">Your Health</a>
+    <a href="journal.html">Journal</a>
+  </div>
+  <div class="navact">
+    <a class="btn btn-quiet btn-sm" href="https://wa.me/971543061896">WhatsApp</a>
+    <a class="btn btn-primary btn-sm" href="services.html">Book Now</a>
+    <a class="iconbtn" href="cart.html" aria-label="Cart, 2 items"><svg width="17" height="17" viewBox="0 0 24 24" class="svgi"><path d="M6 7h14l-1.5 10.5a2 2 0 0 1-2 1.5H9.5a2 2 0 0 1-2-1.5L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg><span class="cnt">2</span></a>
+    <a class="iconbtn" href="login.html" aria-label="Log in / Register"><svg width="16" height="16" viewBox="0 0 24 24" class="svgi"><circle cx="12" cy="8" r="3.4"/><path d="M5 20a7 7 0 0 1 14 0"/></svg></a>
+  </div>
+</div></nav>
+
+<!-- HERO: full-width block, no photo (wireframe-strict) -->
+<div class="wrap">
+  <header class="hero-solo">
+    <span class="eyebrow">Home healthcare · Dubai</span>
+    <h1>Hospital-grade care, in the comfort of home.</h1>
+    <p class="lead">DHA-licensed doctors, nurses and physiotherapists at your door — often the same day. No queues, no waiting rooms.</p>
+    <div class="trust">
+      <span>Caring for Dubai homes since <b>2016</b></span>
+      <span><b>DHA</b> licensed</span>
+      <span><b>MOHAP</b> approved</span>
+      <span><span class="star">★</span> <b>4.9</b></span>
+    </div>
+    <form class="book">
+      <div class="f"><label>Service</label><select><option>Choose</option><option>Doctor visit</option><option>Home nursing</option><option>Physiotherapy</option><option>IV therapy</option></select></div>
+      <div class="f"><label>When</label><select><option>Today</option><option>Tomorrow</option><option>Choose date</option></select></div>
+      <div class="f"><label>Area</label><select><option>Address</option><option>Oud Metha</option><option>Downtown</option><option>Marina</option></select></div>
+      <button type="button" class="btn btn-primary">See available times</button>
+    </form>
+    <p class="avail"><span class="dot"></span> Next availability: today 6:00 PM · serves most of Dubai</p>
+  </header>
+</div>
+
+<!-- SERVICES: section head + all services link + 8 cards (wireframe names, units, slots) -->
+<section class="wrap" style="padding-block:56px">
+  <div class="sec-hd" style="margin-bottom:28px">
+    <div><h2 class="sec">Our services</h2><p>Licensed care at your doorstep — transparent prices, same-day slots.</p></div>
+    <a class="btn btn-quiet btn-sm" href="services.html">All services →</a>
+  </div>
+  <div class="grid4">
+    <article class="svc"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" class="svgi"><circle cx="12" cy="8" r="3.2"/><path d="M5 20a7 7 0 0 1 14 0"/></svg></span><h3>Doctors Visit &amp; Consultation</h3><p>Assessment and treatment at home.</p><div class="foot"><span class="price">AED —<small>per visit</small></span><span class="slot"><span class="dot"></span>Today</span></div></article>
+    <article class="svc"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" class="svgi"><path d="M4 17l5-5 4 4 7-7"/></svg></span><h3>Physiotherapy &amp; Fitness</h3><p>Recovery programs at home.</p><div class="foot"><span class="price">AED —<small>per session</small></span><span class="slot"><span class="dot"></span>Tmrw</span></div></article>
+    <article class="svc"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" class="svgi"><path d="M12 4v16M4 12h16"/></svg></span><h3>Home Nursing Services</h3><p>Hourly to live-in skilled nursing.</p><div class="foot"><span class="price">AED —<small>per hour</small></span><span class="slot"><span class="dot"></span>Today</span></div></article>
+    <article class="svc"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" class="svgi"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></span><h3>Newborn &amp; Child Care</h3><p>Certified, gentle support.</p><div class="foot"><span class="price">AED —<small>per hour</small></span><span class="slot"><span class="dot"></span>Tmrw</span></div></article>
+    <article class="svc"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" class="svgi"><path d="M12 21s-7-4.5-7-10a7 7 0 0 1 14 0c0 5.5-7 10-7 10z"/></svg></span><h3>Elderly Care Nursing</h3><p>Dignified daily care at home.</p><div class="foot"><span class="price">AED —<small>per hour</small></span><span class="slot"><span class="dot"></span>Today</span></div></article>
+    <article class="svc"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" class="svgi"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg></span><h3>Travel Medical Assistance</h3><p>Treatment journeys abroad.</p><div class="foot"><span class="price">AED —<small>from</small></span><span class="slot"><span class="dot"></span>Enquire</span></div></article>
+    <article class="svc"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" class="svgi"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a4 4 0 0 1 8 0v2"/></svg></span><h3>Chronic Disease Management</h3><p>Programs with your physician.</p><div class="foot"><span class="price">AED —<small>program</small></span><span class="slot"><span class="dot"></span>Book</span></div></article>
+    <article class="svc"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" class="svgi"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg></span><h3>Wellness Services</h3><p>IV drips, NAD+, panels &amp; more.</p><div class="foot"><span class="price">AED —<small>from</small></span><span class="slot"><span class="dot"></span>Explore</span></div></article>
+  </div>
+</section>
+
+<!-- STEPS (wireframe copy) -->
+<div class="wrap">
+  <div class="steps">
+    <div class="s"><span class="n">1</span><span>Choose service &amp; time</span></div>
+    <div class="s"><span class="n">2</span><span>Confirm address · pay now or on visit</span></div>
+    <div class="s"><span class="n">3</span><span>Open the door — clinician arrives</span></div>
+  </div>
+</div>
+
+<!-- WELLNESS FEATURE BAND: photography band + CTA (wireframe-strict) -->
+<section class="wrap" style="padding-block:48px 0">
+  <div class="wellphoto">
+    <span class="ph">Wellness feature band — photography</span>
+    <div class="ovl"><b>Wellness, delivered at home.</b><a class="btn btn-primary btn-sm" href="wellness.html">Explore wellness →</a></div>
+  </div>
+</section>
+
+<!-- STATS BAND -->
+<section class="wrap" style="padding-block:40px 0">
+  <div class="band">
+    <div class="stat"><div class="big">2016</div><div class="lb">Serving Dubai homes</div></div>
+    <div class="stat"><div class="big">DHA</div><div class="lb">FL-0064861</div></div>
+    <div class="stat"><div class="big">MOHAP</div><div class="lb">ZM0ETT1A-090224</div></div>
+    <div class="insurers"><span>ESAAD</span><span>Al Sanad</span><span>Al Saada</span><span>Saico</span><span>Almadallah</span></div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL: single compact Google-review band (wireframe-strict) -->
+<section class="wrap" style="padding-block:24px 56px">
+  <div class="quoteband">
+    <span class="stars" aria-label="5 stars">★★★★★</span>
+    <p>"The nurse arrived the same evening we called. Professional, kind, and my mother felt completely at ease."</p>
+    <cite>Google review · verified family</cite>
+  </div>
+</section>
+
+<!-- FOOTER: logo + 3 columns + wireframe legal links -->
+<footer class="site" style="margin-top:0">
+  <div class="wrap">
+    <div class="fcols">
+      <div>
+        <svg width="170" height="46" viewBox="0 0 300 84" role="img" aria-label="HealthServe logo">
+          <rect x="57" y="10" width="10" height="18" fill="#D97F34"/>
+          <path d="M4 40 L42 6 L80 40" fill="none" stroke="#D97F34" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M14 40 h56 v40 h-56 z" fill="#FFFFFF" stroke="#CCCCCC" stroke-width="2"/>
+          <path d="M20 70 q22 14 44 0 l0 7 q-22 10 -44 0 z" fill="#73A060"/>
+          <path d="M42 68 C30 58 26 50 31 44.5 c4-4.5 10-3 11 1 c1-4 7-5.5 11-1 c5 5.5 1 13.5 -11 23.5 z" fill="#D8232C"/>
+          <text x="92" y="50" font-family="Lato,sans-serif" font-weight="900" font-size="31" fill="#575757" letter-spacing=".5">HEALTH<tspan font-weight="700">Serve</tspan></text>
+          <text x="94" y="76" font-family="'Segoe Script','Brush Script MT',cursive" font-size="20" font-style="italic" fill="#6E6E6E">Home Healthcare</text>
+        </svg>
+        <p>DHA-licensed home healthcare provider. Oud Metha, Dubai. Daily 8:30 AM – 6:30 PM.</p>
+      </div>
+      <div><h4>Services</h4><a href="service-detail.html">Doctors visit</a><a href="services.html">Home nursing</a><a href="services.html">Physiotherapy</a><a href="wellness.html">Wellness &amp; IV</a></div>
+      <div><h4>Company</h4><a href="about.html">About</a><a href="journal.html">Journal</a><a href="careers.html">Careers</a><a href="contact.html">Contact</a></div>
+      <div><h4>Support</h4><a href="help.html">Help centre</a><a href="cancellation.html">Cancellation &amp; refund</a><a href="privacy.html">Privacy</a></div>
+    </div>
+    <div class="legal" style="flex-direction:column;align-items:flex-start;gap:10px">
+      <div class="foot-links"><span><a href="services.html">Services</a> · <a href="about.html">About</a> · <a href="journal.html">Journal</a> · <a href="help.html">FAQ</a> · <a href="careers.html">Careers</a> · <a href="contact.html">Contact</a> · <a href="organizations.html">For Organizations</a> · <a href="about.html">Partners &amp; Insurance</a></span></div>
+      <div class="foot-links" style="width:100%;justify-content:space-between"><span><a href="privacy.html">Privacy</a> · <a href="privacy.html">Terms</a> · © 2026 Healthserve Home Healthcare LLC</span><span>DHA FL-0064861 · MOHAP ZM0ETT1A-090224</span></div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

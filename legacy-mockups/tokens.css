@@ -1,0 +1,270 @@
+/* ==========================================================================
+   HEALTH SERVE — Corrected Brand Tokens (v1.0, April 2026)
+   --------------------------------------------------------------------------
+   Drop-in replacement for the Health Serve Design System's tokens/colors.css,
+   tokens/typography.css and tokens/spacing.css.
+
+   WHY THIS FILE EXISTS
+   The design system shipped with placeholder colors/fonts sampled from the
+   logo PNG, flagged there as guesses pending real brand guidelines. The
+   client's actual Brand Style Sheet has since been supplied — this file
+   replaces every guessed value with the confirmed one, using the SAME
+   variable names, so anything already built against the design system
+   (var(--brand-primary), var(--radius-pill), etc.) picks up the correct
+   look with no markup changes. Attach this file after (or instead of) the
+   old tokens/colors.css + tokens/typography.css + tokens/spacing.css.
+
+   WHAT CHANGED VS. THE PLACEHOLDER TOKENS
+   - Orange   #F07800 → #D97F34   (Healthserve Orange)
+   - Green    #78A848 → #73A060   (Life Green — no separate bright accent;
+                                    the doc only defines one green)
+   - Red      #E1231D → #D8232C   (Care Red)
+   - Ink gray #4A4A4A → #575757   (Warm Charcoal)
+   - Type: Poppins/Nunito Sans/Caveat → Lato everywhere (English) + Cairo
+     (Arabic). Script/decorative fonts are explicitly banned by the brand
+     — --font-script now just aliases Lato instead of Caveat.
+   - Radius: buttons/cards are NOT pill-shaped. The brand spec calls for
+     6–8px corners throughout, so --radius-pill now resolves to 8px instead
+     of 999px. If a component hard-codes "border-radius:999px" instead of
+     using the token, that hard-coded value still needs a manual fix.
+   - Shadows: neutral black tint (per spec: 0 2px 8px rgba(0,0,0,0.06)),
+     not the warm-gray tint the placeholder system used.
+   - Container max-width nudged to the doc's stated 1200–1280px band.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Lato:ital,wght@0,400;0,700;0,900;1,400&display=swap');
+
+:root {
+  /* ================= COLOR ================= */
+
+  /* ---- Brand primary: Healthserve Orange ---- */
+  --orange-50:  #FCF4EE;
+  --orange-100: #F7E5D6;
+  --orange-200: #EFCAAB;
+  --orange-300: #E7AE7F;
+  --orange-400: #E1985C;
+  --orange-500: #D97F34;  /* base — confirmed brand orange */
+  --orange-600: #C0702E;
+  --orange-700: #985924;
+  --orange-800: #70421B;
+
+  /* ---- Brand secondary: Life Green ---- */
+  --green-50:  #F3F7F2;
+  --green-100: #E3ECDF;
+  --green-200: #C5D8BE;
+  --green-300: #A7C39B;
+  --green-400: #8FB37F;
+  --green-500: #73A060;  /* base — confirmed Life Green */
+  --green-600: #668D55;
+  --green-700: #517043;
+  --green-800: #3C5332;
+
+  /* ---- Care Red (heart / urgency / error) ---- */
+  --red-50:  #FCEDEE;
+  --red-100: #F7D3D5;
+  --red-300: #E6747A;
+  --red-500: #D8232C;  /* base — confirmed Care Red */
+  --red-600: #BF1F27;
+  --red-700: #97191F;
+
+  /* ---- Neutral / warm gray ---- */
+  --gray-0:   #FFFFFF;
+  --gray-25:  #FDFCFA;  /* Warm White — primary page background */
+  --gray-50:  #F5F5F5;  /* Light Gray — page/card backgrounds, alt rows */
+  --gray-100: #EBEBEB;
+  --gray-200: #CCCCCC;  /* Mid Gray — dividers, borders, disabled */
+  --gray-300: #ADADAD;
+  --gray-400: #8A8A8A;
+  --gray-500: #6E6E6E;
+  --gray-600: #616161;
+  --gray-700: #575757;  /* Warm Charcoal — all body text & wordmark */
+  --gray-800: #3D3D3D;
+  --gray-900: #232323;  /* never pure #000 for text, per spec */
+
+  /* ---- Semantic status ---- */
+  --info:    #2B7FBF;  /* not defined in the brand doc — neutral utility blue kept as-is */
+  --success: var(--green-500);
+  --warning: var(--orange-500);
+  --danger:  var(--red-500);
+
+  /* ================= Semantic aliases ================= */
+  --brand-primary:         var(--orange-500);
+  --brand-primary-hover:   var(--orange-600);
+  --brand-primary-press:   var(--orange-700);
+  --brand-secondary:       var(--green-500);
+  --brand-secondary-hover: var(--green-600);
+  --brand-accent:          var(--green-400);
+  --brand-heart:           var(--red-500);
+
+  --text-strong:   var(--gray-900);
+  --text-body:     var(--gray-700);
+  --text-muted:    var(--gray-500);
+  --text-inverse:  var(--gray-0);
+  --text-on-brand: #FFFFFF;
+  --text-link:     var(--orange-500); /* spec: links are Orange w/ underline on hover */
+
+  --surface-page:       var(--gray-25);
+  --surface-card:       var(--gray-0);
+  --surface-subtle:     var(--gray-50);
+  --surface-sunken:     var(--gray-100);
+  --surface-brand-soft: var(--orange-50);
+  --surface-care-soft:  var(--green-50);
+  --surface-ink:        var(--gray-900);
+
+  --border-subtle:  var(--gray-200);
+  --border-default: var(--gray-300);
+  --border-strong:  var(--gray-400);
+  --border-brand:   var(--orange-500);
+  --ring-brand:     rgba(217,127,52,0.35);
+
+  /* ================= TYPE ================= */
+  --font-display: 'Lato', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-body:    'Lato', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-arabic:  'Cairo', system-ui, sans-serif;              /* new — brand doc adds an Arabic typeface */
+  --font-script:  'Lato', system-ui, sans-serif;                /* was Caveat — script fonts are banned by the brand */
+
+  --fw-regular:  400;
+  --fw-medium:   400;  /* Lato has no 500 — alias to regular to avoid synthetic-bold */
+  --fw-semibold: 600;  /* Lato has no 600 either; browsers will render the nearest weight it ships (usually bold) */
+  --fw-bold:     700;
+  --fw-extra:    900;  /* Lato's Black weight, used for H1/hero + headlines */
+
+  /* Type scale, from the doc's Website & Digital table (mid-range px picked from each range) */
+  --fs-display: 64px;  /* H1 — Hero, 52–68px */
+  --fs-h1:      44px;  /* H2 — Section, 38–46px */
+  --fs-h2:      28px;  /* H3 — Subsection, 26–30px */
+  --fs-h3:      22px;  /* H4 — Card Title, 20–24px */
+  --fs-h4:      20px;
+  --fs-lg:      19px;  /* Body Large, 18–20px */
+  --fs-body:    17px;  /* Body, 16–18px */
+  --fs-sm:      15px;
+  --fs-xs:      13px;  /* Caption / Label, 12–14px */
+  --fs-eyebrow: 12px;
+
+  --lh-tight:   1.15;
+  --lh-heading: 1.2;
+  --lh-snug:    1.3;
+  --lh-body:    1.6;
+
+  --ls-tight:   -0.02em;
+  --ls-normal:  0;
+  --ls-eyebrow: 0.14em;
+  --ls-cta:     0.5px; /* spec: CTA button text tracking */
+
+  /* ================= SPACING (unchanged — the doc's 8pt scale already matches) ================= */
+  --space-0:  0;
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+
+  /* ================= RADIUS — corrected: brand uses 6–8px corners, NOT pills ================= */
+  --radius-sm:     6px;
+  --radius-md:     8px;
+  --radius-lg:     12px;  /* extrapolated for larger surfaces — doc only specifies 6–8px */
+  --radius-xl:     16px;  /* extrapolated — use sparingly */
+  --radius-pill:   8px;   /* was 999px — brand buttons are NOT pill-shaped */
+  --radius-circle: 50%;
+
+  /* ================= SHADOWS — neutral black tint per spec (was warm-gray tint) ================= */
+  --shadow-xs:    0 1px 2px rgba(0,0,0,0.04);
+  --shadow-sm:    0 2px 8px rgba(0,0,0,0.06);   /* spec's literal card shadow */
+  --shadow-md:    0 6px 16px rgba(0,0,0,0.08);
+  --shadow-lg:    0 14px 32px rgba(0,0,0,0.10);
+  --shadow-brand: 0 10px 22px rgba(217,127,52,0.28);
+
+  /* ================= LAYOUT ================= */
+  --container-max: 1240px; /* spec: 1200–1280px */
+  --container-pad: 32px;   /* spec: 32px minimum outer margin */
+  --section-y:     80px;   /* spec: 80–96px section padding */
+  --grid-gutter:   24px;   /* new — 24px column gutter */
+  --grid-columns:  12;     /* new — 12-column desktop grid, 4-column mobile */
+  --safe-zone:     16px;   /* new — min margin inside content containers */
+  --touch-target:  44px;   /* new — min tappable size on mobile */
+
+  /* ================= MOTION (unchanged — not specified by the brand doc) ================= */
+  --ease-out:   cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast:   140ms;
+  --dur-base:   220ms;
+  --dur-slow:   360ms;
+}
+
+/* ==========================================================================
+   OPTIONAL BASE STYLES
+   Safe to include even without adopting the tokens elsewhere — applies the
+   corrected fonts/colors directly so a plain wireframe or static HTML page
+   picks up the brand look immediately.
+   ========================================================================== */
+
+body {
+  font-family: var(--font-body);
+  color: var(--text-body);
+  background: var(--surface-page);
+  line-height: var(--lh-body);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: var(--text-strong);
+  letter-spacing: var(--ls-tight);
+  line-height: var(--lh-heading);
+  margin: 0;
+}
+
+a {
+  color: var(--text-link);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+.btn-primary {
+  display: inline-block;
+  background: var(--brand-primary);
+  color: var(--text-on-brand);
+  font-family: var(--font-body);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-body);
+  letter-spacing: var(--ls-cta);
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 12px 24px;
+  min-height: var(--touch-target);
+  cursor: pointer;
+  transition: filter var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+.btn-primary:hover { filter: brightness(0.94); }
+.btn-primary:active { transform: scale(0.97); }
+
+.btn-ghost {
+  display: inline-block;
+  background: transparent;
+  color: var(--brand-primary);
+  font-family: var(--font-body);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-body);
+  letter-spacing: var(--ls-cta);
+  border: 1px solid var(--brand-primary);
+  border-radius: var(--radius-md);
+  padding: 12px 24px;
+  min-height: var(--touch-target);
+  cursor: pointer;
+}
+
+.card {
+  background: var(--surface-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-6);
+}
