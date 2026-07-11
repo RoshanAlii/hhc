@@ -11,7 +11,7 @@ const nextConfig = {
   trailingSlash: true,
   images: { unoptimized: true },
   basePath: isPages ? "/hhc" : "",
-  assetPrefix: isPages ? "/hhc/" : "",
+  assetPrefix: isPages ? "/hhc" : "",
 };
 
 export default nextConfig;
