@@ -438,3 +438,33 @@ footer.site{background:var(--surface-card);border-top:1px solid var(--border-sub
 /* Footer tri-colour accent strip */
 footer.site{position:relative}
 footer.site::before{content:"";position:absolute;top:0;inset-inline:0;height:4px;background:linear-gradient(90deg,var(--orange-500),var(--red-500) 55%,var(--green-500))}
+
+/* ==========================================================================
+   Beautiful home hero — layered brand-colour blobs, dot pattern, depth
+   ========================================================================== */
+.homehero{position:relative;overflow:hidden;padding-block:36px 20px}
+/* soft, blurred brand-colour blobs */
+.homehero .blob{position:absolute;border-radius:50%;filter:blur(70px);z-index:0;pointer-events:none}
+.homehero .blob-a{width:440px;height:440px;background:radial-gradient(circle,rgba(217,127,52,.55),transparent 68%);top:-140px;inset-inline-end:-90px}
+.homehero .blob-b{width:400px;height:400px;background:radial-gradient(circle,rgba(115,160,96,.5),transparent 68%);bottom:-170px;inset-inline-start:-110px}
+.homehero .blob-c{width:260px;height:260px;background:radial-gradient(circle,rgba(216,35,44,.16),transparent 66%);top:40%;inset-inline-end:34%}
+/* faint dot grid that fades toward the bottom */
+.homehero::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:radial-gradient(var(--orange-300) 1.2px,transparent 1.2px);
+  background-size:26px 26px;opacity:.22;
+  -webkit-mask-image:linear-gradient(180deg,#000 0%,transparent 72%);
+  mask-image:linear-gradient(180deg,#000 0%,transparent 72%)}
+.homehero .wrap{position:relative;z-index:1}
+/* the hero card sits above it all with real depth */
+.homehero .hero-solo{box-shadow:var(--shadow-lg)}
+/* floating trust badge in the hero card corner */
+.hero-badge{position:absolute;top:22px;inset-inline-end:22px;z-index:3;display:inline-flex;align-items:center;gap:8px;background:var(--surface-card);border:1px solid var(--border-subtle);box-shadow:var(--shadow-md);border-radius:var(--radius-md);padding:9px 14px;font-size:13px;font-weight:var(--fw-bold);color:var(--text-strong)}
+.hero-badge .st{color:var(--orange-500);font-size:15px}
+.hero-badge b{color:var(--green-700)}
+@media(max-width:760px){.hero-badge{display:none}}
+/* booking widget gets more presence */
+.hero-solo .book{box-shadow:var(--shadow-md);border-color:var(--orange-100)}
+.hero-solo .book .btn-primary{box-shadow:0 8px 20px rgba(217,127,52,.28)}
+/* section kicker */
+.kicker{display:inline-flex;align-items:center;gap:8px;font-size:var(--fs-eyebrow);letter-spacing:var(--ls-eyebrow);text-transform:uppercase;color:var(--brand-primary);font-weight:var(--fw-bold);margin-bottom:8px}
+.kicker::before{content:"";width:22px;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--orange-500),var(--green-500))}

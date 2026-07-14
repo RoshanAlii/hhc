@@ -11,8 +11,12 @@ export default function HomePage() {
     <>
       {/* HERO */}
       <div className="homehero">
+      <span className="blob blob-a" aria-hidden="true" />
+      <span className="blob blob-b" aria-hidden="true" />
+      <span className="blob blob-c" aria-hidden="true" />
       <div className="wrap">
         <header className="hero-solo">
+          <span className="hero-badge"><span className="st">★</span> 4.9 · <b>2,000+</b> Dubai families</span>
           <span className="eyebrow">Welcome · Home healthcare in Dubai</span>
           <h1>Hospital-grade care, in the comfort of home.</h1>
           <p className="lead">
@@ -34,6 +38,7 @@ export default function HomePage() {
       <section className="wrap" style={{ paddingBlock: 56 }}>
         <div className="sec-hd" style={{ marginBottom: 28 }}>
           <div>
+            <span className="kicker">What we offer</span>
             <h2 className="sec">Our services</h2>
             <p>Licensed care at your doorstep — transparent prices, same-day slots.</p>
           </div>
