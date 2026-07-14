@@ -51,6 +51,43 @@ const PATHS: Record<string, React.ReactNode> = {
   ),
   menu: <path d="M4 7h16M4 12h16M4 17h16" />,
   check: <path d="M5 12l5 5L20 6" />,
+  pill: (
+    <>
+      <rect x="2.5" y="9" width="19" height="6" rx="3" />
+      <path d="M12 9v6" />
+    </>
+  ),
+  delivery: (
+    <>
+      <rect x="1.5" y="6" width="13" height="10" rx="1.5" />
+      <path d="M14.5 9h3.5l3 3v4h-6.5z" />
+      <circle cx="6" cy="18.5" r="1.6" />
+      <circle cx="17.5" cy="18.5" r="1.6" />
+    </>
+  ),
+  shield: <path d="M12 3l7 3v5c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6z" />,
+  doc: (
+    <>
+      <path d="M6 3h8l4 4v14H6z" />
+      <path d="M14 3v4h4" />
+      <path d="M9 13h6M9 16h6" />
+    </>
+  ),
+  bell: (
+    <>
+      <path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2H4.5z" />
+      <path d="M10 20a2 2 0 0 0 4 0" />
+    </>
+  ),
+  heart: <path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 5.5-7 10-7 10z" />,
+  refresh: (
+    <>
+      <path d="M4 12a8 8 0 0 1 13.5-5.8L20 8" />
+      <path d="M20 4v4h-4" />
+      <path d="M20 12a8 8 0 0 1-13.5 5.8L4 16" />
+      <path d="M4 20v-4h4" />
+    </>
+  ),
 };
 
 export default function Icon({

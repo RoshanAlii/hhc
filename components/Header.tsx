@@ -12,9 +12,9 @@ type NavItem = { label: string; href?: string; parked?: string };
 
 const NAV: NavItem[] = [
   { href: "/", label: "Home Care" },
-  { label: "The Dispensary", parked: "Coming soon" },
+  { href: "/dispensary", label: "The Dispensary" },
   { href: "/services", label: "All Services" },
-  { label: "Your Health", parked: "Coming soon" },
+  { href: "/your-health", label: "Your Health" },
   { href: "/journal", label: "Journal" },
 ];
 
