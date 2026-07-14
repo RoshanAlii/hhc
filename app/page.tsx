@@ -1,45 +1,85 @@
 import Link from "next/link";
 import BookingWidget from "@/components/BookingWidget";
 import Icon from "@/components/Icon";
-import { coreServiceList, priceLabel, COMPANY, type Category } from "@/lib/data";
+import { coreServiceList, priceLabel, articles, COMPANY, type Category } from "@/lib/data";
 
 const catClass = (c: Category) =>
   c === "Medical" ? "cat-medical" : c === "Nursing & care" ? "cat-nursing" : "cat-therapy";
 
+const features = [
+  { icon: "calendar", cat: "cat-medical", t: "Same-day slots", d: "Book before 6 PM for a same-evening visit at home." },
+  { icon: "shield", cat: "cat-nursing", t: "DHA-licensed team", d: "Every clinician licensed and reference-checked." },
+  { icon: "wellness", cat: "cat-therapy", t: "Transparent pricing", d: "Clear prices up front — no surprises at the door." },
+  { icon: "refresh", cat: "cat-medical", t: "We follow up", d: "A friendly WhatsApp check-in after every visit." },
+];
+
 export default function HomePage() {
+  const latest = articles.slice(0, 3);
+
   return (
     <>
-      {/* HERO */}
-      <div className="homehero">
-      <span className="blob blob-a" aria-hidden="true" />
-      <span className="blob blob-b" aria-hidden="true" />
-      <span className="blob blob-c" aria-hidden="true" />
-      <div className="wrap">
-        <header className="hero-solo">
-          <span className="hero-badge"><span className="st">★</span> 4.9 · <b>2,000+</b> Dubai families</span>
-          <span className="eyebrow">Welcome · Home healthcare in Dubai</span>
-          <h1>Hospital-grade care, in the comfort of home.</h1>
-          <p className="lead">
-            DHA-licensed doctors, nurses and physiotherapists at your door — often the same day.
-            No queues, no waiting rooms. Just warm, expert care where you feel most at ease.
-          </p>
-          <div className="trust">
-            <span>Caring for Dubai homes since <b>{COMPANY.since}</b></span>
-            <span><b>DHA</b> licensed</span>
-            <span><b>MOHAP</b> approved</span>
-            <span><span className="star">★</span> <b>4.9</b></span>
+      {/* HERO — immersive, full-bleed */}
+      <section className="hero-x">
+        <span className="blob blob-a" aria-hidden="true" />
+        <span className="blob blob-b" aria-hidden="true" />
+        <span className="blob blob-c" aria-hidden="true" />
+        <div className="wrap">
+          <div className="hero-x-inner">
+            <div>
+              <span className="kick">Home healthcare · Dubai · since {COMPANY.since}</span>
+              <h1>Hospital-grade care, <em>in the comfort of home.</em></h1>
+              <p className="lead">
+                DHA-licensed doctors, nurses and physiotherapists at your door — often the same day.
+                No queues, no waiting rooms.
+              </p>
+              <div className="trust">
+                <span>Caring for Dubai since <b>{COMPANY.since}</b></span>
+                <span><b>DHA</b> licensed</span>
+                <span><b>MOHAP</b> approved</span>
+                <span><span className="star">★</span> <b>4.9</b> · 2,000+ families</span>
+              </div>
+              <div className="hero-x-actions">
+                <Link className="btn btn-primary btn-lg" href="/services">Book a visit</Link>
+                <a className="btn btn-clear btn-lg" href={COMPANY.whatsapp} target="_blank" rel="noreferrer">WhatsApp us</a>
+              </div>
+            </div>
+
+            <div className="hero-panel">
+              <span className="hero-rating"><span className="st">★</span> 4.9 Google rating</span>
+              <h3>Book your visit</h3>
+              <p className="subt">Pick a service and see today&rsquo;s available times.</p>
+              <BookingWidget />
+            </div>
           </div>
-          <BookingWidget />
-        </header>
-      </div>
-      </div>
+
+          <div className="hero-strip">
+            <span className="lbl2">Insurance &amp; direct billing</span>
+            <div className="ins">
+              <span>ESAAD</span><span>Al Sanad</span><span>Al Saada</span><span>Saico</span><span>Almadallah</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FEATURES */}
+      <section className="wrap home-sec">
+        <div className="features">
+          {features.map((f) => (
+            <div className="feature" key={f.t}>
+              <span className={`ic ${f.cat}`}><Icon name={f.icon} /></span>
+              <h4>{f.t}</h4>
+              <p>{f.d}</p>
+            </div>
+          ))}
+        </div>
+      </section>
 
       {/* SERVICES */}
-      <section className="wrap" style={{ paddingBlock: 56 }}>
-        <div className="sec-hd" style={{ marginBottom: 28 }}>
+      <section className="wrap home-sec tight">
+        <div className="sec-hd" style={{ marginBottom: 24 }}>
           <div>
             <span className="kicker">What we offer</span>
-            <h2 className="sec">Our services</h2>
+            <h2 className="sec">Care that comes to you</h2>
             <p>Licensed care at your doorstep — transparent prices, same-day slots.</p>
           </div>
           <Link className="btn btn-quiet btn-sm" href="/services">All services →</Link>
@@ -69,19 +109,16 @@ export default function HomePage() {
             </div>
           </Link>
         </div>
-      </section>
 
-      {/* STEPS */}
-      <div className="wrap">
-        <div className="steps warm">
+        <div className="steps warm" style={{ marginTop: 28 }}>
           <div className="s"><span className="n">1</span><span>Choose service &amp; time</span></div>
           <div className="s"><span className="n">2</span><span>Confirm address · pay now or on visit</span></div>
           <div className="s"><span className="n">3</span><span>Open the door — a friendly clinician arrives</span></div>
         </div>
-      </div>
+      </section>
 
       {/* WELLNESS BAND */}
-      <section className="wrap" style={{ paddingBlock: "48px 0" }}>
+      <section className="wrap home-sec tight">
         <div className="wellphoto">
           <span className="ph">Wellness, delivered at home</span>
           <div className="ovl">
@@ -92,7 +129,7 @@ export default function HomePage() {
       </section>
 
       {/* STATS */}
-      <section className="wrap" style={{ paddingBlock: "40px 0" }}>
+      <section className="wrap home-sec tight">
         <div className="band ink">
           <div className="stat"><div className="big">{COMPANY.since}</div><div className="lb">Serving Dubai homes</div></div>
           <div className="stat"><div className="big">DHA</div><div className="lb">FL-0064861</div></div>
@@ -103,8 +140,36 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* JOURNAL PREVIEW */}
+      <section className="wrap home-sec tight">
+        <div className="sec-hd" style={{ marginBottom: 24 }}>
+          <div>
+            <span className="kicker">From our journal</span>
+            <h2 className="sec">Health guidance from our team</h2>
+          </div>
+          <Link className="btn btn-quiet btn-sm" href="/journal">Read the journal →</Link>
+        </div>
+        <div className="jgrid">
+          {latest.map((a) => (
+            <Link className="pcard" key={a.slug} href={`/journal/${a.slug}`}>
+              <div className="imgph img">{a.category}</div>
+              <div className="body">
+                <span className={`tag${a.category === "News & press" ? " orange" : ""}`} style={{ alignSelf: "flex-start", marginBottom: 8 }}>
+                  <span className="dot" />{a.category}
+                </span>
+                <h3 style={{ fontSize: 16 }}>{a.title}</h3>
+                <div className="foot" style={{ marginTop: "auto", paddingTop: 12, display: "flex", justifyContent: "space-between" }}>
+                  <span className="muted" style={{ fontSize: 12 }}>{a.readMins} min read</span>
+                  <span className="btn btn-quiet btn-sm">Read</span>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       {/* TESTIMONIAL */}
-      <section className="wrap" style={{ paddingBlock: "24px 40px" }}>
+      <section className="wrap home-sec tight">
         <div className="quoteband">
           <span className="stars" aria-label="5 stars">★★★★★</span>
           <p>
@@ -116,7 +181,7 @@ export default function HomePage() {
       </section>
 
       {/* CTA */}
-      <section className="wrap" style={{ paddingBlock: "8px 64px" }}>
+      <section className="wrap home-sec">
         <div className="ctaband">
           <div className="txt">
             <h2>Ready when you are.</h2>
