@@ -26,7 +26,10 @@
       "Bash(git -c user.name=HealthServe -c user.email=ahamedroshanali@gmail.com commit -q -m 'More colourful, polished UI within the brand palette *)",
       "Bash(xargs kill -9)",
       "Bash(curl -s -o /dev/null -w \"dispensary:%{http_code}  your-health:\" -L http://localhost:3200/dispensary/)",
-      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" -L http://localhost:3200/your-health/)"
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" -L http://localhost:3200/your-health/)",
+      "Bash(curl -s -o /dev/null -w \"your-health:%{http_code}  \" -L http://localhost:3200/your-health/)",
+      "Bash(curl -s -o /dev/null -w \"dispensary:%{http_code}  \" -L http://localhost:3200/dispensary/)",
+      "Bash(curl -s -o /dev/null -w \"profile:%{http_code}\\\\n\" -L http://localhost:3200/account/profile/)"
     ]
   }
 }
