@@ -38,18 +38,31 @@ export default function HomePage() {
                 <span><b>MOHAP</b> approved</span>
                 <span><span className="star">★</span> <b>4.9</b> · 2,000+ families</span>
               </div>
-              <div className="hero-x-actions">
-                <Link className="btn btn-primary btn-lg" href="/services">Book a visit</Link>
-                <a className="btn btn-clear btn-lg" href={COMPANY.whatsapp} target="_blank" rel="noreferrer">WhatsApp us</a>
-              </div>
             </div>
 
-            <div className="hero-panel">
-              <span className="hero-rating"><span className="st">★</span> 4.9 Google rating</span>
-              <h3>Book your visit</h3>
-              <p className="subt">Pick a service and see today&rsquo;s available times.</p>
-              <BookingWidget />
+            {/* Ambient media that dissolves into the background. Drop a looping
+                clip at public/hero.mp4 to replace the animation. */}
+            <div className="hero-media">
+              <video className="hero-video" autoPlay muted loop playsInline preload="none" poster="">
+                <source src="/hero.mp4" type="video/mp4" />
+              </video>
+              <div className="hero-anim" aria-hidden="true">
+                <span className="ring r1" />
+                <span className="ring r2" />
+                <span className="ring r3" />
+                <svg className="ecg" viewBox="0 0 220 80" preserveAspectRatio="xMidYMid meet">
+                  <path d="M4 40 H74 L84 40 L94 16 L106 64 L116 40 L124 30 L132 40 H216" />
+                </svg>
+                <span className="core">
+                  <svg viewBox="0 0 24 24"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 5.5-7 10-7 10z" fill="var(--red-500)" /></svg>
+                </span>
+              </div>
             </div>
+          </div>
+
+          {/* Booking / search bar — full width, underneath */}
+          <div className="hero-search">
+            <BookingWidget />
           </div>
 
           <div className="hero-strip">
