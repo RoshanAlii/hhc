@@ -20,9 +20,6 @@ export default function HomePage() {
     <>
       {/* HERO — immersive, full-bleed */}
       <section className="hero-x">
-        <span className="blob blob-a" aria-hidden="true" />
-        <span className="blob blob-b" aria-hidden="true" />
-        <span className="blob blob-c" aria-hidden="true" />
         <div className="wrap">
           <div className="hero-x-inner">
             <div>
@@ -40,22 +37,18 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Ambient media that dissolves into the background. Drop a looping
-                clip at public/hero.mp4 to replace the animation. */}
+            {/* Premium ambient aurora that dissolves into the background.
+                Drop a looping clip at public/hero.mp4 to use video instead. */}
             <div className="hero-media">
               <video className="hero-video" autoPlay muted loop playsInline preload="none" poster="">
                 <source src="/hero.mp4" type="video/mp4" />
               </video>
-              <div className="hero-anim" aria-hidden="true">
-                <span className="ring r1" />
-                <span className="ring r2" />
-                <span className="ring r3" />
-                <svg className="ecg" viewBox="0 0 220 80" preserveAspectRatio="xMidYMid meet">
-                  <path d="M4 40 H74 L84 40 L94 16 L106 64 L116 40 L124 30 L132 40 H216" />
-                </svg>
-                <span className="core">
-                  <svg viewBox="0 0 24 24"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 5.5-7 10-7 10z" fill="var(--red-500)" /></svg>
-                </span>
+              <div className="aura" aria-hidden="true">
+                <span className="o1" />
+                <span className="o2" />
+                <span className="o3" />
+                <span className="halo" />
+                <span className="rim" />
               </div>
             </div>
           </div>
