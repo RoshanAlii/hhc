@@ -1,9 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useState } from "react";
+import Placeholder from "@/components/Placeholder";
 import { coreServiceList, priceLabel, type Category } from "@/lib/data";
+
+const toneFor = (c: Category): "orange" | "green" | "red" =>
+  c === "Medical" ? "orange" : c === "Nursing & care" ? "green" : "red";
 
 const FILTERS: ("All" | Category)[] = ["All", "Medical", "Nursing & care", "Therapy & wellness"];
 
@@ -33,7 +36,7 @@ export default function ServicesGrid() {
       <div className="grid3" style={{ paddingBottom: 80 }}>
         {showFeatured && (
           <Link className="pcard feature" href={`/services/${featured.slug}`}>
-            <Image className="img" src={featured.image!} width={640} height={360} alt={featured.name} style={{ objectFit: "cover" }} />
+            <Placeholder caption={featured.photo} tone={toneFor(featured.category)} />
             <div className="body">
               <span className="tag orange" style={{ alignSelf: "flex-start" }}><span className="dot" />Most booked</span>
               <h3 style={{ fontSize: 24, fontWeight: "var(--fw-extra)", marginTop: 10 }}>{featured.name}</h3>
@@ -48,7 +51,7 @@ export default function ServicesGrid() {
 
         {visibleRest.map((s) => (
           <Link className="pcard" key={s.slug} href={`/services/${s.slug}`}>
-            <Image className="img" src={s.image!} width={640} height={360} alt={s.shortName} style={{ objectFit: "cover" }} />
+            <Placeholder caption={s.photo} tone={toneFor(s.category)} />
             <div className="body">
               <h3 style={{ fontSize: 17 }}>{s.name}</h3>
               <p className="muted" style={{ fontSize: 14, marginTop: 4 }}>{s.blurb}</p>
@@ -62,7 +65,7 @@ export default function ServicesGrid() {
 
         {showWellness && (
           <Link className="pcard" href="/services/wellness">
-            <div className="imgph img">Wellness &amp; IV</div>
+            <Placeholder caption="Wellness &amp; IV therapy at home" tone="green" />
             <div className="body">
               <h3 style={{ fontSize: 17 }}>Wellness services</h3>
               <p className="muted" style={{ fontSize: 14, marginTop: 4 }}>IV drips, NAD+, panels — 8 sub-services.</p>

@@ -46,7 +46,7 @@ export interface Service {
   unit: string;
   nextSlot: string;
   featured?: boolean;
-  image?: string;
+  photo?: string; // caption for the solid-shape image placeholder
   heroTitle: string;
   heroBlurb: string;
   variants?: Variant[];
@@ -235,19 +235,19 @@ const wellnessServices: Service[] = [
 
 export const services: Service[] = [...coreServices, ...wellnessServices];
 
-// Attach the official brand illustrations to the core services (in order).
-const serviceImages: Record<string, string> = {
-  "doctor-visit": "/img/svc-1.png",
-  "home-nursing": "/img/svc-2.png",
-  "physiotherapy": "/img/svc-3.png",
-  "elderly-care": "/img/svc-4.png",
-  "newborn-child-care": "/img/svc-5.png",
-  "lab-tests": "/img/svc-6.png",
-  "chronic-disease": "/img/svc-7.png",
-  "travel-medical": "/img/svc-8.png",
+// Placeholder captions for the solid-shape image slots (per the design).
+const servicePhotos: Record<string, string> = {
+  "doctor-visit": "Doctor examining a patient at home",
+  "home-nursing": "Nurse assisting a patient at home",
+  "physiotherapy": "Physiotherapist guiding a home exercise",
+  "elderly-care": "Caregiver with an elderly person at home",
+  "newborn-child-care": "Nurse caring for a newborn baby",
+  "lab-tests": "Home blood sample collection",
+  "chronic-disease": "Clinician reviewing a patient health plan",
+  "travel-medical": "Medical travel assistance support",
 };
 for (const s of services) {
-  if (serviceImages[s.slug]) s.image = serviceImages[s.slug];
+  s.photo = servicePhotos[s.slug] ?? "Wellness care at home";
 }
 
 export function getService(slug: string): Service | undefined {
@@ -310,7 +310,7 @@ export interface Article {
   excerpt: string;
   body: string[];
   relatedServiceSlug?: string;
-  image?: string;
+  photo?: string; // caption for the solid-shape image placeholder
 }
 
 export const articles: Article[] = [
@@ -388,9 +388,14 @@ export const articles: Article[] = [
   },
 ];
 
-// Attach the brand blog illustrations (cycled across the posts).
-articles.forEach((a, i) => {
-  a.image = `/img/post-${(i % 3) + 1}.png`;
+// Placeholder captions for the journal image slots.
+const articlePhotos: Record<string, string> = {
+  "home-nurses-diabetes-hypertension": "Nurse checking blood pressure at home",
+  "ultimate-guide-home-health-care": "Clinician with tablet in a home setting",
+  "iv-drip-therapy-recovery": "IV drip wellness treatment at home",
+};
+articles.forEach((a) => {
+  a.photo = articlePhotos[a.slug] ?? "Home healthcare in Dubai";
 });
 
 export function getArticle(slug: string): Article | undefined {

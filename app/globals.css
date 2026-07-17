@@ -586,8 +586,57 @@ footer.site::before{content:"";position:absolute;top:0;inset-inline:0;height:4px
 .icard h3{font-size:17px;font-weight:var(--fw-bold);color:var(--text-strong);margin-bottom:4px}
 .icard .b > p{font-size:14px;color:var(--text-muted)}
 .icard .foot{margin-top:auto;padding-top:14px;border-top:1px solid var(--border-subtle);display:flex;justify-content:space-between;align-items:center}
-/* real images inside cards */
-.icard img.ph{width:100%;height:auto;object-fit:cover}
-.pcard img.img{width:100%;height:auto;display:block;object-fit:cover}
-.pcard.feature img.img{width:44%;height:auto;align-self:stretch;object-fit:cover}
-@media(max-width:960px){.pcard.feature img.img{width:100%}}
+/* ---- solid-shape image placeholders (match the design) --------------- */
+.ph-shape{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;text-align:center;padding:14px;aspect-ratio:16/9;background:var(--surface-subtle);color:var(--text-muted)}
+.ph-shape[data-tone="orange"]{background:var(--orange-50)}
+.ph-shape[data-tone="green"]{background:var(--green-50)}
+.ph-shape[data-tone="red"]{background:var(--red-50)}
+.ph-shape[data-tone="neutral"]{background:var(--surface-subtle)}
+.ph-shape .ph-ic{stroke:var(--gray-400);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;opacity:.75}
+.ph-shape .ph-cap{font-size:12px;color:var(--text-muted);max-width:26ch;line-height:1.35}
+.ph-shape .ph-sub{font-size:11px;color:var(--brand-primary);text-decoration:underline}
+.icard > .ph-shape{border-bottom:1px solid var(--border-subtle)}
+.pcard > .ph-shape{border-bottom:1px solid var(--border-subtle)}
+.pcard.feature > .ph-shape{width:44%;aspect-ratio:auto;border-bottom:none;border-inline-end:1px solid var(--border-subtle)}
+@media(max-width:960px){.pcard.feature > .ph-shape{width:100%;aspect-ratio:16/9;border-inline-end:none;border-bottom:1px solid var(--border-subtle)}}
+
+/* hero solid-shape media box */
+.hero-ph{position:relative;aspect-ratio:1/0.82;border-radius:var(--radius-xl);border:1px solid var(--border-subtle);background:radial-gradient(58% 54% at 50% 46%,var(--orange-100),var(--surface-subtle) 78%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;padding:24px;color:var(--text-muted)}
+.hero-ph .ph-ic{width:34px;height:34px;stroke:var(--gray-400);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;opacity:.7}
+.hero-ph .ph-cap{font-size:13px;max-width:30ch;color:var(--text-muted)}
+.hero-ph .ph-sub{font-size:12px;color:var(--brand-primary);text-decoration:underline}
+.pill-hl{position:absolute;top:16px;inset-inline-end:16px;background:#fff;border:1px solid var(--border-subtle);box-shadow:var(--shadow-sm);border-radius:999px;padding:6px 13px;font-size:12px;font-weight:var(--fw-bold);color:var(--text-strong);display:inline-flex;align-items:center;gap:6px}
+.pill-hl .h{color:var(--red-500)}
+
+/* hero trust chips as soft pills */
+.hero-lite .trust span{border-radius:999px;padding:8px 15px;background:var(--surface-brand-soft);border-color:var(--orange-100);color:var(--text-body)}
+.hero-lite .trust b{color:var(--text-strong)}
+.hero-lite .trust .star{color:var(--orange-500)}
+
+/* features: compact horizontal cards (icon + title) */
+.features .feature{display:flex;align-items:center;gap:12px;padding:15px 16px}
+.features .feature .ic{margin-bottom:0;width:40px;height:40px;flex:none}
+.features .feature h4{margin-bottom:0;font-size:15px}
+
+/* how-it-works: clean white card */
+.howrow{background:var(--surface-card);border:1px solid var(--border-subtle);border-radius:var(--radius-lg);box-shadow:var(--shadow-xs);padding:24px 28px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:28px}
+@media(max-width:800px){.howrow{grid-template-columns:1fr;gap:16px}}
+.how-s{display:flex;gap:12px;align-items:flex-start}
+.how-s .n{width:30px;height:30px;border-radius:50%;background:var(--brand-primary);color:#fff;font-weight:var(--fw-bold);font-size:14px;display:flex;align-items:center;justify-content:center;flex:none}
+.how-s b{display:block;color:var(--text-strong);font-size:15px;margin-bottom:2px}
+.how-s span{font-size:13px;color:var(--text-muted)}
+
+/* solid promo bands (wellness + organisation) */
+.promoband{border-radius:var(--radius-xl);padding:38px 40px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;box-shadow:var(--shadow-sm)}
+.promoband.green{background:var(--green-500);color:#fff}
+.promoband .k{font-size:var(--fs-eyebrow);letter-spacing:var(--ls-eyebrow);text-transform:uppercase;font-weight:var(--fw-bold);color:var(--green-100)}
+.promoband h2{color:#fff;font-size:clamp(24px,3vw,34px);font-weight:var(--fw-extra);margin-top:6px;line-height:1.1}
+.promoband p{color:rgba(255,255,255,.9);margin-top:6px;max-width:52ch}
+.promoband .txt{min-width:0}
+
+/* light stats band */
+.band.soft{background:linear-gradient(120deg,var(--orange-50),var(--green-50));border:1px solid var(--border-subtle);color:var(--text-strong);box-shadow:var(--shadow-xs)}
+.band.soft .stat .big{color:var(--text-strong)}
+.band.soft .stat:nth-child(1) .big{color:var(--orange-600)}
+.band.soft .stat:nth-child(2) .big{color:var(--green-600)}
+.band.soft .stat .lb{color:var(--text-muted)}

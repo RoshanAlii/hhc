@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useState } from "react";
+import Placeholder from "@/components/Placeholder";
 import { articles } from "@/lib/data";
 
 const FILTERS = ["All", "Health guides", "News & press"] as const;
@@ -27,7 +27,7 @@ export default function JournalGrid() {
       <div className="grid3" style={{ paddingBottom: 80 }}>
         {visible.map((a) => (
           <Link className="pcard" key={a.slug} href={`/journal/${a.slug}`}>
-            <Image className="img" src={a.image!} width={760} height={440} alt={a.title} style={{ objectFit: "cover" }} />
+            <Placeholder caption={a.photo} tone="neutral" />
             <div className="body">
               <span className={`tag${a.category === "News & press" ? " orange" : ""}`} style={{ alignSelf: "flex-start", marginBottom: 8 }}>
                 <span className="dot" />{a.category}
