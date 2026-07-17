@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { articles, getArticle, getService, COMPANY } from "@/lib/data";
 
@@ -28,7 +29,9 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       <p className="muted" style={{ fontSize: 13, marginBottom: 18 }}>
         Reviewed by HealthServe clinical team · {article.readMins} min read
       </p>
-      <div className="imgph" style={{ height: 240, marginBottom: 24 }}>Article hero photo</div>
+      {article.image && (
+        <Image src={article.image} width={760} height={440} alt={article.title} priority style={{ width: "100%", height: "auto", borderRadius: "var(--radius-lg)", marginBottom: 24, display: "block" }} />
+      )}
 
       {article.body.map((p, i) => (
         <p className="muted" key={i} style={{ fontSize: 16, marginBottom: 14 }}>{p}</p>

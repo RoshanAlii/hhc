@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useCart } from "@/lib/cart";
@@ -100,7 +101,11 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
 
       <div className="wrap detail">
         <main className="panel">
-          <div className="imgph" style={{ height: 220, marginBottom: 26 }}>Service photography — {service.shortName}</div>
+          {service.image ? (
+            <Image src={service.image} width={640} height={360} alt={service.name} className="svc-hero-img" style={{ width: "100%", height: "auto", borderRadius: "var(--radius-md)", marginBottom: 26, display: "block" }} />
+          ) : (
+            <div className="imgph" style={{ height: 220, marginBottom: 26 }}>Service photography — {service.shortName}</div>
+          )}
 
           <h2 className="blk">What&rsquo;s included</h2>
           <ul className="inc">{service.includes.map((i) => <li key={i}>{i}</li>)}</ul>

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { coreServiceList, priceLabel, type Category } from "@/lib/data";
 
@@ -32,7 +33,7 @@ export default function ServicesGrid() {
       <div className="grid3" style={{ paddingBottom: 80 }}>
         {showFeatured && (
           <Link className="pcard feature" href={`/services/${featured.slug}`}>
-            <div className="imgph img">Featured — GP home visit</div>
+            <Image className="img" src={featured.image!} width={640} height={360} alt={featured.name} style={{ objectFit: "cover" }} />
             <div className="body">
               <span className="tag orange" style={{ alignSelf: "flex-start" }}><span className="dot" />Most booked</span>
               <h3 style={{ fontSize: 24, fontWeight: "var(--fw-extra)", marginTop: 10 }}>{featured.name}</h3>
@@ -47,7 +48,7 @@ export default function ServicesGrid() {
 
         {visibleRest.map((s) => (
           <Link className="pcard" key={s.slug} href={`/services/${s.slug}`}>
-            <div className="imgph img">{s.shortName}</div>
+            <Image className="img" src={s.image!} width={640} height={360} alt={s.shortName} style={{ objectFit: "cover" }} />
             <div className="body">
               <h3 style={{ fontSize: 17 }}>{s.name}</h3>
               <p className="muted" style={{ fontSize: 14, marginTop: 4 }}>{s.blurb}</p>

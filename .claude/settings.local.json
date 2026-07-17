@@ -31,7 +31,12 @@
       "Bash(curl -s -o /dev/null -w \"dispensary:%{http_code}  \" -L http://localhost:3200/dispensary/)",
       "Bash(curl -s -o /dev/null -w \"profile:%{http_code}\\\\n\" -L http://localhost:3200/account/profile/)",
       "Bash(git -c user.name=HealthServe -c user.email=ahamedroshanali@gmail.com commit -q -m 'Rework hero: fused ambient media + booking bar underneath *)",
-      "Bash(git -c user.name=HealthServe -c user.email=ahamedroshanali@gmail.com commit -q -m 'Premium ambient hero: soft aurora media that fuses into the background *)"
+      "Bash(git -c user.name=HealthServe -c user.email=ahamedroshanali@gmail.com commit -q -m 'Premium ambient hero: soft aurora media that fuses into the background *)",
+      "Bash(python3 -)",
+      "Bash(python3 -c ' *)",
+      "Bash(SRC=/private/tmp/claude-501/-Users-user-Desktop-hhc/355d6c19-3ad8-4d3c-919d-df91109598cc/scratchpad/palette/assets/img *)",
+      "Bash(curl -s -o /dev/null -w \"svc-1 img:%{http_code}\\\\n\" http://localhost:3200/img/svc-1.png)",
+      "Bash(git -c user.name=HealthServe -c user.email=ahamedroshanali@gmail.com commit -q -m 'Apply official design: light warm hero + real brand illustrations *)"
     ]
   }
 }

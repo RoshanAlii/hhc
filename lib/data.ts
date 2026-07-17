@@ -46,6 +46,7 @@ export interface Service {
   unit: string;
   nextSlot: string;
   featured?: boolean;
+  image?: string;
   heroTitle: string;
   heroBlurb: string;
   variants?: Variant[];
@@ -234,6 +235,21 @@ const wellnessServices: Service[] = [
 
 export const services: Service[] = [...coreServices, ...wellnessServices];
 
+// Attach the official brand illustrations to the core services (in order).
+const serviceImages: Record<string, string> = {
+  "doctor-visit": "/img/svc-1.png",
+  "home-nursing": "/img/svc-2.png",
+  "physiotherapy": "/img/svc-3.png",
+  "elderly-care": "/img/svc-4.png",
+  "newborn-child-care": "/img/svc-5.png",
+  "lab-tests": "/img/svc-6.png",
+  "chronic-disease": "/img/svc-7.png",
+  "travel-medical": "/img/svc-8.png",
+};
+for (const s of services) {
+  if (serviceImages[s.slug]) s.image = serviceImages[s.slug];
+}
+
 export function getService(slug: string): Service | undefined {
   return services.find((s) => s.slug === slug);
 }
@@ -294,6 +310,7 @@ export interface Article {
   excerpt: string;
   body: string[];
   relatedServiceSlug?: string;
+  image?: string;
 }
 
 export const articles: Article[] = [
@@ -370,6 +387,11 @@ export const articles: Article[] = [
     ],
   },
 ];
+
+// Attach the brand blog illustrations (cycled across the posts).
+articles.forEach((a, i) => {
+  a.image = `/img/post-${(i % 3) + 1}.png`;
+});
 
 export function getArticle(slug: string): Article | undefined {
   return articles.find((a) => a.slug === slug);

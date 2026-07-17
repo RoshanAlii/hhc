@@ -415,6 +415,7 @@ footer.site{background:var(--surface-card);border-top:1px solid var(--border-sub
 .band.ink .stat:nth-child(1) .big{color:var(--orange-400)}
 .band.ink .stat:nth-child(2) .big{color:var(--green-400)}
 .band.ink .stat:nth-child(3) .big{color:var(--orange-300)}
+.band.ink .stat:nth-child(4) .big{color:var(--green-300)}
 .band.ink .stat .lb{color:rgba(255,255,255,.68)}
 .band.ink .insurers span{color:rgba(255,255,255,.82);border-color:rgba(255,255,255,.18);background:rgba(255,255,255,.06)}
 
@@ -550,3 +551,43 @@ footer.site::before{content:"";position:absolute;top:0;inset-inline:0;height:4px
 .hero-search .book{box-shadow:0 18px 44px rgba(0,0,0,.4)}
 .hero-search .avail{color:rgba(255,255,255,.72)}
 .hero-search .avail .dot{background:var(--green-400)}
+
+/* ==========================================================================
+   Official design — light warm hero + real illustration + image cards
+   ========================================================================== */
+.hero-lite{position:relative;overflow:hidden;background:linear-gradient(180deg,#FEF3E8 0%,var(--surface-page) 64%);padding:44px 0 40px}
+.hero-lite-inner{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;padding-bottom:26px}
+@media(max-width:940px){.hero-lite-inner{grid-template-columns:1fr;gap:18px}}
+.hero-lite .kick2{display:inline-flex;align-items:center;gap:9px;padding:7px 15px;border-radius:999px;background:#fff;border:1px solid var(--orange-100);font-size:12px;font-weight:var(--fw-bold);letter-spacing:.13em;text-transform:uppercase;color:var(--brand-primary);margin-bottom:20px;box-shadow:var(--shadow-xs)}
+.hero-lite .kick2 .d{width:7px;height:7px;border-radius:50%;background:var(--green-500)}
+.hero-lite h1{font-size:clamp(38px,5vw,58px);font-weight:var(--fw-extra);line-height:1.05;letter-spacing:-.025em;color:var(--text-strong);margin:0 0 18px;max-width:15ch}
+.hero-lite h1 em{font-style:normal;color:var(--brand-primary)}
+.hero-lite .lead{font-size:19px;color:var(--text-body);max-width:46ch;margin:0 0 20px}
+.hero-lite .trust{margin-bottom:22px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.hero-art{position:relative}
+.hero-art img{width:100%;height:auto;display:block;
+  -webkit-mask-image:radial-gradient(125% 120% at 52% 46%,#000 62%,transparent 100%);
+  mask-image:radial-gradient(125% 120% at 52% 46%,#000 62%,transparent 100%)}
+@media(max-width:940px){.hero-art{max-width:460px;margin-inline:auto}}
+.hero-book{position:relative;z-index:1;margin-top:6px}
+.hero-book .book{box-shadow:var(--shadow-md);border-color:var(--orange-100)}
+.hero-book .book .btn-primary{box-shadow:0 8px 20px rgba(217,127,52,.26)}
+.hero-strip-lite{margin-top:18px;border-top:1px solid var(--border-subtle);padding-top:16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--text-muted)}
+.hero-strip-lite .lbl2{letter-spacing:.12em;text-transform:uppercase;font-weight:var(--fw-bold);color:var(--text-muted)}
+.hero-strip-lite .ins{display:flex;gap:8px;flex-wrap:wrap}
+.hero-strip-lite .ins span{border:1px solid var(--border-subtle);border-radius:var(--radius-sm);padding:6px 12px;color:var(--text-body);background:var(--surface-card)}
+
+/* image service card */
+.icard{background:var(--surface-card);border:1px solid var(--border-subtle);border-radius:var(--radius-lg);overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow-xs);text-decoration:none!important;color:inherit;transition:box-shadow var(--dur-base) var(--ease-out),transform var(--dur-base) var(--ease-out),border-color var(--dur-base) var(--ease-out)}
+.icard:hover{box-shadow:var(--shadow-md);transform:translateY(-3px);border-color:var(--orange-200)}
+.icard .ph{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;background:var(--orange-50);border-bottom:1px solid var(--border-subtle)}
+.icard .b{padding:18px;display:flex;flex-direction:column;flex:1}
+.icard h3{font-size:17px;font-weight:var(--fw-bold);color:var(--text-strong);margin-bottom:4px}
+.icard .b > p{font-size:14px;color:var(--text-muted)}
+.icard .foot{margin-top:auto;padding-top:14px;border-top:1px solid var(--border-subtle);display:flex;justify-content:space-between;align-items:center}
+/* real images inside cards */
+.icard img.ph{width:100%;height:auto;object-fit:cover}
+.pcard img.img{width:100%;height:auto;display:block;object-fit:cover}
+.pcard.feature img.img{width:44%;height:auto;align-self:stretch;object-fit:cover}
+@media(max-width:960px){.pcard.feature img.img{width:100%}}

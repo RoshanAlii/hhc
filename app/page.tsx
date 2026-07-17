@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import BookingWidget from "@/components/BookingWidget";
 import Icon from "@/components/Icon";
 import { coreServiceList, priceLabel, articles, COMPANY, type Category } from "@/lib/data";
@@ -18,47 +19,34 @@ export default function HomePage() {
 
   return (
     <>
-      {/* HERO — immersive, full-bleed */}
-      <section className="hero-x">
+      {/* HERO — light, warm, with the brand illustration */}
+      <section className="hero-lite">
         <div className="wrap">
-          <div className="hero-x-inner">
+          <div className="hero-lite-inner">
             <div>
-              <span className="kick">Home healthcare · Dubai · since {COMPANY.since}</span>
+              <span className="kick2"><span className="d" />Home Healthcare · Dubai · Since {COMPANY.since}</span>
               <h1>Hospital-grade care, <em>in the comfort of home.</em></h1>
-              <p className="lead">
-                DHA-licensed doctors, nurses and physiotherapists at your door — often the same day.
-                No queues, no waiting rooms.
-              </p>
+              <p className="lead">Licensed doctors, nurses and physiotherapists at your door. No queues, no waiting rooms.</p>
               <div className="trust">
-                <span>Caring for Dubai since <b>{COMPANY.since}</b></span>
                 <span><b>DHA</b> licensed</span>
                 <span><b>MOHAP</b> approved</span>
-                <span><span className="star">★</span> <b>4.9</b> · 2,000+ families</span>
+                <span><span className="star">★</span> <b>4.9</b> · 25,000+ families</span>
+              </div>
+              <div className="hero-actions">
+                <Link className="btn btn-primary btn-lg" href="/services">Book a visit</Link>
+                <a className="btn btn-outline btn-lg" href={COMPANY.whatsapp} target="_blank" rel="noreferrer">WhatsApp us</a>
               </div>
             </div>
-
-            {/* Premium ambient aurora that dissolves into the background.
-                Drop a looping clip at public/hero.mp4 to use video instead. */}
-            <div className="hero-media">
-              <video className="hero-video" autoPlay muted loop playsInline preload="none" poster="">
-                <source src="/hero.mp4" type="video/mp4" />
-              </video>
-              <div className="aura" aria-hidden="true">
-                <span className="o1" />
-                <span className="o2" />
-                <span className="o3" />
-                <span className="halo" />
-                <span className="rim" />
-              </div>
+            <div className="hero-art">
+              <Image src="/img/hero.png" width={1100} height={920} alt="A licensed clinician caring for an elderly patient at home" priority />
             </div>
           </div>
 
-          {/* Booking / search bar — full width, underneath */}
-          <div className="hero-search">
+          <div className="hero-book">
             <BookingWidget />
           </div>
 
-          <div className="hero-strip">
+          <div className="hero-strip-lite">
             <span className="lbl2">Insurance &amp; direct billing</span>
             <div className="ins">
               <span>ESAAD</span><span>Al Sanad</span><span>Al Saada</span><span>Saico</span><span>Almadallah</span>
@@ -80,7 +68,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* SERVICES */}
+      {/* SERVICES — real illustrations */}
       <section className="wrap home-sec tight">
         <div className="sec-hd" style={{ marginBottom: 24 }}>
           <div>
@@ -92,26 +80,30 @@ export default function HomePage() {
         </div>
         <div className="grid4">
           {coreServiceList.map((s) => (
-            <Link className="svc" key={s.slug} href={s.slug === "wellness" ? "/services/wellness" : `/services/${s.slug}`}>
-              <span className={`ic ${catClass(s.category)}`}><Icon name={s.icon} /></span>
-              <h3>{s.shortName}</h3>
-              <p>{s.blurb}</p>
-              <div className="foot">
-                <span className="price">
-                  {priceLabel(s)}
-                  <small>{s.priceType === "from" ? s.unit : s.priceType === "program" ? "tailored" : "quote"}</small>
-                </span>
-                <span className="slot"><span className="dot" />{s.nextSlot.split(" ")[0]}</span>
+            <Link className="icard" key={s.slug} href={`/services/${s.slug}`}>
+              <Image className="ph" src={s.image!} width={640} height={360} alt={s.shortName} />
+              <div className="b">
+                <h3>{s.shortName}</h3>
+                <p>{s.blurb}</p>
+                <div className="foot">
+                  <span className="price">
+                    {priceLabel(s)}
+                    <small>{s.priceType === "from" ? s.unit : s.priceType === "program" ? "tailored" : "quote"}</small>
+                  </span>
+                  <span className="slot"><span className="dot" />{s.nextSlot.split(" ")[0]}</span>
+                </div>
               </div>
             </Link>
           ))}
-          <Link className="svc" href="/services/wellness">
-            <span className="ic cat-therapy"><Icon name="wellness" /></span>
-            <h3>Wellness services</h3>
-            <p>IV drips, NAD+, panels &amp; more.</p>
-            <div className="foot">
-              <span className="price">from AED 150<small>8 services</small></span>
-              <span className="slot"><span className="dot" />Explore</span>
+          <Link className="icard" href="/services/wellness">
+            <div className="ph" style={{ background: "linear-gradient(120deg,var(--green-200),var(--green-500))", aspectRatio: "16/9" }} />
+            <div className="b">
+              <h3>Wellness services</h3>
+              <p>IV drips, NAD+, panels &amp; more.</p>
+              <div className="foot">
+                <span className="price">from AED 150<small>8 services</small></span>
+                <span className="slot"><span className="dot" />Explore</span>
+              </div>
             </div>
           </Link>
         </div>
@@ -140,13 +132,11 @@ export default function HomePage() {
           <div className="stat"><div className="big">{COMPANY.since}</div><div className="lb">Serving Dubai homes</div></div>
           <div className="stat"><div className="big">DHA</div><div className="lb">FL-0064861</div></div>
           <div className="stat"><div className="big">MOHAP</div><div className="lb">ZM0ETT1A-090224</div></div>
-          <div className="insurers">
-            <span>ESAAD</span><span>Al Sanad</span><span>Al Saada</span><span>Saico</span><span>Almadallah</span>
-          </div>
+          <div className="stat"><div className="big">25,000+</div><div className="lb">Families cared for</div></div>
         </div>
       </section>
 
-      {/* JOURNAL PREVIEW */}
+      {/* JOURNAL PREVIEW — real illustrations */}
       <section className="wrap home-sec tight">
         <div className="sec-hd" style={{ marginBottom: 24 }}>
           <div>
@@ -157,14 +147,14 @@ export default function HomePage() {
         </div>
         <div className="jgrid">
           {latest.map((a) => (
-            <Link className="pcard" key={a.slug} href={`/journal/${a.slug}`}>
-              <div className="imgph img">{a.category}</div>
-              <div className="body">
+            <Link className="icard" key={a.slug} href={`/journal/${a.slug}`}>
+              <Image className="ph" src={a.image!} width={760} height={440} alt={a.title} />
+              <div className="b">
                 <span className={`tag${a.category === "News & press" ? " orange" : ""}`} style={{ alignSelf: "flex-start", marginBottom: 8 }}>
                   <span className="dot" />{a.category}
                 </span>
                 <h3 style={{ fontSize: 16 }}>{a.title}</h3>
-                <div className="foot" style={{ marginTop: "auto", paddingTop: 12, display: "flex", justifyContent: "space-between" }}>
+                <div className="foot">
                   <span className="muted" style={{ fontSize: 12 }}>{a.readMins} min read</span>
                   <span className="btn btn-quiet btn-sm">Read</span>
                 </div>
