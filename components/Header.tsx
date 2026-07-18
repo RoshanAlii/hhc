@@ -28,21 +28,20 @@ export default function Header() {
 
   return (
     <>
-      <div className="promo" aria-label="Offers">
-        <div className="track">
-          {[...PROMOS, ...PROMOS].map((p, i) => (
-            <span key={i}>{p}</span>
-          ))}
-        </div>
-      </div>
-
-      <div className="wrap">
-        <div className="util">
-          <span className="lft">
-            <a href={COMPANY.phoneHref}>{COMPANY.phoneLabel}</a> · 8:30 AM – 6:30 PM daily
+      {/* Top utility bar — single light row */}
+      <div className="topbar">
+        <div className="wrap topbar-in">
+          <span className="tb-left">
+            <a className="ph" href={COMPANY.phoneHref}>{COMPANY.phoneLabel}</a> · 8:30 AM – 6:30 PM daily
           </span>
-          <button className="sel" type="button">Dubai ▾</button>
-          <button className="sel" type="button">English ▾</button>
+          <div className="tb-promo">
+            <div className="track">
+              {[...PROMOS, ...PROMOS].map((p, i) => (
+                <span key={i}>{p}<span className="b">&nbsp;&nbsp;•</span></span>
+              ))}
+            </div>
+          </div>
+          <span className="tb-right">Dubai, UAE <span className="sep">·</span> English</span>
         </div>
       </div>
 
@@ -50,7 +49,7 @@ export default function Header() {
         <div className="wrap">
           <div className="navrow">
             <Link className="hs-logo" href="/" aria-label="HealthServe — Home Healthcare">
-              <Logo width={186} />
+              <Logo width={150} />
             </Link>
             <div className="links">
               {NAV.map((n) =>
@@ -66,14 +65,15 @@ export default function Header() {
               )}
             </div>
             <div className="navact">
-              <a className="btn btn-quiet btn-sm" href={COMPANY.whatsapp} target="_blank" rel="noreferrer">WhatsApp</a>
-              <Link className="btn btn-primary btn-sm" href="/services">Book Now</Link>
-              <Link className="iconbtn" href="/cart" aria-label={`Cart, ${count} items`}>
-                <Icon name="cart" size={17} />
-                {count > 0 && <span className="cnt">{count}</span>}
-              </Link>
-              <Link className="iconbtn" href="/login" aria-label="Log in / Register">
-                <Icon name="user" size={16} />
+              {count > 0 && (
+                <Link className="navcart" href="/cart" aria-label={`Cart, ${count} items`}>
+                  <Icon name="cart" size={16} />
+                  <span className="cnt">{count}</span>
+                </Link>
+              )}
+              <Link className="btn-booknow" href="/services">Book Now</Link>
+              <Link className="btn-login" href="/login">
+                <Icon name="user" size={16} /> Log in
               </Link>
               <button
                 className="navtoggle"
@@ -98,8 +98,7 @@ export default function Header() {
                 </a>
               ),
             )}
-            <Link href="/about" onClick={() => setOpen(false)}>About</Link>
-            <Link href="/contact" onClick={() => setOpen(false)}>Contact</Link>
+            <a href={COMPANY.whatsapp} target="_blank" rel="noreferrer" onClick={() => setOpen(false)}>WhatsApp us</a>
           </div>
         </div>
       </nav>
