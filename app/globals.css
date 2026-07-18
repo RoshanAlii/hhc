@@ -138,11 +138,12 @@ nav.main{position:sticky;top:0;z-index:50;background:rgba(253,252,250,.92);backd
 .logo em{font-style:normal;color:var(--brand-primary)}
 .logo .plus{color:var(--brand-heart)}
 /* grouped pill nav (matches design) */
-.links{display:flex;align-items:center;gap:22px;background:#EBE6DF;border:1px solid #DDD5CA;border-radius:999px;padding:9px 22px;white-space:nowrap}
-.links a{color:#4A4A4A;font-size:14.5px;font-weight:600;text-decoration:none!important}
-.links a:hover,.links a[aria-current]{color:#302B26}
+.links{display:flex;align-items:center;gap:4px;background:#EBE6DF;border:1px solid #DDD5CA;border-radius:999px;padding:6px 8px;white-space:nowrap}
+.links a{color:#4A4A4A;font-size:14.5px;font-weight:600;text-decoration:none!important;padding:7px 15px;border-radius:999px;transition:background var(--dur-fast) var(--ease-out),color var(--dur-fast) var(--ease-out)}
+.links a:hover{color:#302B26;background:rgba(48,43,38,.05)}
+.links a[aria-current]{color:#302B26;background:#D9D0C3}
 .links a.parked{cursor:default}
-.links a.parked:hover{color:#4A4A4A}
+.links a.parked:hover{color:#4A4A4A;background:transparent}
 .mobilemenu a.parked{cursor:default}
 .navact{display:flex;gap:12px;align-items:center;flex-shrink:0}
 /* top utility bar (single light row) */
