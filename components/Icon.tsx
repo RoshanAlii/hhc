@@ -51,6 +51,9 @@ const PATHS: Record<string, React.ReactNode> = {
   ),
   menu: <path d="M4 7h16M4 12h16M4 17h16" />,
   check: <path d="M5 12l5 5L20 6" />,
+  arrow: <path d="M5 12h12.5M12.5 6.5L19 12l-6.5 5.5" />,
+  star: <path d="M12 2.9l2.85 5.78 6.38.93-4.62 4.5 1.09 6.35L12 17.46l-5.7 3-1.09-6.35-4.62-4.5 6.38-.93z" />,
+  heartSolid: <path d="M12 20.4s-7.4-4.7-7.4-10.2a4.05 4.05 0 0 1 7.4-2.28 4.05 4.05 0 0 1 7.4 2.28c0 5.5-7.4 10.2-7.4 10.2z" />,
   pill: (
     <>
       <rect x="2.5" y="9" width="19" height="6" rx="3" />
@@ -90,10 +93,13 @@ const PATHS: Record<string, React.ReactNode> = {
   ),
 };
 
+// Icons that are drawn as filled shapes rather than strokes.
+const SOLID = new Set(["star", "heartSolid"]);
+
 export default function Icon({
   name,
   size = 20,
-  className = "svgi",
+  className,
   style,
 }: {
   name: string;
@@ -101,8 +107,16 @@ export default function Icon({
   className?: string;
   style?: React.CSSProperties;
 }) {
+  const solid = SOLID.has(name);
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" className={className} style={style} aria-hidden="true">
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      className={className ?? (solid ? "svgi-solid" : "svgi")}
+      style={style}
+      aria-hidden="true"
+    >
       {PATHS[name] ?? PATHS.doctor}
     </svg>
   );

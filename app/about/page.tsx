@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Icon from "@/components/Icon";
 import { COMPANY } from "@/lib/data";
 
 export const metadata: Metadata = {
@@ -36,7 +37,7 @@ export default function AboutPage() {
           <div className="stat"><div className="big">DHA</div><div className="lb">FL-0064861 · licensed facility</div></div>
           <div className="stat"><div className="big">MOHAP</div><div className="lb">ZM0ETT1A-090224</div></div>
           <div className="stat"><div className="big">10 yrs</div><div className="lb">In Dubai homes</div></div>
-          <div className="stat"><div className="big">4.9 ★</div><div className="lb">Google rating</div></div>
+          <div className="stat"><div className="big" style={{display:"inline-flex",alignItems:"center",gap:6}}>4.9 <Icon name="star" size={20} style={{color:"var(--star)"}} /></div><div className="lb">Google rating</div></div>
         </div>
         <h2 className="blk" style={{ marginTop: 40 }}>Partners &amp; insurance</h2>
         <div className="insurers" style={{ marginBottom: 60 }}>

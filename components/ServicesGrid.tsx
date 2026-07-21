@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Icon from "@/components/Icon";
 import { useState } from "react";
 import Placeholder from "@/components/Placeholder";
 import { coreServiceList, priceLabel, type Category } from "@/lib/data";
@@ -57,7 +58,7 @@ export default function ServicesGrid() {
               <p className="muted" style={{ fontSize: 14, marginTop: 4 }}>{s.blurb}</p>
               <div className="foot" style={{ marginTop: "auto", paddingTop: 14, borderTop: "1px solid var(--border-subtle)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                 <span className="price">{priceLabel(s)}<small>{s.priceType === "from" ? s.unit : s.priceType === "program" ? "tailored" : "quote"}</small></span>
-                <span className="btn btn-quiet btn-sm">{s.priceType === "enquire" ? "Explore →" : "Book"}</span>
+                <span className="btn btn-quiet btn-sm">{s.priceType === "enquire" ? <>Explore <Icon name="arrow" size={13} /></> : "Book"}</span>
               </div>
             </div>
           </Link>
@@ -71,7 +72,7 @@ export default function ServicesGrid() {
               <p className="muted" style={{ fontSize: 14, marginTop: 4 }}>IV drips, NAD+, panels — 8 sub-services.</p>
               <div className="foot" style={{ marginTop: "auto", paddingTop: 14, borderTop: "1px solid var(--border-subtle)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                 <span className="price">from AED 150<small>8 services</small></span>
-                <span className="btn btn-quiet btn-sm">Explore →</span>
+                <span className="btn btn-quiet btn-sm">Explore <Icon name="arrow" size={13} /></span>
               </div>
             </div>
           </Link>

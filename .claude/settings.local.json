@@ -40,7 +40,8 @@
       "Bash(git -c user.name=HealthServe -c user.email=ahamedroshanali@gmail.com commit -q -m 'Match design: solid-shape placeholders, exact home layout *)",
       "Bash(git -c user.name=HealthServe -c user.email=ahamedroshanali@gmail.com commit -q -m 'Match design header: grouped pill nav + Book Now / Log in *)",
       "Bash(curl -s -o /dev/null -w \"services:%{http_code}\\\\n\" http://localhost:3200/services/)",
-      "Bash(git -c user.name=HealthServe -c user.email=ahamedroshanali@gmail.com commit -q -m 'Highlight the active nav item with a darker-gray chip *)"
+      "Bash(git -c user.name=HealthServe -c user.email=ahamedroshanali@gmail.com commit -q -m 'Highlight the active nav item with a darker-gray chip *)",
+      "Bash(git -c user.name=HealthServe -c user.email=ahamedroshanali@gmail.com commit -q -m 'Sleek polish pass: control system, crisp type, real depth *)"
     ]
   }
 }

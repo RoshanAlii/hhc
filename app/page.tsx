@@ -30,16 +30,16 @@ export default function HomePage() {
               <div className="trust">
                 <span><b>DHA</b> licensed</span>
                 <span><b>MOHAP</b> approved</span>
-                <span><span className="star">★</span> <b>4.9</b> · 25,000+ families</span>
+                <span><Icon name="star" size={14} /> <b>4.9</b> · 25,000+ families</span>
               </div>
               <div className="hero-actions">
-                <Link className="btn btn-primary btn-lg" href="/services">Book a visit →</Link>
+                <Link className="btn btn-primary btn-lg" href="/services">Book a visit <Icon name="arrow" size={17} /></Link>
                 <a className="btn btn-secondary btn-lg" href={COMPANY.whatsapp} target="_blank" rel="noreferrer">WhatsApp us</a>
               </div>
             </div>
             <div className="hero-art">
               <div className="hero-ph">
-                <span className="pill-hl"><span className="h">♥</span> Healing Lives</span>
+                <span className="pill-hl"><Icon name="heartSolid" size={14} /> Healing Lives</span>
                 <svg className="ph-ic" viewBox="0 0 24 24" aria-hidden="true">
                   <rect x="3" y="4" width="18" height="16" rx="2" /><circle cx="9" cy="10" r="2" /><path d="M4 18l5-4 4 3 3-3 4 4" />
                 </svg>
@@ -80,7 +80,7 @@ export default function HomePage() {
             <h2 className="sec">Care that comes to you</h2>
             <p>Licensed care at your doorstep — transparent prices, same-day slots.</p>
           </div>
-          <Link className="btn btn-primary btn-sm" href="/services">All services →</Link>
+          <Link className="btn btn-primary btn-sm" href="/services">All services <Icon name="arrow" size={14} /></Link>
         </div>
         <div className="grid3">
           {coreServiceList.map((s) => (
@@ -137,7 +137,7 @@ export default function HomePage() {
             <span className="kicker">From our journal</span>
             <h2 className="sec">Health guidance from our team</h2>
           </div>
-          <Link className="btn btn-primary btn-sm" href="/journal">Read the journal →</Link>
+          <Link className="btn btn-primary btn-sm" href="/journal">Read the journal <Icon name="arrow" size={14} /></Link>
         </div>
         <div className="jgrid">
           {latest.map((a) => (
@@ -161,7 +161,7 @@ export default function HomePage() {
       {/* TESTIMONIAL */}
       <section className="wrap home-sec tight">
         <div className="quoteband">
-          <span className="stars" aria-label="5 stars">★★★★★</span>
+          <span className="stars" aria-label="5 out of 5 stars">{[0,1,2,3,4].map(i=><Icon key={i} name="star" size={15} />)}</span>
           <p>&ldquo;The nurse arrived the same evening we called. Professional, kind, and my mother felt completely at ease.&rdquo;</p>
           <cite>Google review · verified family</cite>
         </div>

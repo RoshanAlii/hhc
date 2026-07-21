@@ -37,7 +37,7 @@ export default function Header() {
           <div className="tb-promo">
             <div className="track">
               {[...PROMOS, ...PROMOS].map((p, i) => (
-                <span key={i}>{p}<span className="b">&nbsp;&nbsp;•</span></span>
+                <span key={i}>{p}<span className="b" aria-hidden="true" /></span>
               ))}
             </div>
           </div>
