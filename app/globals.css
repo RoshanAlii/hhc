@@ -751,3 +751,13 @@ html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-r
 /* --- spacing rhythm (4/8 grid) ---------------------------------------- */
 .home-sec{padding-block:48px}
 .home-sec.tight{padding-block:32px}
+
+/* --- full-bleed warm header background on inner pages ------------------
+   .pagehd is also .wrap (max-width 1200), so a background on it stops at the
+   content column. Paint it via a pseudo-element stretched to the viewport so
+   inner pages match the full-width home hero. --------------------------- */
+body{overflow-x:clip}
+.pagehd{position:relative;z-index:0}
+.pagehd::before{content:"";position:absolute;top:0;bottom:0;left:calc(50% - 50vw);width:100vw;z-index:-1;pointer-events:none;
+  background:linear-gradient(180deg,#FEF3E8 0%,var(--surface-page) 100%)}
+.pagehd.warmtop{background:none;border-radius:0}

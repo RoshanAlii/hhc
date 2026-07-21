@@ -41,7 +41,10 @@
       "Bash(git -c user.name=HealthServe -c user.email=ahamedroshanali@gmail.com commit -q -m 'Match design header: grouped pill nav + Book Now / Log in *)",
       "Bash(curl -s -o /dev/null -w \"services:%{http_code}\\\\n\" http://localhost:3200/services/)",
       "Bash(git -c user.name=HealthServe -c user.email=ahamedroshanali@gmail.com commit -q -m 'Highlight the active nav item with a darker-gray chip *)",
-      "Bash(git -c user.name=HealthServe -c user.email=ahamedroshanali@gmail.com commit -q -m 'Sleek polish pass: control system, crisp type, real depth *)"
+      "Bash(git -c user.name=HealthServe -c user.email=ahamedroshanali@gmail.com commit -q -m 'Sleek polish pass: control system, crisp type, real depth *)",
+      "Bash(curl -s -o /dev/null -w \"status:%{http_code} time:%{time_total}s\\\\n\" --max-time 10 http://localhost:3200/)",
+      "Bash(curl -s --max-time 10 http://localhost:3200/)",
+      "Bash(git -c user.name=HealthServe -c user.email=ahamedroshanali@gmail.com commit -q -m 'Make inner-page header backgrounds full-bleed like the home hero *)"
     ]
   }
 }
