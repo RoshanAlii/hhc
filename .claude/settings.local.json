@@ -44,7 +44,8 @@
       "Bash(git -c user.name=HealthServe -c user.email=ahamedroshanali@gmail.com commit -q -m 'Sleek polish pass: control system, crisp type, real depth *)",
       "Bash(curl -s -o /dev/null -w \"status:%{http_code} time:%{time_total}s\\\\n\" --max-time 10 http://localhost:3200/)",
       "Bash(curl -s --max-time 10 http://localhost:3200/)",
-      "Bash(git -c user.name=HealthServe -c user.email=ahamedroshanali@gmail.com commit -q -m 'Make inner-page header backgrounds full-bleed like the home hero *)"
+      "Bash(git -c user.name=HealthServe -c user.email=ahamedroshanali@gmail.com commit -q -m 'Make inner-page header backgrounds full-bleed like the home hero *)",
+      "Bash(curl -s -o /dev/null -w \"detail:%{http_code}\\\\n\" -L http://localhost:3200/services/doctor-visit/)"
     ]
   }
 }

@@ -8,10 +8,10 @@ export default function PackagesGrid() {
   const router = useRouter();
   const { addItem } = useCart();
 
-  function choose(slug: string) {
+  function choose(slug: string, dest: "checkout" | "cart") {
     const p = packages.find((x) => x.slug === slug)!;
     addItem({ key: `pkg:${p.slug}`, slug: p.slug, name: p.name, meta: p.tagline, price: p.price, kind: "package" });
-    router.push("/cart");
+    router.push(dest === "checkout" ? "/checkout" : "/cart");
   }
 
   return (
@@ -27,10 +27,18 @@ export default function PackagesGrid() {
           <button
             className={`btn btn-full ${p.highlight ? "btn-primary" : "btn-outline"}`}
             style={{ marginTop: "auto" }}
-            onClick={() => choose(p.slug)}
+            onClick={() => choose(p.slug, "checkout")}
             type="button"
           >
-            Choose
+            Buy now
+          </button>
+          <button
+            className="btn btn-quiet btn-sm btn-full"
+            style={{ marginTop: 8 }}
+            onClick={() => choose(p.slug, "cart")}
+            type="button"
+          >
+            Add to cart
           </button>
         </div>
       ))}

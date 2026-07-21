@@ -37,7 +37,9 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
 
   const slotLabel = formatSlot(date, time);
 
-  function addToBooking(goToCart: boolean) {
+  // dest: "checkout" books straight through, "cart" opens the cart,
+  // "stay" adds it and keeps you on the page to add more.
+  function addToBooking(dest: "checkout" | "cart" | "stay") {
     if (!bookable) {
       window.open(COMPANY.whatsapp, "_blank");
       return;
@@ -57,7 +59,9 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
       date,
       time,
     });
-    if (goToCart) {
+    if (dest === "checkout") {
+      router.push("/checkout");
+    } else if (dest === "cart") {
       router.push("/cart");
     } else {
       setToast(true);
@@ -88,9 +92,14 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
           )}
           <span className="tag"><span className="dot" />{bookable ? slotLabel : `Next: ${service.nextSlot}`}</span>
           <div className="cta">
-            <button className="btn btn-primary btn-lg" onClick={() => addToBooking(true)} type="button">
-              {bookable ? "See available times" : "Enquire now"}
+            <button className="btn btn-primary btn-lg" onClick={() => addToBooking("checkout")} type="button">
+              {bookable ? "Book now" : "Enquire now"}
             </button>
+            {bookable && (
+              <button className="btn btn-outline btn-lg" onClick={() => addToBooking("stay")} type="button">
+                Add to booking
+              </button>
+            )}
             <a className="btn btn-quiet btn-lg" href={COMPANY.whatsapp} target="_blank" rel="noreferrer">WhatsApp</a>
           </div>
         </div>
@@ -138,12 +147,15 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
               </div>
               <p className="muted" style={{ fontSize: 12, marginBottom: 8 }}>Selected: <b>{slotLabel}</b></p>
               {error && <p className="err" style={{ color: "var(--danger)", fontSize: 13, marginBottom: 8 }}>{error}</p>}
-              <button className="btn btn-primary btn-full" onClick={() => addToBooking(false)} type="button">
+              <button className="btn btn-primary btn-full" onClick={() => addToBooking("checkout")} type="button">
+                Book now &amp; check out
+              </button>
+              <button className="btn btn-outline btn-full" style={{ marginTop: 8 }} onClick={() => addToBooking("stay")} type="button">
                 Add to booking
               </button>
-              <button className="btn btn-outline btn-full" style={{ marginTop: 8 }} onClick={() => addToBooking(true)} type="button">
-                Book &amp; go to cart
-              </button>
+              <p className="muted" style={{ textAlign: "center", fontSize: 12, marginTop: 8 }}>
+                Booking more than one visit? Add them, then <Link href="/cart">review your cart</Link>.
+              </p>
             </>
           ) : (
             <>
@@ -160,7 +172,7 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
 
       <div className="mbar">
         <span className="p"><b>{priceMain}</b> · {bookable ? slotLabel : (variant?.name ?? service.shortName)}</span>
-        <button className="btn" onClick={() => addToBooking(true)} type="button">{bookable ? "Book" : "Enquire"}</button>
+        <button className="btn" onClick={() => addToBooking("checkout")} type="button">{bookable ? "Book now" : "Enquire"}</button>
       </div>
 
       {toast && (
@@ -171,7 +183,11 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
             </div>
             <div>
               <div className="t">Added to your booking</div>
-              <div className="s">{variant?.name ?? service.shortName} · {slotLabel} · <Link href="/cart">View cart →</Link></div>
+              <div className="s">
+                {variant?.name ?? service.shortName} · {slotLabel}
+                <br />
+                <Link href="/checkout">Check out</Link> · <Link href="/cart">View cart</Link>
+              </div>
             </div>
           </div>
         </div>
