@@ -25,7 +25,9 @@ export const PROMOS = [
 ];
 
 export type Category = "Medical" | "Nursing & care" | "Therapy & wellness";
-export type PriceType = "from" | "fixed" | "program" | "enquire";
+export type PriceType = "from" | "fixed" | "enquire" | "soon";
+export type Bucket = "services" | "dispensary";
+export type Cta = "book" | "enquire" | "soon";
 
 export interface Variant {
   id: string;
@@ -37,16 +39,19 @@ export interface Service {
   slug: string;
   name: string;
   shortName: string;
-  group: "core" | "wellness";
+  bucket: Bucket;
   category: Category;
   icon: string;
+  cta: Cta; // book = purchasable w/ slot · enquire = talk to us · soon = Phase 2
+  homeCare: boolean; // shown in the home "Care that comes to you" grid
+  phase2?: boolean;
   blurb: string;
   price: number | null;
   priceType: PriceType;
   unit: string;
   nextSlot: string;
   featured?: boolean;
-  photo?: string; // caption for the solid-shape image placeholder
+  photo?: string;
   heroTitle: string;
   heroBlurb: string;
   variants?: Variant[];
@@ -55,206 +60,200 @@ export interface Service {
   faqs: { q: string; a: string }[];
 }
 
-const doctorVisit: Service = {
-  slug: "doctor-visit",
-  name: "Doctor visit & consultation",
-  shortName: "Doctors visit & consultation",
-  group: "core",
-  category: "Medical",
-  icon: "doctor",
-  blurb: "A DHA-licensed GP at your door for assessment, treatment and prescriptions — often within hours.",
-  price: 350,
-  priceType: "from",
-  unit: "per visit",
-  nextSlot: "Today 6:00 PM",
-  featured: true,
-  heroTitle: "A doctor at your door — often within hours.",
-  heroBlurb:
-    "DHA-licensed general practitioners visit you at home, your office, or your hotel for assessment, treatment and prescriptions. No clinic, no waiting room.",
-  variants: [
-    { id: "gp", name: "GP visit", price: 350 },
-    { id: "specialist", name: "Specialist", price: 550 },
-    { id: "video", name: "Video first", price: 150 },
-  ],
-  includes: [
-    "Full clinical assessment and vitals",
-    "Diagnosis and a clear treatment plan",
-    "Prescriptions where appropriate",
-    "Referral for labs or specialist care — samples can be taken at the same visit",
-    "Visit summary shared with you, and your regular physician on request",
-  ],
-  howItWorks: [
-    "Choose a time — same-evening slots available when you book before 6 PM.",
-    "Your doctor arrives with everything needed for a standard consultation.",
-    "You get a clear plan — and we follow up on WhatsApp.",
-  ],
-  faqs: [
-    { q: "How soon can a doctor arrive?", a: "Often within 2–3 hours inside Dubai. Book before 6 PM for a same-evening visit." },
-    { q: "Which areas do you cover?", a: "Most of Dubai. Enter your area at booking and we confirm instantly." },
-    { q: "Can I claim on insurance?", a: "We issue claim-ready invoices for reimbursement; direct billing with select partners — see About." },
-    { q: "What if the doctor recommends tests?", a: "We can take samples during the same visit via lab tests at home, results to your phone." },
-  ],
-};
+const GENERIC_HOW = [
+  "Choose a service and time that suits you \u2014 same-day slots across most of Dubai.",
+  "A DHA-licensed clinician arrives at your door, fully equipped.",
+  "You get a clear plan and a claim-ready invoice, with WhatsApp follow-up.",
+];
+const GENERIC_FAQ = [
+  { q: "Which areas do you cover?", a: "Most of Dubai. Enter your area at booking and we confirm instantly." },
+  { q: "Can I claim on insurance?", a: "We issue claim-ready invoices; direct billing with select partners." },
+  { q: "Can I reschedule?", a: "Yes \u2014 free up to 2 hours before your slot. See our cancellation policy." },
+];
 
-function core(
-  slug: string,
-  name: string,
-  category: Category,
-  icon: string,
-  price: number | null,
-  priceType: PriceType,
-  unit: string,
-  nextSlot: string,
-  blurb: string,
-  heroTitle: string,
-  heroBlurb: string,
-  includes: string[],
-  shortName = name,
-): Service {
+interface SvcInput {
+  slug: string; name: string; shortName?: string; bucket: Bucket; category: Category;
+  icon: string; cta: Cta; homeCare?: boolean; phase2?: boolean;
+  price?: number | null; priceType?: PriceType; unit?: string; nextSlot?: string;
+  featured?: boolean; photo?: string; blurb: string; heroTitle?: string; heroBlurb?: string;
+  variants?: Variant[]; includes?: string[]; howItWorks?: string[]; faqs?: { q: string; a: string }[];
+}
+
+function svc(i: SvcInput): Service {
+  const price = i.price ?? null;
+  const priceType: PriceType = i.priceType ?? (i.phase2 ? "soon" : price != null ? "from" : "enquire");
+  const nextSlot = i.nextSlot ?? (i.phase2 ? "Coming soon" : i.cta === "book" ? "Today" : "Enquire");
   return {
-    slug, name, shortName, group: "core", category, icon, price, priceType, unit, nextSlot, blurb,
-    heroTitle, heroBlurb, includes,
-    howItWorks: [
-      "Choose a service and time that suits you — same-day slots across most of Dubai.",
-      "A DHA-licensed clinician arrives at your door, fully equipped.",
-      "You get a clear plan and a claim-ready invoice, with WhatsApp follow-up.",
+    slug: i.slug, name: i.name, shortName: i.shortName ?? i.name, bucket: i.bucket, category: i.category,
+    icon: i.icon, cta: i.cta, homeCare: i.homeCare ?? false, phase2: i.phase2,
+    blurb: i.blurb, price, priceType, unit: i.unit ?? "per session", nextSlot,
+    featured: i.featured, photo: i.photo,
+    heroTitle: i.heroTitle ?? i.name + " \u2014 delivered at home.",
+    heroBlurb: i.heroBlurb ?? i.blurb,
+    variants: i.variants,
+    includes: i.includes ?? [
+      "Delivered by a DHA-licensed clinician", "Clear plan and next steps",
+      "Claim-ready invoice", "WhatsApp follow-up after the visit",
     ],
-    faqs: [
-      { q: "Which areas do you cover?", a: "Most of Dubai. Enter your area at booking and we confirm instantly." },
-      { q: "Can I claim on insurance?", a: "We issue claim-ready invoices; direct billing with select partners." },
-      { q: "Can I reschedule?", a: "Yes — free up to 2 hours before your slot. See our cancellation policy." },
-    ],
+    howItWorks: i.howItWorks ?? GENERIC_HOW,
+    faqs: i.faqs ?? GENERIC_FAQ,
   };
 }
 
-const coreServices: Service[] = [
-  doctorVisit,
-  core(
-    "home-nursing", "Home nursing services", "Nursing & care", "nursing", 90, "from", "per hour", "Today",
-    "Hourly to live-in skilled nursing, including maternity care.",
-    "Skilled nursing, at home — hourly to 24/7.",
-    "DHA-licensed nurses for wound care, post-operative recovery, injections, maternity and live-in care — delivered on your schedule.",
-    ["Skilled and practical nursing at home", "Wound care, injections and post-op recovery", "Maternity and newborn support", "Hourly, daily, or live-in arrangements", "Care plan reported to your treating physician"],
-    "Home nursing",
-  ),
-  core(
-    "physiotherapy", "Physiotherapy & fitness", "Therapy & wellness", "physio", 250, "from", "per session", "Tomorrow",
-    "Personalised recovery and mobility programs at home.",
-    "Recover and move better — physiotherapy at home.",
-    "Personalised rehabilitation, post-surgical recovery and mobility programs delivered by licensed physiotherapists in the comfort of your home.",
-    ["Individualised assessment and goals", "Post-surgical and injury rehabilitation", "Mobility, strength and balance programs", "Progress reviews after each block", "Equipment guidance for the home"],
-    "Physiotherapy",
-  ),
-  core(
-    "elderly-care", "Elderly care nursing", "Nursing & care", "elderly", 85, "from", "per hour", "Today",
-    "Dignified daily care at home. Arabic-speaking carers on request.",
-    "Dignified elderly care, at home.",
-    "Compassionate daily support — personal care, medication, mobility and companionship — from trained carers, with Arabic-speaking staff available.",
-    ["Personal care and daily living support", "Medication management and reminders", "Mobility assistance and fall prevention", "Arabic-speaking carers on request", "Regular family updates"],
-    "Elderly care",
-  ),
-  core(
-    "newborn-child-care", "Newborn & child care", "Nursing & care", "child", 90, "from", "per hour", "Tomorrow",
-    "Certified, gentle support — female caregivers.",
-    "Gentle, certified care for your little ones.",
-    "Newborn and paediatric support at home — feeding guidance, jaundice monitoring and overnight care from certified female caregivers.",
-    ["Newborn feeding and settling support", "Jaundice monitoring and vitals", "Overnight and daytime care", "Certified female caregivers", "Guidance for new parents"],
-    "Newborn & child care",
-  ),
-  core(
-    "lab-tests", "Lab tests at home", "Medical", "lab", 300, "from", "per panel", "Today",
-    "Blood draws and panels at home — results to your phone.",
-    "Lab tests at home — results to your phone.",
-    "Accredited home sample collection for a wide range of panels, with results delivered securely to your phone and a doctor review on request.",
-    ["Home blood draw by a trained phlebotomist", "Wide range of accredited panels", "Secure digital results to your phone", "Optional doctor review call", "Samples can be taken during a doctor visit"],
-    "Lab tests",
-  ),
-  core(
-    "chronic-disease", "Chronic disease management", "Medical", "chronic", null, "program", "program", "Book",
-    "Structured programs designed with your physician.",
-    "Manage chronic conditions, at home.",
-    "Structured, ongoing programs for diabetes, hypertension and other chronic conditions — coordinated with your treating physician and delivered by our home care team.",
-    ["Personalised care plan with your physician", "Regular home monitoring and reviews", "Medication and lifestyle support", "Coordinated nursing and doctor visits", "Progress reporting to your care team"],
-    "Chronic disease management",
-  ),
-  core(
-    "travel-medical", "Travel medical assistance", "Medical", "travel", null, "enquire", "quote", "Enquire",
-    "Medical support for treatment journeys abroad.",
-    "Travel medical assistance.",
-    "End-to-end medical support for patients travelling for treatment — coordination, escorts and continuity of care across borders.",
-    ["Pre-travel medical assessment", "Medical escort and coordination", "Liaison with treating facilities", "Continuity of care on return", "Support for individuals and delegations"],
-    "Travel medical assistance",
-  ),
+// ===== All Services bucket (page /services) ==============================
+const serviceItems: Service[] = [
+  svc({
+    slug: "doctor-visit", name: "Doctors Visit & Consultation", shortName: "Doctors visit & consultation",
+    bucket: "services", category: "Medical", icon: "doctor", cta: "book", homeCare: true, featured: true,
+    price: 299, unit: "per visit", photo: "Doctor examining a patient at home",
+    blurb: "A DHA-licensed GP at your door for assessment, treatment and prescriptions \u2014 often within hours.",
+    heroTitle: "A doctor at your door \u2014 often within hours.",
+    heroBlurb: "DHA-licensed GPs visit you at home, your office or your hotel for assessment, treatment and prescriptions. No clinic, no waiting room.",
+    variants: [ { id: "gp", name: "GP visit (9\u20139)", price: 299 }, { id: "express", name: "Express (9pm\u20139am)", price: 375 } ],
+    includes: ["Full clinical assessment and vitals", "Diagnosis and a clear treatment plan", "Prescriptions where appropriate", "Referral for labs or specialist care", "Visit summary shared with you and your physician"],
+  }),
+  svc({
+    slug: "physiotherapy", name: "Physiotherapy & Fitness", shortName: "Physiotherapy & fitness",
+    bucket: "services", category: "Therapy & wellness", icon: "physio", cta: "book", homeCare: true,
+    price: 95, unit: "per session", nextSlot: "Tomorrow", photo: "Physiotherapist guiding a home exercise",
+    blurb: "Personalised recovery and mobility programs at home \u2014 16 physio types, 1/3/6/12-session packs.",
+    heroBlurb: "Personalised rehabilitation, post-surgical recovery and mobility programs by licensed physiotherapists \u2014 assessment free on 6+ session packs.",
+  }),
+  svc({
+    slug: "home-nursing", name: "Home Nursing Services", shortName: "Home nursing",
+    bucket: "services", category: "Nursing & care", icon: "nursing", cta: "enquire", homeCare: true,
+    price: 149, unit: "per hour", photo: "Nurse assisting a patient at home",
+    blurb: "Hourly to 24-hour shifts \u2014 including caregiver and maternity nursing.",
+    heroBlurb: "DHA-licensed nurses for wound care, post-operative recovery, injections and maternity \u2014 hourly or 4/8/12/24-hour shifts.",
+  }),
+  svc({
+    slug: "elderly-care", name: "Elderly Care Nursing", shortName: "Elderly care",
+    bucket: "services", category: "Nursing & care", icon: "elderly", cta: "enquire", homeCare: true,
+    price: 149, unit: "per shift", photo: "Caregiver with an elderly person at home",
+    blurb: "Dignified daily care at home \u2014 4/8/12/24-hour shift tiers. Arabic-speaking carers on request.",
+    heroBlurb: "Compassionate daily support \u2014 personal care, medication, mobility and companionship \u2014 in flexible shift tiers.",
+  }),
+  svc({
+    slug: "newborn-child-care", name: "Newborn & Child Care", shortName: "Newborn & child care",
+    bucket: "services", category: "Nursing & care", icon: "child", cta: "enquire", homeCare: true,
+    price: 149, unit: "per visit", nextSlot: "Tomorrow", photo: "Nurse caring for a newborn baby",
+    blurb: "Certified, gentle newborn nurse visits \u2014 female caregivers.",
+    heroBlurb: "Newborn and paediatric support at home \u2014 feeding guidance, jaundice monitoring and overnight care from certified female nurses.",
+  }),
+  svc({
+    slug: "chronic-disease", name: "Chronic Disease Management", shortName: "Chronic disease management",
+    bucket: "services", category: "Medical", icon: "chronic", cta: "enquire", homeCare: true,
+    price: null, unit: "care plan", photo: "Clinician reviewing a patient health plan",
+    blurb: "Structured, care-plan-based programs designed with your physician.",
+    heroBlurb: "Ongoing programs for diabetes, hypertension and other chronic conditions \u2014 coordinated with your treating physician.",
+  }),
+  svc({
+    slug: "lab-tests", name: "Lab Tests at Home", shortName: "Lab tests",
+    bucket: "services", category: "Medical", icon: "lab", cta: "book", homeCare: true,
+    price: 89, unit: "per panel", photo: "Home blood sample collection",
+    blurb: "71 lab profiles and panels plus sample collection \u2014 87 individual add-on tests.",
+    heroBlurb: "Accredited home sample collection across 71 panels, with 87 add-on tests and results delivered securely to your phone.",
+  }),
+  svc({
+    slug: "teleconsultation", name: "Teleconsultation", shortName: "Teleconsultation",
+    bucket: "services", category: "Medical", icon: "doctor", cta: "book", homeCare: false,
+    price: 149, unit: "per consult", photo: "Online GP consultation",
+    blurb: "Online GP consult from wherever you are.",
+    heroBlurb: "A DHA-licensed GP consultation by video \u2014 advice, prescriptions and referrals without leaving home.",
+  }),
+  svc({
+    slug: "travel-medical", name: "Travel Medical Assistance", shortName: "Travel medical assistance",
+    bucket: "services", category: "Medical", icon: "travel", cta: "enquire", homeCare: false,
+    price: null, unit: "quote", photo: "Medical travel assistance support",
+    blurb: "Customised nurse support for treatment journeys \u2014 free consult, no fixed price.",
+    heroBlurb: "End-to-end medical support for patients travelling for treatment \u2014 coordination, escorts and continuity of care.",
+  }),
+  svc({
+    slug: "mens-health", name: "Men's Health", shortName: "Men's health",
+    bucket: "services", category: "Therapy & wellness", icon: "wellness", cta: "enquire", homeCare: false,
+    price: null, unit: "quote", photo: "Men's health consultation at home",
+    blurb: "Prescriber-gated men's health \u2014 hormone and weight lab panels.",
+    heroBlurb: "Men's health assessments and related hormone/weight lab panels, prescriber-gated and reviewed by a clinician.",
+  }),
+  svc({
+    slug: "womens-health", name: "Women's Health", shortName: "Women's health",
+    bucket: "services", category: "Therapy & wellness", icon: "wellness", cta: "enquire", homeCare: false,
+    price: null, unit: "quote", photo: "Women's health consultation at home",
+    blurb: "Prescriber-gated women's health \u2014 hormone, PCOS and perimenopause panels.",
+    heroBlurb: "Women's health assessments and related hormone, PCOS and perimenopause panels, prescriber-gated and clinician-reviewed.",
+  }),
+  svc({
+    slug: "corporate-wellness", name: "Corporate Wellness", shortName: "Corporate wellness",
+    bucket: "services", category: "Therapy & wellness", icon: "shield", cta: "enquire", homeCare: false,
+    price: null, unit: "bespoke quote", photo: "On-site corporate wellness day",
+    blurb: "On-site nurse, screenings and drives for teams \u2014 bespoke quote.",
+    heroBlurb: "Workplace wellness \u2014 on-site nurses, screenings, IV bars and vaccination drives, tailored to your team.",
+  }),
 ];
 
-function wellness(slug: string, name: string, icon: string, price: number | null, priceType: PriceType, blurb: string, heroBlurb: string, includes: string[]): Service {
-  return {
-    slug, name, shortName: name, group: "wellness", category: "Therapy & wellness", icon,
-    price, priceType, unit: "per session", nextSlot: priceType === "enquire" ? "Enquire" : "Today", blurb,
-    heroTitle: name + " — clinician-delivered, at home.",
-    heroBlurb,
-    includes,
-    howItWorks: [
-      "Choose your wellness service and a time that suits you.",
-      "A DHA-licensed clinician administers it at your home or office.",
-      "You receive aftercare guidance and a summary on WhatsApp.",
-    ],
-    faqs: [
-      { q: "Is this clinically administered?", a: "Yes — every drip, panel and program is administered by DHA-licensed clinicians." },
-      { q: "Where can I book this?", a: "At your home or office, across most of Dubai." },
-    ],
-  };
-}
-
-const wellnessServices: Service[] = [
-  wellness("iv-therapy", "IV therapy", "wellness", 450, "from", "6 drip families, hydration to recovery.",
-    "Six IV drip families — from hydration to recovery — administered at home by DHA-licensed clinicians.",
-    ["Clinical screening before every drip", "Hydration, recovery and immunity blends", "Administered by a licensed nurse", "30–45 minute sessions", "Aftercare guidance"]),
-  wellness("nad-therapy", "NAD+ therapy", "wellness", 1200, "from", "Longevity protocol, clinically administered.",
-    "A clinically administered NAD+ longevity protocol, delivered slowly and safely in the comfort of home.",
-    ["Pre-session clinical review", "Slow, monitored NAD+ infusion", "Comfort and hydration support", "Administered by a licensed clinician"]),
-  wellness("oxygen-therapy", "Oxygen therapy", "wellness", 400, "from", "Recovery and respiratory support.",
-    "Supplemental oxygen therapy for recovery and respiratory support, set up and monitored at home.",
-    ["Clinical assessment of suitability", "Equipment setup and monitoring", "Recovery and respiratory support", "Licensed clinician oversight"]),
-  wellness("corporate-wellness", "Corporate wellness", "wellness", null, "enquire", "Programs for teams — enquire.",
-    "Wellness programs for teams — screenings, IV bars and vaccination drives, delivered at your workplace.",
-    ["On-site screenings and IV bars", "Vaccination and flu drives", "Tailored to your team size", "One provider, one invoice"]),
-  wellness("mens-health", "Men's health", "wellness", 600, "from", "Panels and programs.",
-    "Comprehensive men's health panels and programs with clinical review, at home.",
-    ["Comprehensive health panel", "Home sample collection", "Doctor review of results", "Personalised recommendations"]),
-  wellness("womens-health", "Women's health", "wellness", 600, "from", "Panels and programs.",
-    "Comprehensive women's health panels and programs with clinical review, at home.",
-    ["Comprehensive health panel", "Home sample collection", "Doctor review of results", "Personalised recommendations"]),
-  wellness("genetic-testing", "Genetic testing", "wellness", 900, "from", "DNA insight with clinical review.",
-    "DNA-based insight into health risks and traits, with a clinical review to make results actionable.",
-    ["Simple home sample collection", "Accredited genetic analysis", "Clinical review of findings", "Actionable recommendations"]),
-  wellness("flu-vaccination", "Flu vaccination", "wellness", 150, "from", "Seasonal, at home — individual or family.",
-    "Seasonal flu vaccination at home for individuals and families, administered by a licensed nurse.",
-    ["Licensed nurse administration", "Individual or family bookings", "Suitable for all ages on assessment", "Aftercare guidance"]),
+// ===== The Dispensary bucket (page /dispensary) =========================
+const dispensaryItems: Service[] = [
+  svc({
+    slug: "iv-therapy", name: "IV Therapy", shortName: "IV therapy",
+    bucket: "dispensary", category: "Therapy & wellness", icon: "wellness", cta: "book",
+    price: 399, unit: "per session", photo: "IV drip administered at home",
+    blurb: "15 fixed drips grouped into ~6 families \u2014 hydration to recovery.",
+    heroBlurb: "Clinician-administered IV drips at home \u2014 hydration, immunity, recovery and beauty blends. Customised drips by enquiry.",
+  }),
+  svc({
+    slug: "nad-therapy", name: "NAD+ IV Therapy", shortName: "NAD+ IV therapy",
+    bucket: "dispensary", category: "Therapy & wellness", icon: "wellness", cta: "book",
+    price: 449, unit: "per session", photo: "NAD+ infusion at home",
+    blurb: "Longevity NAD+ infusion \u2014 dose tiers 100 / 250 / 500 mg.",
+    heroBlurb: "A clinically administered NAD+ longevity infusion in dose tiers of 100, 250 and 500 mg, delivered slowly and safely at home.",
+    variants: [ { id: "100", name: "100 mg", price: 449 }, { id: "250", name: "250 mg", price: 599 }, { id: "500", name: "500 mg", price: 899 } ],
+  }),
+  svc({
+    slug: "oxygen-therapy", name: "Oxygen Therapy", shortName: "Oxygen therapy",
+    bucket: "dispensary", category: "Therapy & wellness", icon: "wellness", cta: "enquire",
+    price: null, unit: "quote", photo: "Oxygen therapy setup at home",
+    blurb: "Recovery and respiratory support, set up and monitored at home.",
+    heroBlurb: "Supplemental oxygen therapy for recovery and respiratory support, assessed and monitored by a licensed clinician.",
+  }),
+  svc({
+    slug: "im-shots", name: "IM Shots", shortName: "IM shots",
+    bucket: "dispensary", category: "Therapy & wellness", icon: "pill", cta: "book",
+    price: 149, unit: "per shot", photo: "Vitamin injection at home",
+    blurb: "Injection service plus Vitamin D and Vitamin B12 (Rx only).",
+    heroBlurb: "Quick single-shot IM injections at home by a nurse \u2014 including Vitamin D and Vitamin B12 (prescription only).",
+  }),
+  svc({
+    slug: "flu-vaccination", name: "Flu Vaccination", shortName: "Flu vaccination",
+    bucket: "dispensary", category: "Therapy & wellness", icon: "shield", cta: "book",
+    price: 299, unit: "per dose", photo: "Flu vaccination at home",
+    blurb: "Seasonal flu vaccination at home \u2014 individual (group 3+ TBC).",
+    heroBlurb: "Seasonal flu vaccination at home, administered by a licensed nurse for individuals and families.",
+  }),
+  svc({
+    slug: "genetic-testing", name: "Genetic Testing", shortName: "Genetic testing",
+    bucket: "dispensary", category: "Medical", icon: "lab", cta: "enquire",
+    price: null, unit: "kit ships", photo: "Home DNA sample collection kit",
+    blurb: "DNA insight with clinical review \u2014 kit ships to your door.",
+    heroBlurb: "DNA-based insight into health risks and traits, with a clinical review to make results actionable. Kit ships to you.",
+  }),
+  // Peptides \u2014 Phase 2, pending DHA/MOHAP, shown as coming soon
+  svc({ slug: "peptide-bpc-157", name: "Peptide \u2014 BPC-157", shortName: "BPC-157", bucket: "dispensary", category: "Therapy & wellness", icon: "pill", cta: "soon", phase2: true, price: null, photo: "Peptide therapy \u2014 coming soon", blurb: "Recovery and gut-health support. Launching once DHA/MOHAP cleared." }),
+  svc({ slug: "peptide-tb-500", name: "Peptide \u2014 TB-500", shortName: "TB-500", bucket: "dispensary", category: "Therapy & wellness", icon: "pill", cta: "soon", phase2: true, price: null, photo: "Peptide therapy \u2014 coming soon", blurb: "Tissue repair and mobility. Launching once DHA/MOHAP cleared." }),
+  svc({ slug: "peptide-aod-9604", name: "Peptide \u2014 AOD-9604", shortName: "AOD-9604", bucket: "dispensary", category: "Therapy & wellness", icon: "pill", cta: "soon", phase2: true, price: null, photo: "Peptide therapy \u2014 coming soon", blurb: "Metabolic support. Launching once DHA/MOHAP cleared." }),
+  svc({ slug: "peptide-thymosin-alpha-1", name: "Peptide \u2014 Thymosin Alpha-1", shortName: "Thymosin Alpha-1", bucket: "dispensary", category: "Therapy & wellness", icon: "pill", cta: "soon", phase2: true, price: null, photo: "Peptide therapy \u2014 coming soon", blurb: "Immune-system support. Launching once DHA/MOHAP cleared." }),
 ];
 
-export const services: Service[] = [...coreServices, ...wellnessServices];
+export const services: Service[] = [...serviceItems, ...dispensaryItems];
 
-// Placeholder captions for the solid-shape image slots (per the design).
-const servicePhotos: Record<string, string> = {
-  "doctor-visit": "Doctor examining a patient at home",
-  "home-nursing": "Nurse assisting a patient at home",
-  "physiotherapy": "Physiotherapist guiding a home exercise",
-  "elderly-care": "Caregiver with an elderly person at home",
-  "newborn-child-care": "Nurse caring for a newborn baby",
-  "lab-tests": "Home blood sample collection",
-  "chronic-disease": "Clinician reviewing a patient health plan",
-  "travel-medical": "Medical travel assistance support",
-};
-for (const s of services) {
-  s.photo = servicePhotos[s.slug] ?? "Wellness care at home";
-}
+export const serviceList = serviceItems;                                  // All Services page
+export const homeServiceList = serviceItems.filter((s) => s.homeCare);    // Home "Care that comes to you"
+export const dispensaryList = dispensaryItems;                            // The Dispensary page
 
 export function getService(slug: string): Service | undefined {
   return services.find((s) => s.slug === slug);
 }
-export const coreServiceList = coreServices;
-export const wellnessServiceList = wellnessServices;
+// Back-compat alias (home grid used to read coreServiceList).
+export const coreServiceList = homeServiceList;
 
 // ---- Packages -----------------------------------------------------------
 export interface Pkg {
@@ -488,8 +487,7 @@ export function localDate(offsetDays = 0): string {
 }
 
 export function priceLabel(s: Service): string {
-  if (s.priceType === "enquire") return "Enquire";
-  if (s.priceType === "program") return "Program";
-  if (s.price == null) return "Enquire";
+  if (s.priceType === "soon" || s.phase2) return "Coming soon";
+  if (s.price == null || s.priceType === "enquire") return "Enquire";
   return (s.priceType === "from" ? "from " : "") + formatAED(s.price);
 }

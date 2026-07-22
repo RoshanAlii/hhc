@@ -16,7 +16,7 @@ export default function Footer() {
             <Link href="/services/doctor-visit">Doctor visits</Link>
             <Link href="/services/home-nursing">Home nursing</Link>
             <Link href="/services/physiotherapy">Physiotherapy</Link>
-            <Link href="/services/wellness">Wellness &amp; IV</Link>
+            <Link href="/dispensary">The Dispensary</Link>
             <Link href="/packages">Packages</Link>
           </div>
           <div>

@@ -1,172 +1,66 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Icon from "@/components/Icon";
-import { COMPANY, formatAED } from "@/lib/data";
+import Placeholder from "@/components/Placeholder";
+import { COMPANY, dispensaryList, priceLabel } from "@/lib/data";
 
 export const metadata: Metadata = {
-  title: "The Dispensary — IV drips, peptides & wellness",
+  title: "The Dispensary — IV, NAD+, shots & more",
   description:
-    "HealthServe's wellness dispensary: IV therapy, clinician-prescribed peptides, vitamin injections, supplements and longevity programs — administered or delivered at home.",
+    "HealthServe's dispensary: IV therapy, NAD+ IV therapy, oxygen therapy, IM shots, flu vaccination and genetic testing — administered at home or delivered to your door. Peptides coming soon.",
 };
 
-type Product = { name: string; desc: string; price?: number };
-type Group = {
-  key: string;
-  title: string;
-  blurb: string;
-  icon: string;
-  cat: string;
-  pricePrefix?: string;
-  noPriceLabel?: string;
-  cta: string;
-  href: string; // "wa" => WhatsApp, otherwise an internal path
-  products: Product[];
-};
-
-const WA = "wa";
-
-const catalogue: Group[] = [
-  {
-    key: "iv",
-    title: "IV therapy & drips",
-    blurb: "Clinician-administered infusions at home — hydration to recovery.",
-    icon: "wellness",
-    cat: "cat-therapy",
-    pricePrefix: "from ",
-    cta: "Book",
-    href: "/services/iv-therapy",
-    products: [
-      { name: "Hydration Boost", desc: "Rehydrate and replenish electrolytes.", price: 450 },
-      { name: "Immunity Defense", desc: "High-dose vitamin C, zinc and antioxidants.", price: 500 },
-      { name: "NAD+ Longevity", desc: "Cellular energy and longevity protocol.", price: 1200 },
-      { name: "Recovery & Energy", desc: "Post-illness, jet-lag and fatigue support.", price: 550 },
-      { name: "Beauty Glow", desc: "Glutathione and biotin for skin and hair.", price: 600 },
-      { name: "Myers' Cocktail", desc: "The classic vitamin-and-mineral blend.", price: 500 },
-    ],
-  },
-  {
-    key: "peptides",
-    title: "Peptides",
-    blurb: "Prescription peptide therapies, dispensed only after a clinician consultation.",
-    icon: "pill",
-    cat: "cat-medical",
-    noPriceLabel: "Rx · consult",
-    cta: "Enquire",
-    href: WA,
-    products: [
-      { name: "BPC-157", desc: "Recovery and gut-health support." },
-      { name: "TB-500", desc: "Tissue repair and mobility." },
-      { name: "Ipamorelin", desc: "Growth-hormone and recovery support." },
-      { name: "CJC-1295", desc: "Longevity and vitality protocol." },
-      { name: "GHK-Cu", desc: "Skin, collagen and hair support." },
-      { name: "Thymosin Alpha-1", desc: "Immune-system modulation." },
-    ],
-  },
-  {
-    key: "injections",
-    title: "Vitamin injections & boosters",
-    blurb: "Quick single-shot boosters, administered at home by a nurse.",
-    icon: "shield",
-    cat: "cat-nursing",
-    pricePrefix: "from ",
-    cta: "Order",
-    href: WA,
-    products: [
-      { name: "Vitamin B12", desc: "Energy and nervous-system support.", price: 150 },
-      { name: "Vitamin D", desc: "For deficiency and immunity.", price: 200 },
-      { name: "Glutathione push", desc: "Antioxidant and skin brightening.", price: 300 },
-      { name: "Biotin", desc: "Hair, skin and nails.", price: 180 },
-      { name: "Vitamin C", desc: "Immunity and collagen support.", price: 200 },
-      { name: "Iron (Ferric)", desc: "For iron-deficiency, clinician-assessed.", price: 350 },
-    ],
-  },
-  {
-    key: "supplements",
-    title: "Supplements & vitamins",
-    blurb: "Pharmacist-approved daily supplements, delivered to your door.",
-    icon: "heart",
-    cat: "cat-therapy",
-    cta: "Order",
-    href: WA,
-    products: [
-      { name: "Omega-3 Fish Oil", desc: "Heart and brain support.", price: 120 },
-      { name: "Magnesium Glycinate", desc: "Sleep, muscles and calm.", price: 95 },
-      { name: "Vitamin D3 + K2", desc: "Bone and immune health.", price: 110 },
-      { name: "Probiotics", desc: "Gut and digestive balance.", price: 140 },
-      { name: "Coenzyme Q10", desc: "Cellular energy and heart health.", price: 160 },
-      { name: "Collagen Peptides", desc: "Skin, joints and hair.", price: 180 },
-    ],
-  },
-  {
-    key: "longevity",
-    title: "Longevity & hormone programs",
-    blurb: "Clinician-led programs, built around your labs and goals.",
-    icon: "refresh",
-    cat: "cat-medical",
-    noPriceLabel: "Consultation",
-    cta: "Book consult",
-    href: WA,
-    products: [
-      { name: "NAD+ Program", desc: "A course of infusions for energy and longevity." },
-      { name: "Hormone optimisation", desc: "Assessment and clinician-guided therapy." },
-      { name: "Weight management", desc: "Medically-supervised metabolic program." },
-    ],
-  },
-];
-
-function priceLabel(g: Group, p: Product): string {
-  if (p.price != null) return (g.pricePrefix ?? "") + formatAED(p.price);
-  return g.noPriceLabel ?? "Enquire";
-}
+const live = dispensaryList.filter((s) => !s.phase2);
+const soon = dispensaryList.filter((s) => s.phase2);
 
 export default function DispensaryPage() {
   return (
     <>
       <header className="pagehd wrap warmtop">
         <span className="crumb"><Link href="/">Home</Link> / <b>The Dispensary</b></span>
-        <span className="tag orange" style={{ marginTop: 10 }}><span className="dot" />IV · Peptides · Supplements · delivered or at home</span>
+        <span className="tag orange" style={{ marginTop: 10 }}><span className="dot" />IV · NAD+ · Shots · delivered or at home</span>
         <h1>The Dispensary.</h1>
-        <p>Our wellness pharmacy — IV drips, clinician-prescribed peptides, vitamin injections, supplements and longevity programs, administered at home or delivered to your door across Dubai.</p>
+        <p>IV drips, NAD+ therapy, oxygen, vitamin shots, flu vaccination and genetic testing — administered at home or delivered to your door across Dubai.</p>
       </header>
 
       <div className="wrap" style={{ paddingBottom: 24 }}>
-        {catalogue.map((g) => (
-          <section key={g.key} style={{ paddingBlock: "28px 4px" }}>
-            <div className="sec-hd" style={{ marginBottom: 20 }}>
-              <div style={{ display: "flex", gap: 14, alignItems: "center" }}>
-                <span className={`ic ${g.cat}`}><Icon name={g.icon} /></span>
-                <div>
-                  <h2 className="sec" style={{ fontSize: 22 }}>{g.title}</h2>
-                  <p style={{ marginTop: 2 }}>{g.blurb}</p>
+        <div className="grid3" style={{ marginTop: 12 }}>
+          {live.map((s) => (
+            <Link className="icard" key={s.slug} href={`/services/${s.slug}`}>
+              <Placeholder caption={s.photo} tone={s.category === "Medical" ? "orange" : "red"} />
+              <div className="b">
+                <h3>{s.shortName}</h3>
+                <p>{s.blurb}</p>
+                <div className="foot">
+                  <span className="price">{priceLabel(s)}<small>{s.priceType === "from" ? s.unit : "quote"}</small></span>
+                  <span className="btn btn-quiet btn-sm">{s.cta === "book" ? "Book" : "Enquire"}</span>
                 </div>
               </div>
-            </div>
-            <div className="grid3">
-              {g.products.map((p) => (
-                <article className="svc" style={{ minHeight: 0 }} key={p.name}>
-                  <h3 style={{ fontSize: 17 }}>{p.name}</h3>
-                  <p>{p.desc}</p>
-                  <div className="foot">
-                    <span className="price">{priceLabel(g, p)}{p.price != null && <small>per session</small>}</span>
-                    {g.href === WA ? (
-                      <a className="btn btn-quiet btn-sm" href={COMPANY.whatsapp} target="_blank" rel="noreferrer">{g.cta}</a>
-                    ) : (
-                      <Link className="btn btn-quiet btn-sm" href={g.href}>{g.cta}</Link>
-                    )}
-                  </div>
+            </Link>
+          ))}
+        </div>
+
+        {soon.length > 0 && (
+          <>
+            <h2 className="sec" style={{ fontSize: 22, marginTop: 36 }}>Peptides</h2>
+            <p className="muted" style={{ margin: "4px 0 16px" }}>Prescription peptide therapies — launching once DHA/MOHAP cleared.</p>
+            <div className="grid4">
+              {soon.map((s) => (
+                <article className="svc" style={{ minHeight: 0, opacity: 0.9 }} key={s.slug}>
+                  <span className="tag dark" style={{ alignSelf: "flex-start", marginBottom: 10 }}><span className="dot" />Coming soon</span>
+                  <h3 style={{ fontSize: 17 }}>{s.shortName}</h3>
+                  <p>{s.blurb}</p>
                 </article>
               ))}
             </div>
-          </section>
-        ))}
+          </>
+        )}
 
-        <div className="policy-note" style={{ marginTop: 20 }}>
-          <b>Please note:</b> peptides, hormone therapies and other prescription items are dispensed only after a
-          consultation with a DHA-licensed clinician. Nothing here is a recommendation to use a specific product.
+        <div className="policy-note" style={{ marginTop: 24 }}>
+          <b>Please note:</b> IM shots (Vitamin D / B12) and other prescription items are dispensed only after a
+          clinician review. Peptides are pending DHA/MOHAP approval. Nothing here is a recommendation to use a specific product.
         </div>
       </div>
 
-      {/* Pharmacy / prescription band */}
       <section className="wrap" style={{ paddingBlock: "8px 24px" }}>
         <div className="band">
           <div style={{ flex: 1, minWidth: 240 }}>
@@ -185,11 +79,11 @@ export default function DispensaryPage() {
         <div className="ctaband">
           <div className="txt">
             <h2>Not sure what you need?</h2>
-            <p>Talk to a HealthServe clinician about the right drip, program or supplement for your goals.</p>
+            <p>Talk to a HealthServe clinician about the right drip, shot or program for your goals.</p>
           </div>
           <div className="actions">
             <a className="btn btn-white btn-lg" href={COMPANY.whatsapp} target="_blank" rel="noreferrer">Ask a clinician</a>
-            <Link className="btn btn-clear btn-lg" href="/services/wellness">Explore wellness</Link>
+            <Link className="btn btn-clear btn-lg" href="/services">All services</Link>
           </div>
         </div>
       </section>

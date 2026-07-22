@@ -2,11 +2,11 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { coreServiceList } from "@/lib/data";
+import { homeServiceList } from "@/lib/data";
 
-// Only services with a real price can be booked directly; program/enquire
-// services (e.g. chronic disease, travel medical) go through enquiry instead.
-const bookable = coreServiceList.filter((s) => s.price != null);
+// Only directly-bookable home-care services appear in the widget; enquiry-only
+// services (nursing, chronic disease, etc.) go through their own flow.
+const bookable = homeServiceList.filter((s) => s.cta === "book");
 
 export default function BookingWidget() {
   const router = useRouter();

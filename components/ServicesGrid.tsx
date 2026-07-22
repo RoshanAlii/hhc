@@ -4,7 +4,7 @@ import Link from "next/link";
 import Icon from "@/components/Icon";
 import { useState } from "react";
 import Placeholder from "@/components/Placeholder";
-import { coreServiceList, priceLabel, type Category } from "@/lib/data";
+import { serviceList, priceLabel, type Category } from "@/lib/data";
 
 const toneFor = (c: Category): "orange" | "green" | "red" =>
   c === "Medical" ? "orange" : c === "Nursing & care" ? "green" : "red";
@@ -14,14 +14,13 @@ const FILTERS: ("All" | Category)[] = ["All", "Medical", "Nursing & care", "Ther
 export default function ServicesGrid() {
   const [filter, setFilter] = useState<(typeof FILTERS)[number]>("All");
 
-  const featured = coreServiceList.find((s) => s.featured)!;
-  const rest = coreServiceList.filter((s) => !s.featured);
+  const featured = serviceList.find((s) => s.featured)!;
+  const rest = serviceList.filter((s) => !s.featured);
 
   const matches = (cat: Category) => filter === "All" || filter === cat;
   const showFeatured = matches(featured.category);
   const visibleRest = rest.filter((s) => matches(s.category));
-  const showWellness = filter === "All" || filter === "Therapy & wellness";
-  const count = (showFeatured ? 1 : 0) + visibleRest.length + (showWellness ? 1 : 0);
+  const count = (showFeatured ? 1 : 0) + visibleRest.length;
 
   return (
     <div className="wrap">
@@ -57,26 +56,12 @@ export default function ServicesGrid() {
               <h3 style={{ fontSize: 17 }}>{s.name}</h3>
               <p className="muted" style={{ fontSize: 14, marginTop: 4 }}>{s.blurb}</p>
               <div className="foot" style={{ marginTop: "auto", paddingTop: 14, borderTop: "1px solid var(--border-subtle)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                <span className="price">{priceLabel(s)}<small>{s.priceType === "from" ? s.unit : s.priceType === "program" ? "tailored" : "quote"}</small></span>
-                <span className="btn btn-quiet btn-sm">{s.priceType === "enquire" ? <>Explore <Icon name="arrow" size={13} /></> : "Book"}</span>
+                <span className="price">{priceLabel(s)}<small>{s.priceType === "from" ? s.unit : "quote"}</small></span>
+                <span className="btn btn-quiet btn-sm">{s.cta === "book" ? "Book" : <>Explore <Icon name="arrow" size={13} /></>}</span>
               </div>
             </div>
           </Link>
         ))}
-
-        {showWellness && (
-          <Link className="pcard" href="/services/wellness">
-            <Placeholder caption="Wellness &amp; IV therapy at home" tone="green" />
-            <div className="body">
-              <h3 style={{ fontSize: 17 }}>Wellness services</h3>
-              <p className="muted" style={{ fontSize: 14, marginTop: 4 }}>IV drips, NAD+, panels — 8 sub-services.</p>
-              <div className="foot" style={{ marginTop: "auto", paddingTop: 14, borderTop: "1px solid var(--border-subtle)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                <span className="price">from AED 150<small>8 services</small></span>
-                <span className="btn btn-quiet btn-sm">Explore <Icon name="arrow" size={13} /></span>
-              </div>
-            </div>
-          </Link>
-        )}
       </div>
     </div>
   );

@@ -19,7 +19,8 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
 
   const variant = service.variants?.find((v) => v.id === variantId);
   const activePrice = variant?.price ?? service.price;
-  const bookable = activePrice != null && service.priceType !== "enquire" && service.priceType !== "program";
+  const comingSoon = service.cta === "soon" || service.phase2;
+  const bookable = service.cta === "book" && activePrice != null;
 
   // Prefill the date on the client. Honour the ?when= hint from the home
   // booking widget (Today / Tomorrow); default to today otherwise.
@@ -29,11 +30,13 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
     setDate(localDate(when === "Tomorrow" ? 1 : 0));
   }, []);
 
-  const priceMain = bookable
-    ? (service.priceType === "from" && !variant ? "from " : "") + formatAED(activePrice!)
-    : service.priceType === "program"
-      ? "Program"
-      : "Enquire";
+  const priceMain = comingSoon
+    ? "Coming soon"
+    : bookable
+      ? (service.priceType === "from" && !variant ? "from " : "") + formatAED(activePrice!)
+      : activePrice != null
+        ? "from " + formatAED(activePrice)
+        : "Enquire";
 
   const slotLabel = formatSlot(date, time);
 
@@ -79,7 +82,7 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
         <div className="buybar">
           <span className="bigprice">
             <span className="n">{priceMain}</span>
-            <span className="s">{service.priceType === "from" || bookable ? service.unit : service.priceType === "program" ? "tailored program" : "on request"}</span>
+            <span className="s">{comingSoon ? "Phase 2" : service.priceType === "from" || bookable ? service.unit : "on request"}</span>
           </span>
           {service.variants && (
             <div className="seg" role="group" aria-label="Options">
@@ -90,17 +93,23 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
               ))}
             </div>
           )}
-          <span className="tag"><span className="dot" />{bookable ? slotLabel : `Next: ${service.nextSlot}`}</span>
+          <span className="tag"><span className="dot" />{comingSoon ? "Phase 2 · coming soon" : bookable ? slotLabel : `Next: ${service.nextSlot}`}</span>
           <div className="cta">
-            <button className="btn btn-primary btn-lg" onClick={() => addToBooking("checkout")} type="button">
-              {bookable ? "Book now" : "Enquire now"}
-            </button>
-            {bookable && (
-              <button className="btn btn-outline btn-lg" onClick={() => addToBooking("stay")} type="button">
-                Add to booking
-              </button>
+            {comingSoon ? (
+              <button className="btn btn-primary btn-lg" type="button" disabled>Coming soon</button>
+            ) : (
+              <>
+                <button className="btn btn-primary btn-lg" onClick={() => addToBooking("checkout")} type="button">
+                  {bookable ? "Book now" : "Enquire now"}
+                </button>
+                {bookable && (
+                  <button className="btn btn-outline btn-lg" onClick={() => addToBooking("stay")} type="button">
+                    Add to booking
+                  </button>
+                )}
+                <a className="btn btn-quiet btn-lg" href={COMPANY.whatsapp} target="_blank" rel="noreferrer">WhatsApp</a>
+              </>
             )}
-            <a className="btn btn-quiet btn-lg" href={COMPANY.whatsapp} target="_blank" rel="noreferrer">WhatsApp</a>
           </div>
         </div>
         <p className="muted" style={{ fontSize: 13, marginBottom: 20 }}>
@@ -135,7 +144,15 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
           <div className="srow"><span>Service</span><b>{variant?.name ?? service.shortName}</b></div>
           <div className="srow"><span>{bookable ? "Price" : "Pricing"}</span><b>{priceMain}</b></div>
 
-          {bookable ? (
+          {comingSoon ? (
+            <>
+              <div className="srow"><span>Status</span><b>Phase 2 · pending DHA/MOHAP</b></div>
+              <button className="btn btn-primary btn-full" style={{ marginTop: 12 }} type="button" disabled>Coming soon</button>
+              <p className="muted" style={{ textAlign: "center", fontSize: 12, marginTop: 8 }}>
+                We&rsquo;ll open bookings once it&rsquo;s cleared. <a href={COMPANY.whatsapp} target="_blank" rel="noreferrer">Ask us on WhatsApp</a>.
+              </p>
+            </>
+          ) : bookable ? (
             <>
               <div className="field" style={{ marginTop: 12, marginBottom: 10 }}>
                 <label>Appointment date</label>
@@ -172,7 +189,11 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
 
       <div className="mbar">
         <span className="p"><b>{priceMain}</b> · {bookable ? slotLabel : (variant?.name ?? service.shortName)}</span>
-        <button className="btn" onClick={() => addToBooking("checkout")} type="button">{bookable ? "Book now" : "Enquire"}</button>
+        {comingSoon ? (
+          <button className="btn" type="button" disabled>Coming soon</button>
+        ) : (
+          <button className="btn" onClick={() => addToBooking("checkout")} type="button">{bookable ? "Book now" : "Enquire"}</button>
+        )}
       </div>
 
       {toast && (

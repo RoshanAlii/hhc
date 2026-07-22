@@ -92,7 +92,7 @@ export default function HomePage() {
                 <div className="foot">
                   <span className="price">
                     {priceLabel(s)}
-                    <small>{s.priceType === "from" ? s.unit : s.priceType === "program" ? "tailored" : "quote"}</small>
+                    <small>{s.priceType === "from" ? s.unit : "quote"}</small>
                   </span>
                   <span className="slot"><span className="dot" />{s.nextSlot.split(" ")[0]}</span>
                 </div>
@@ -112,11 +112,11 @@ export default function HomePage() {
       <section className="wrap home-sec tight">
         <div className="promoband green">
           <div className="txt">
-            <span className="k">Wellness, delivered at home</span>
-            <h2>IV drips, NAD+ and lab panels — without leaving the sofa.</h2>
-            <p>Curated wellness packages administered by licensed nurses.</p>
+            <span className="k">The Dispensary</span>
+            <h2>IV drips, NAD+ and vitamin shots — without leaving the sofa.</h2>
+            <p>Clinician-administered wellness, delivered to your door.</p>
           </div>
-          <Link className="btn btn-primary btn-lg" href="/services/wellness">Explore wellness</Link>
+          <Link className="btn btn-primary btn-lg" href="/dispensary">Explore the Dispensary</Link>
         </div>
       </section>
 
