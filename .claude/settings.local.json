@@ -54,7 +54,8 @@
       "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" -L http://localhost:3200/services/peptide-bpc-157/)",
       "Bash(curl -sL http://localhost:3200/services/iv-therapy/)",
       "Bash(curl -sL http://localhost:3200/services/lab-tests/)",
-      "Bash(curl -sL http://localhost:3200/services/physiotherapy/)"
+      "Bash(curl -sL http://localhost:3200/services/physiotherapy/)",
+      "Bash(curl -sL http://localhost:3200/services/doctor-visit/)"
     ]
   }
 }

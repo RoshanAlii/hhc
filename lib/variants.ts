@@ -352,3 +352,30 @@ export const serviceOptions: Record<string, ServiceOption[]> = {
     { name:"Online Doctor Consultation (General Practitioner)", price:149 },
   ],
 };
+
+// ---- grouping: promote each distinct product (the `name`) to a listing ----
+export interface Product {
+  name: string;
+  options: ServiceOption[];
+  from: number;
+  mrp?: number;
+}
+
+export function productsFor(slug: string): Product[] {
+  const map = new Map<string, ServiceOption[]>();
+  for (const o of serviceOptions[slug] ?? []) {
+    if (o.addon) continue;
+    const arr = map.get(o.name) ?? [];
+    arr.push(o);
+    map.set(o.name, arr);
+  }
+  return [...map.entries()].map(([name, options]) => {
+    const from = Math.min(...options.map((o) => o.price));
+    const cheapest = options.find((o) => o.price === from);
+    return { name, options, from, mrp: cheapest?.mrp };
+  });
+}
+
+export function addonsFor(slug: string): ServiceOption[] {
+  return (serviceOptions[slug] ?? []).filter((o) => o.addon);
+}
