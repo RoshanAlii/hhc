@@ -752,6 +752,22 @@ html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-r
 .home-sec{padding-block:48px}
 .home-sec.tight{padding-block:32px}
 
+/* --- option / SKU picker on service detail --------------------------- */
+.optpicker{margin:6px 0 4px}
+.optsearch{position:relative;margin-bottom:8px}
+.optsearch input{width:100%;border:1px solid var(--border-default);border-radius:var(--radius-md);padding:9px 40px 9px 12px;font:inherit;font-size:var(--fs-sm);background:var(--surface-card);color:var(--text-strong)}
+.optsearch input:focus{outline:none;border-color:var(--brand-primary);box-shadow:0 0 0 3px var(--ring-brand)}
+.optsearch .optcount{position:absolute;top:50%;inset-inline-end:12px;transform:translateY(-50%);font-size:12px;font-weight:700;color:var(--text-muted)}
+.optlist{display:flex;flex-direction:column;gap:6px;max-height:360px;overflow-y:auto;padding-inline-end:2px}
+.optrow{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;text-align:start;background:var(--surface-card);border:1px solid var(--hairline);border-radius:var(--radius-md);padding:10px 13px;font:inherit;cursor:default}
+button.optrow{cursor:pointer;transition:border-color var(--dur-fast) var(--ease-out),background var(--dur-fast) var(--ease-out)}
+button.optrow:hover{border-color:var(--orange-200)}
+.optrow.on{border-color:var(--brand-primary);background:var(--surface-brand-soft)}
+.optname{font-size:var(--fs-sm);color:var(--text-strong);font-weight:600;line-height:1.35}
+.optlabel{color:var(--text-muted);font-weight:400}
+.optprice{flex:none;font-size:var(--fs-sm);font-weight:700;color:var(--text-strong);white-space:nowrap;display:inline-flex;gap:7px;align-items:baseline}
+.optprice s{color:var(--text-muted);font-weight:400;font-size:12px}
+
 /* --- full-bleed warm header background on inner pages ------------------
    .pagehd is also .wrap (max-width 1200), so a background on it stops at the
    content column. Paint it via a pseudo-element stretched to the viewport so

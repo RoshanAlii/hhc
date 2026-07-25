@@ -4,23 +4,29 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Placeholder from "@/components/Placeholder";
+import OptionPicker from "@/components/OptionPicker";
 import { useCart } from "@/lib/cart";
 import { COMPANY, formatAED, formatSlot, localDate, type Service } from "@/lib/data";
+import { serviceOptions } from "@/lib/variants";
 
 export default function ServiceDetailClient({ service }: { service: Service }) {
   const router = useRouter();
   const { addItem } = useCart();
-  const [variantId, setVariantId] = useState(service.variants?.[0]?.id ?? "");
+  const options = serviceOptions[service.slug] ?? [];
+  const mainOptions = options.filter((o) => !o.addon);
+  const addonOptions = options.filter((o) => o.addon);
+  const [optIndex, setOptIndex] = useState(0);
   const [date, setDate] = useState("");
   const [time, setTime] = useState("18:00");
   const [today, setToday] = useState("");
   const [error, setError] = useState("");
   const [toast, setToast] = useState(false);
 
-  const variant = service.variants?.find((v) => v.id === variantId);
-  const activePrice = variant?.price ?? service.price;
+  const option = mainOptions[optIndex] ?? mainOptions[0];
+  const activePrice = option?.price ?? service.price;
   const comingSoon = service.cta === "soon" || service.phase2;
   const bookable = service.cta === "book" && activePrice != null;
+  const optionLabel = option ? [option.name, option.label].filter(Boolean).join(" · ") : undefined;
 
   // Prefill the date on the client. Honour the ?when= hint from the home
   // booking widget (Today / Tomorrow); default to today otherwise.
@@ -32,11 +38,9 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
 
   const priceMain = comingSoon
     ? "Coming soon"
-    : bookable
-      ? (service.priceType === "from" && !variant ? "from " : "") + formatAED(activePrice!)
-      : activePrice != null
-        ? "from " + formatAED(activePrice)
-        : "Enquire";
+    : activePrice != null
+      ? (mainOptions.length ? "" : service.priceType === "from" ? "from " : "") + formatAED(activePrice)
+      : "Enquire";
 
   const slotLabel = formatSlot(date, time);
 
@@ -53,10 +57,10 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
     }
     setError("");
     addItem({
-      key: `${service.slug}:${variantId || "std"}`,
+      key: `${service.slug}:${optIndex}`,
       slug: service.slug,
       name: service.name,
-      meta: variant?.name,
+      meta: optionLabel,
       price: activePrice!,
       kind: "service",
       date,
@@ -84,14 +88,8 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
             <span className="n">{priceMain}</span>
             <span className="s">{comingSoon ? "Phase 2" : service.priceType === "from" || bookable ? service.unit : "on request"}</span>
           </span>
-          {service.variants && (
-            <div className="seg" role="group" aria-label="Options">
-              {service.variants.map((v) => (
-                <button key={v.id} className={variantId === v.id ? "on" : ""} onClick={() => setVariantId(v.id)} type="button">
-                  {v.name}
-                </button>
-              ))}
-            </div>
+          {mainOptions.length > 1 && (
+            <span className="tag orange"><span className="dot" />{mainOptions.length} options</span>
           )}
           <span className="tag"><span className="dot" />{comingSoon ? "Phase 2 · coming soon" : bookable ? slotLabel : `Next: ${service.nextSlot}`}</span>
           <div className="cta">
@@ -121,6 +119,22 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
         <main className="panel">
           <Placeholder caption={service.photo ?? `Service photography — ${service.shortName}`} tone="orange" style={{ borderRadius: "var(--radius-md)", marginBottom: 26 }} />
 
+          {mainOptions.length > 0 && (
+            <>
+              <h2 className="blk">
+                {bookable ? "Choose an option" : "Options & prices"}
+                {mainOptions.length > 1 ? <span style={{ color: "var(--text-muted)", fontWeight: 400 }}> · {mainOptions.length}</span> : null}
+              </h2>
+              <OptionPicker options={mainOptions} selectedIndex={bookable ? optIndex : undefined} onSelect={bookable ? setOptIndex : undefined} />
+              {addonOptions.length > 0 && (
+                <>
+                  <h2 className="blk">Add-on tests <span style={{ color: "var(--text-muted)", fontWeight: 400 }}>· {addonOptions.length}</span></h2>
+                  <OptionPicker options={addonOptions} />
+                </>
+              )}
+            </>
+          )}
+
           <h2 className="blk">What&rsquo;s included</h2>
           <ul className="inc">{service.includes.map((i) => <li key={i}>{i}</li>)}</ul>
 
@@ -141,7 +155,7 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
 
         <aside className="aside">
           <div className="lbl">{bookable ? "Book your appointment" : "Booking summary"}</div>
-          <div className="srow"><span>Service</span><b>{variant?.name ?? service.shortName}</b></div>
+          <div className="srow"><span>Service</span><b>{option?.name ?? service.shortName}</b></div>
           <div className="srow"><span>{bookable ? "Price" : "Pricing"}</span><b>{priceMain}</b></div>
 
           {comingSoon ? (
@@ -188,7 +202,7 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
       </div>
 
       <div className="mbar">
-        <span className="p"><b>{priceMain}</b> · {bookable ? slotLabel : (variant?.name ?? service.shortName)}</span>
+        <span className="p"><b>{priceMain}</b> · {bookable ? slotLabel : (option?.name ?? service.shortName)}</span>
         {comingSoon ? (
           <button className="btn" type="button" disabled>Coming soon</button>
         ) : (
@@ -205,7 +219,7 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
             <div>
               <div className="t">Added to your booking</div>
               <div className="s">
-                {variant?.name ?? service.shortName} · {slotLabel}
+                {option?.name ?? service.shortName} · {slotLabel}
                 <br />
                 <Link href="/checkout">Check out</Link> · <Link href="/cart">View cart</Link>
               </div>
