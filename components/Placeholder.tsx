@@ -1,10 +1,14 @@
 import React from "react";
+import clinicalImage from "@/public/img/generated/home-clinical-care.jpg";
+import diagnosticsImage from "@/public/img/generated/home-diagnostics.jpg";
+import familyImage from "@/public/img/generated/home-family-care.jpg";
+import physiotherapyImage from "@/public/img/generated/home-physiotherapy.jpg";
 
 const GENERATED_IMAGES = {
-  clinical: "/img/generated/home-clinical-care.jpg",
-  physiotherapy: "/img/generated/home-physiotherapy.jpg",
-  diagnostics: "/img/generated/home-diagnostics.jpg",
-  family: "/img/generated/home-family-care.jpg",
+  clinical: clinicalImage.src,
+  physiotherapy: physiotherapyImage.src,
+  diagnostics: diagnosticsImage.src,
+  family: familyImage.src,
 } as const;
 
 function imageFor(caption = "") {

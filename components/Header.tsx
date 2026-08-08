@@ -64,7 +64,12 @@ export default function Header() {
           </div>
           <div className="tb-right">
             <label className="sr-only" htmlFor="emirate-select">Emirate</label>
-            <select id="emirate-select" value={emirate} onChange={(event) => changeEmirate(event.target.value)}>
+            <select
+              id="emirate-select"
+              value={emirate}
+              onChange={(event) => changeEmirate(event.target.value)}
+              style={{ width: `${Math.max(6.6, emirate.length + 1.9)}ch` }}
+            >
               {EMIRATES.map((item) => <option key={item} value={item}>{item}</option>)}
             </select>
             <span className="sep">·</span>
