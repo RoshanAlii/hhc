@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Icon from "@/components/Icon";
 import { searchSite } from "@/lib/siteSearch";
 
@@ -15,9 +15,16 @@ export default function NavSearch() {
   const [activeIndex, setActiveIndex] = useState(0);
   const results = useMemo(() => searchSite(query), [query]);
 
-  function reveal(focus = false) {
+  useEffect(() => {
+    if (!open) return;
+    const frame = window.requestAnimationFrame(() => {
+      inputRef.current?.focus({ preventScroll: true });
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [open]);
+
+  function reveal() {
     setOpen(true);
-    if (focus) window.setTimeout(() => inputRef.current?.focus(), 0);
   }
 
   function close() {
@@ -54,16 +61,16 @@ export default function NavSearch() {
     <div
       className={`nav-search${open ? " open" : ""}`}
       ref={containerRef}
-      onMouseEnter={() => reveal(true)}
+      onMouseEnter={reveal}
       onMouseLeave={() => {
         if (!containerRef.current?.contains(document.activeElement)) close();
       }}
-      onFocusCapture={() => reveal(false)}
+      onFocusCapture={reveal}
       onBlurCapture={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget as Node | null)) close();
       }}
     >
-      <button className="nav-search-trigger" type="button" aria-label="Search HealthServe" aria-expanded={open} aria-controls="nav-search-panel" onClick={() => open ? close() : reveal(true)}>
+      <button className="nav-search-trigger" type="button" aria-label="Search HealthServe" aria-expanded={open} aria-controls="nav-search-panel" onClick={() => open ? close() : reveal()}>
         <Icon name="search" size={18} />
       </button>
       {open && (
