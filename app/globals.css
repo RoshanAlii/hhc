@@ -226,6 +226,8 @@ nav.main{position:sticky;top:0;z-index:50;background:rgba(253,252,250,.92);backd
 .book .f:last-of-type{border-inline-end:none}
 .book label{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);font-weight:var(--fw-bold);margin-bottom:2px}
 .book select{width:100%;border:none;background:transparent;font:inherit;font-size:var(--fs-sm);font-weight:var(--fw-bold);color:var(--text-strong);padding:4px 0;cursor:pointer}
+.book input[type="date"]{width:100%;border:none;background:transparent;font:inherit;font-size:var(--fs-sm);font-weight:var(--fw-bold);color:var(--text-strong);padding:4px 0;cursor:pointer;min-height:30px}
+.book input[type="date"]:focus{outline:none}
 .avail{margin-top:12px;font-size:var(--fs-sm);color:var(--text-muted);display:flex;align-items:center;gap:8px}
 .avail .dot{width:8px;height:8px;border-radius:50%;background:var(--green-500)}
 @media(max-width:900px){.hero-grid{grid-template-columns:1fr}.book{flex-direction:column}.book .f{border-inline-end:none;border-bottom:1px solid var(--border-subtle);padding:10px 6px}.book .btn{width:100%}}
