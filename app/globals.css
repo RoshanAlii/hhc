@@ -867,6 +867,103 @@ button.optrow:hover{border-color:var(--orange-200)}
   .catalogue-sheet-actions{position:sticky;bottom:0;background:#fff;padding-top:10px}.catalogue-tabs{margin-inline:-15px;padding-inline:15px}
 }
 
+/* Mobile experience polish */
+@media(max-width:600px){
+  html{-webkit-text-size-adjust:100%;scroll-padding-top:78px}
+  body{line-height:1.55}
+  button,.btn,.chip,summary,.qty button{min-height:44px}
+  .field input,.field select,.field textarea,.book select,.book input[type="date"]{font-size:16px}
+  .wrap{padding-inline:16px}
+
+  .topbar-in{min-height:38px;padding-block:4px}
+  .tb-left{min-width:0;overflow:hidden;text-overflow:ellipsis}
+  .tb-left .ph{font-size:11px}
+  .tb-right select{font-size:11px;min-height:32px}
+  nav.main>.wrap{position:relative}
+  .navrow{min-height:64px;padding-block:7px}
+  .navact{margin-left:auto}
+  .nav-search-trigger,.navtoggle{width:42px;height:42px}
+  .mobilemenu.open{position:absolute;top:100%;left:0;right:0;z-index:5;padding:10px 16px 18px;background:rgba(253,252,250,.98);border:1px solid var(--border-subtle);border-top:0;border-radius:0 0 20px 20px;box-shadow:0 20px 45px rgba(48,43,38,.14);max-height:calc(100svh - 104px);overflow-y:auto}
+  .mobilemenu a{min-height:48px;padding:11px 12px}
+  .nav-search-panel{top:104px;left:10px;right:10px}
+
+  .hero-lite{min-height:auto;padding:28px 0 24px}
+  .hero-lite::after{background:linear-gradient(180deg,rgba(253,248,241,.95) 0%,rgba(253,248,241,.88) 54%,rgba(253,248,241,.96) 100%)}
+  .hero-bg img{object-position:68% center}
+  .hero-lite .kick2{max-width:100%;white-space:normal;line-height:1.35}
+  .hero-lite h1{font-size:clamp(34px,10.2vw,42px);max-width:13ch;text-wrap:balance}
+  .hero-lite .lead{font-size:16px;max-width:32ch}
+  .hero-actions .btn{min-height:50px;padding-inline:12px}
+  .hero-book .book{padding:7px;border-radius:18px;box-shadow:0 16px 40px rgba(48,43,38,.14)}
+  .book .f{min-height:56px;padding:8px 10px}
+  .book .btn{min-height:52px}
+  .insurance-capsule{padding:13px;border-radius:22px}
+
+  .pagehd{padding-top:30px;padding-bottom:4px}
+  .pagehd h1{font-size:clamp(30px,9vw,38px);line-height:1.08;text-wrap:balance}
+  .pagehd p{font-size:14px;line-height:1.55}
+  .filters{top:64px;margin:18px -16px;padding:10px 16px;scroll-padding-inline:16px;border-top:1px solid var(--border-subtle);scrollbar-width:none}
+  .filters::-webkit-scrollbar,.catalogue-tabs::-webkit-scrollbar{display:none}
+
+  .panel,.aside{padding:18px}
+  .detail{gap:16px;padding-bottom:96px}
+  .buybar{margin-top:18px;border-radius:18px}
+  .buybar .tag{font-size:10px}
+  .bigprice .n{font-size:20px}
+  .catalogue-panel{padding:16px}
+  .catalogue-banner{align-items:flex-start;padding:14px}
+  .catalogue-tabs{scroll-padding-inline:16px}
+  .catalogue-card{border-radius:16px}
+  .catalogue-card-action .btn{min-height:44px}
+  .optrow{padding-block:12px}
+  summary{padding:13px 14px;line-height:1.35}
+  .mbar{padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(38,37,35,.97);backdrop-filter:blur(14px)}
+  .mbar .btn{min-height:48px;padding-inline:18px}
+
+  .two{gap:16px}
+  .li{display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:11px;padding:15px 0}
+  .li .th{width:52px;height:52px}
+  .li .m{min-width:0}
+  .li .t{font-size:14px;line-height:1.35}
+  .li .sub{margin-top:3px;line-height:1.4}
+  .li>b{font-size:13px;white-space:nowrap}
+  .qty button{padding:5px 14px}
+  .aside{border-radius:18px}
+
+  .checkout-page{min-height:calc(100svh - 64px)}
+  .checkout-mode .navrow{min-height:68px}
+  .checkout-nav-progress{border-radius:14px}
+  .checkout-section{padding:17px}
+  .checkout-section>header{gap:10px;margin-bottom:17px}
+  .checkout-section>header p{line-height:1.4}
+  .appointment-editor{padding:12px}
+  .checkout-mobile-bar{gap:10px}
+  .checkout-mobile-bar .btn{min-width:0;flex:1;padding-inline:12px}
+  .checkout-mobile-bar>div{flex:none}
+
+  footer.site{padding-bottom:calc(24px + env(safe-area-inset-bottom))}
+  .fcols{gap:24px}
+  .fcols h4{margin-bottom:8px}
+  .fcols a{display:flex;align-items:center;min-height:40px}
+}
+
+@media(max-width:420px){
+  .btn-booknow{display:none}
+  .hs-logo{width:118px;max-width:40vw}
+  .checkout-mode .hs-logo{width:82px;max-width:25vw}
+  .checkout-mode .navrow{gap:7px}
+  .checkout-nav-progress{padding:7px 6px}
+  .checkout-progress-step>span{width:26px;height:26px}
+  .checkout-progress-step>i{margin-inline:3px}
+  .hero-actions{grid-template-columns:1fr}
+  .trust span{font-size:10px;padding:6px 9px}
+  .insurance-capsule .ins-brand{height:40px}
+  .features{grid-template-columns:1fr 1fr}
+  .band.soft{grid-template-columns:1fr 1fr}
+  .checkout-mobile-bar b{font-size:16px}
+  .checkout-mobile-bar .btn{font-size:13px}
+}
+
 /* --- full-bleed warm header background on inner pages ------------------
    .pagehd is also .wrap (max-width 1200), so a background on it stops at the
    content column. Paint it via a pseudo-element stretched to the viewport so
