@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import ServiceVisual from "@/components/ServiceVisual";
+import Placeholder from "@/components/Placeholder";
 import { articles, getArticle, getService, COMPANY } from "@/lib/data";
 
 export function generateStaticParams() {
@@ -29,7 +29,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       <p className="muted" style={{ fontSize: 13, marginBottom: 18 }}>
         Reviewed by HealthServe clinical team · {article.readMins} min read
       </p>
-      <ServiceVisual icon="doc" eyebrow={`${article.category} · Clinically reviewed`} title={article.title} tone="ink" large />
+      <Placeholder caption={article.photo} tone="neutral" style={{ borderRadius: "var(--radius-lg)", marginBottom: 24 }} />
 
       {article.body.map((p, i) => (
         <p className="muted" key={i} style={{ fontSize: 16, marginBottom: 14 }}>{p}</p>

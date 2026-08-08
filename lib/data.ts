@@ -1,5 +1,5 @@
 // HealthServe content + data model.
-// Published prices are starting estimates and remain subject to care-team confirmation.
+// Prices are sample AED values so cart/checkout math works end-to-end.
 
 export const COMPANY = {
   name: "Healthserve Home Healthcare LLC",
@@ -16,6 +16,13 @@ export const COMPANY = {
 };
 
 export const VAT_RATE = 0.05;
+
+export const PROMOS = [
+  "Free first doctor consultation on home visits",
+  "Same-day home nursing across Dubai",
+  "New wellness & IV packages now open",
+  "Book before 6 PM for same-evening visits",
+];
 
 export type Category = "Medical" | "Nursing & care" | "Therapy & wellness";
 export type PriceType = "from" | "fixed" | "enquire" | "soon";
@@ -54,14 +61,14 @@ export interface Service {
 }
 
 const GENERIC_HOW = [
-  "Choose a service and share your preferred time with the care team.",
+  "Choose a service and time that suits you \u2014 same-day slots across most of Dubai.",
   "A DHA-licensed clinician arrives at your door, fully equipped.",
   "You get a clear plan and a claim-ready invoice, with WhatsApp follow-up.",
 ];
 const GENERIC_FAQ = [
-  { q: "Which areas do you cover?", a: "Most of Dubai. Share your area with the care team and we will confirm coverage before the visit." },
-  { q: "Can I claim on insurance?", a: "We can issue a claim-ready invoice. Reimbursement and direct billing depend on your insurer and policy." },
-  { q: "Can I reschedule?", a: "Contact the care team as early as possible. Any applicable terms are explained in our cancellation policy." },
+  { q: "Which areas do you cover?", a: "Most of Dubai. Enter your area at booking and we confirm instantly." },
+  { q: "Can I claim on insurance?", a: "We issue claim-ready invoices; direct billing with select partners." },
+  { q: "Can I reschedule?", a: "Yes \u2014 free up to 2 hours before your slot. See our cancellation policy." },
 ];
 
 interface SvcInput {
@@ -99,8 +106,8 @@ const serviceItems: Service[] = [
     slug: "doctor-visit", name: "Doctors Visit & Consultation", shortName: "Doctors visit & consultation",
     bucket: "services", category: "Medical", icon: "doctor", cta: "book", homeCare: true, featured: true,
     price: 299, unit: "per visit", photo: "Doctor examining a patient at home",
-    blurb: "A DHA-licensed GP at your door for assessment, treatment and prescriptions, with availability confirmed directly.",
-    heroTitle: "A doctor at your door, coordinated around you.",
+    blurb: "A DHA-licensed GP at your door for assessment, treatment and prescriptions \u2014 often within hours.",
+    heroTitle: "A doctor at your door \u2014 often within hours.",
     heroBlurb: "DHA-licensed GPs visit you at home, your office or your hotel for assessment, treatment and prescriptions. No clinic, no waiting room.",
     variants: [ { id: "gp", name: "GP visit (9\u20139)", price: 299 }, { id: "express", name: "Express (9pm\u20139am)", price: 375 } ],
     includes: ["Full clinical assessment and vitals", "Diagnosis and a clear treatment plan", "Prescriptions where appropriate", "Referral for labs or specialist care", "Visit summary shared with you and your physician"],
@@ -190,15 +197,15 @@ const dispensaryItems: Service[] = [
     slug: "iv-therapy", name: "IV Therapy", shortName: "IV therapy",
     bucket: "dispensary", category: "Therapy & wellness", icon: "wellness", cta: "book",
     price: 399, unit: "per session", photo: "IV drip administered at home",
-    blurb: "IV options organised into six clear clinical and wellness categories.",
-    heroBlurb: "Clinician-administered IV therapy at home. Options are organised by care goal, with suitability and formulation confirmed before treatment.",
+    blurb: "15 fixed drips grouped into ~6 families \u2014 hydration to recovery.",
+    heroBlurb: "Clinician-administered IV drips at home \u2014 hydration, immunity, recovery and beauty blends. Customised drips by enquiry.",
   }),
   svc({
     slug: "nad-therapy", name: "NAD+ IV Therapy", shortName: "NAD+ IV therapy",
     bucket: "dispensary", category: "Therapy & wellness", icon: "wellness", cta: "book",
     price: 449, unit: "per session", photo: "NAD+ infusion at home",
-    blurb: "Clinician-reviewed NAD+ therapy in 100, 250 and 500 mg dose tiers.",
-    heroBlurb: "Clinician-administered NAD+ therapy in 100, 250 and 500 mg dose tiers, subject to individual assessment and delivered at home.",
+    blurb: "Longevity NAD+ infusion \u2014 dose tiers 100 / 250 / 500 mg.",
+    heroBlurb: "A clinically administered NAD+ longevity infusion in dose tiers of 100, 250 and 500 mg, delivered slowly and safely at home.",
     variants: [ { id: "100", name: "100 mg", price: 449 }, { id: "250", name: "250 mg", price: 599 }, { id: "500", name: "500 mg", price: 899 } ],
   }),
   svc({
@@ -219,7 +226,7 @@ const dispensaryItems: Service[] = [
     slug: "flu-vaccination", name: "Flu Vaccination", shortName: "Flu vaccination",
     bucket: "dispensary", category: "Therapy & wellness", icon: "shield", cta: "book",
     price: 299, unit: "per dose", photo: "Flu vaccination at home",
-    blurb: "Seasonal flu vaccination at home for individuals and families.",
+    blurb: "Seasonal flu vaccination at home \u2014 individual (group 3+ TBC).",
     heroBlurb: "Seasonal flu vaccination at home, administered by a licensed nurse for individuals and families.",
   }),
   svc({
@@ -247,6 +254,51 @@ export function getService(slug: string): Service | undefined {
 }
 // Back-compat alias (home grid used to read coreServiceList).
 export const coreServiceList = homeServiceList;
+
+// ---- Packages -----------------------------------------------------------
+export interface Pkg {
+  slug: string;
+  name: string;
+  tagline: string;
+  price: number;
+  perUnit: string;
+  features: string[];
+  highlight?: boolean;
+  ribbon?: string;
+}
+
+export const packages: Pkg[] = [
+  {
+    slug: "physio-recovery",
+    name: "Physio Recovery",
+    tagline: "6-session program",
+    price: 1290,
+    perUnit: "≈ AED 215 / session",
+    features: ["6 home sessions", "Personalised plan", "Progress report"],
+  },
+  {
+    slug: "nursing-block",
+    name: "Nursing Block",
+    tagline: "10 prepaid nurse hours",
+    price: 799,
+    perUnit: "≈ AED 80 / hour",
+    features: ["Use flexibly, anytime", "Priority scheduling", "Usage statement on WhatsApp"],
+    highlight: true,
+    ribbon: "BEST VALUE",
+  },
+  {
+    slug: "wellness-baseline",
+    name: "Wellness Baseline",
+    tagline: "Twice-yearly health panels",
+    price: 990,
+    perUnit: "2 × home visits",
+    features: ["2 full panels / year", "Results to your phone", "Doctor review call"],
+  },
+];
+
+export function getPackage(slug: string): Pkg | undefined {
+  return packages.find((p) => p.slug === slug);
+}
 
 // ---- Journal ------------------------------------------------------------
 export interface Article {
@@ -289,14 +341,14 @@ export const articles: Article[] = [
   },
   {
     slug: "iv-drip-therapy-recovery",
-    title: "A clinical guide to IV therapy at home",
+    title: "Why IV drip therapy is the new trend for recovery",
     category: "Health guide",
     readMins: 4,
     excerpt: "IV therapy can support hydration and recovery — but only when it's clinically administered.",
     body: [
-      "IV therapy may be recommended in specific circumstances after an appropriate clinical assessment. It is not a substitute for medical diagnosis, balanced nutrition or emergency care.",
-      "Every treatment should follow screening, be selected for an individual clinical need, and be administered by an appropriately licensed professional.",
-      "At HealthServe, suitability, formulation and follow-up are confirmed by the clinical team before treatment.",
+      "IV drip therapy has moved from hospitals into homes and offices. Done well, it can support hydration, recovery and immunity.",
+      "The key word is clinical. Every drip should follow a screening, be tailored to the individual, and be administered by a licensed nurse.",
+      "At HealthServe, IV therapy is never a spa menu — it's a clinician-delivered service.",
     ],
     relatedServiceSlug: "iv-therapy",
   },
@@ -312,6 +364,17 @@ export const articles: Article[] = [
     relatedServiceSlug: "newborn-child-care",
   },
   {
+    slug: "healthserve-khaleej-times",
+    title: "HealthServe in Khaleej Times",
+    category: "News & press",
+    readMins: 2,
+    excerpt: "Our approach to home healthcare featured in the national press.",
+    body: [
+      "We were proud to be featured in Khaleej Times for our work bringing hospital-grade care into Dubai homes.",
+      "The piece highlighted our clinical standards, our training program, and the families we've cared for since 2016.",
+    ],
+  },
+  {
     slug: "clinical-skills-training",
     title: "Clinical skills training for our nursing team",
     category: "News & press",
@@ -324,7 +387,7 @@ export const articles: Article[] = [
   },
 ];
 
-// Descriptive labels for the journal's code-generated editorial artwork.
+// Placeholder captions for the journal image slots.
 const articlePhotos: Record<string, string> = {
   "home-nurses-diabetes-hypertension": "Nurse checking blood pressure at home",
   "ultimate-guide-home-health-care": "Clinician with tablet in a home setting",

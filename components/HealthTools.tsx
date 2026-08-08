@@ -42,8 +42,8 @@ function BmiTool() {
   return (
     <Tool title="BMI calculator">
       <div className="grid2">
-        <div className="field" style={{ marginBottom: 8 }}><label htmlFor="bmi-height">Height (cm)</label><input id="bmi-height" inputMode="decimal" value={h} onChange={(e) => setH(e.target.value)} placeholder="170" /></div>
-        <div className="field" style={{ marginBottom: 8 }}><label htmlFor="bmi-weight">Weight (kg)</label><input id="bmi-weight" inputMode="decimal" value={w} onChange={(e) => setW(e.target.value)} placeholder="68" /></div>
+        <div className="field" style={{ marginBottom: 8 }}><label>Height (cm)</label><input inputMode="decimal" value={h} onChange={(e) => setH(e.target.value)} placeholder="170" /></div>
+        <div className="field" style={{ marginBottom: 8 }}><label>Weight (kg)</label><input inputMode="decimal" value={w} onChange={(e) => setW(e.target.value)} placeholder="68" /></div>
       </div>
       {out ?? <p className="muted" style={{ fontSize: 13 }}>Enter your height and weight to see your Body Mass Index.</p>}
     </Tool>
@@ -67,14 +67,14 @@ function CalorieTool() {
   return (
     <Tool title="Daily calorie needs">
       <div className="grid2">
-        <div className="field" style={{ marginBottom: 8 }}><label htmlFor="calorie-sex">Sex</label><select id="calorie-sex" value={sex} onChange={(e) => setSex(e.target.value)}><option value="female">Female</option><option value="male">Male</option></select></div>
-        <div className="field" style={{ marginBottom: 8 }}><label htmlFor="calorie-age">Age</label><input id="calorie-age" inputMode="numeric" value={age} onChange={(e) => setAge(e.target.value)} placeholder="32" /></div>
-        <div className="field" style={{ marginBottom: 8 }}><label htmlFor="calorie-height">Height (cm)</label><input id="calorie-height" inputMode="decimal" value={h} onChange={(e) => setH(e.target.value)} placeholder="170" /></div>
-        <div className="field" style={{ marginBottom: 8 }}><label htmlFor="calorie-weight">Weight (kg)</label><input id="calorie-weight" inputMode="decimal" value={w} onChange={(e) => setW(e.target.value)} placeholder="68" /></div>
+        <div className="field" style={{ marginBottom: 8 }}><label>Sex</label><select value={sex} onChange={(e) => setSex(e.target.value)}><option value="female">Female</option><option value="male">Male</option></select></div>
+        <div className="field" style={{ marginBottom: 8 }}><label>Age</label><input inputMode="numeric" value={age} onChange={(e) => setAge(e.target.value)} placeholder="32" /></div>
+        <div className="field" style={{ marginBottom: 8 }}><label>Height (cm)</label><input inputMode="decimal" value={h} onChange={(e) => setH(e.target.value)} placeholder="170" /></div>
+        <div className="field" style={{ marginBottom: 8 }}><label>Weight (kg)</label><input inputMode="decimal" value={w} onChange={(e) => setW(e.target.value)} placeholder="68" /></div>
       </div>
       <div className="field" style={{ marginBottom: 8 }}>
-        <label htmlFor="calorie-activity">Activity level</label>
-        <select id="calorie-activity" value={act} onChange={(e) => setAct(e.target.value)}>
+        <label>Activity level</label>
+        <select value={act} onChange={(e) => setAct(e.target.value)}>
           <option value="1.2">Sedentary (little exercise)</option>
           <option value="1.375">Light (1–3 days/week)</option>
           <option value="1.55">Moderate (3–5 days/week)</option>
@@ -100,7 +100,7 @@ function IdealWeightTool() {
   }
   return (
     <Tool title="Healthy weight range">
-      <div className="field" style={{ marginBottom: 8 }}><label htmlFor="range-height">Height (cm)</label><input id="range-height" inputMode="decimal" value={h} onChange={(e) => setH(e.target.value)} placeholder="170" /></div>
+      <div className="field" style={{ marginBottom: 8 }}><label>Height (cm)</label><input inputMode="decimal" value={h} onChange={(e) => setH(e.target.value)} placeholder="170" /></div>
       {out ?? <p className="muted" style={{ fontSize: 13 }}>See the weight range considered healthy for your height.</p>}
     </Tool>
   );
@@ -118,7 +118,7 @@ function WaterTool() {
   }
   return (
     <Tool title="Daily water intake">
-      <div className="field" style={{ marginBottom: 8 }}><label htmlFor="water-weight">Weight (kg)</label><input id="water-weight" inputMode="decimal" value={w} onChange={(e) => setW(e.target.value)} placeholder="68" /></div>
+      <div className="field" style={{ marginBottom: 8 }}><label>Weight (kg)</label><input inputMode="decimal" value={w} onChange={(e) => setW(e.target.value)} placeholder="68" /></div>
       {out ?? <p className="muted" style={{ fontSize: 13 }}>A simple guide to how much water to drink each day.</p>}
     </Tool>
   );
@@ -138,8 +138,8 @@ function WaistTool() {
   return (
     <Tool title="Waist-to-height ratio">
       <div className="grid2">
-        <div className="field" style={{ marginBottom: 8 }}><label htmlFor="waist-size">Waist (cm)</label><input id="waist-size" inputMode="decimal" value={waist} onChange={(e) => setWaist(e.target.value)} placeholder="80" /></div>
-        <div className="field" style={{ marginBottom: 8 }}><label htmlFor="waist-height">Height (cm)</label><input id="waist-height" inputMode="decimal" value={h} onChange={(e) => setH(e.target.value)} placeholder="170" /></div>
+        <div className="field" style={{ marginBottom: 8 }}><label>Waist (cm)</label><input inputMode="decimal" value={waist} onChange={(e) => setWaist(e.target.value)} placeholder="80" /></div>
+        <div className="field" style={{ marginBottom: 8 }}><label>Height (cm)</label><input inputMode="decimal" value={h} onChange={(e) => setH(e.target.value)} placeholder="170" /></div>
       </div>
       {out ?? <p className="muted" style={{ fontSize: 13 }}>A quick indicator of metabolic health — aim below 0.5.</p>}
     </Tool>
@@ -165,7 +165,7 @@ function HeartRateTool() {
   }
   return (
     <Tool title="Heart-rate zones">
-      <div className="field" style={{ marginBottom: 8 }}><label htmlFor="heart-age">Age</label><input id="heart-age" inputMode="numeric" value={age} onChange={(e) => setAge(e.target.value)} placeholder="32" /></div>
+      <div className="field" style={{ marginBottom: 8 }}><label>Age</label><input inputMode="numeric" value={age} onChange={(e) => setAge(e.target.value)} placeholder="32" /></div>
       {out ?? <p className="muted" style={{ fontSize: 13 }}>Find your target zones for fat-burn and cardio training.</p>}
     </Tool>
   );

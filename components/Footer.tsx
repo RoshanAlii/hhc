@@ -17,7 +17,7 @@ export default function Footer() {
             <Link href="/services/home-nursing">Home nursing</Link>
             <Link href="/services/physiotherapy">Physiotherapy</Link>
             <Link href="/dispensary">The Dispensary</Link>
-            <Link href="/packages">Care plans</Link>
+            <Link href="/packages">Packages</Link>
           </div>
           <div>
             <h4>Company</h4>
@@ -32,14 +32,14 @@ export default function Footer() {
             <Link href="/help">Help centre</Link>
             <Link href="/cancellation">Cancellation &amp; refund</Link>
             <Link href="/privacy">Privacy</Link>
-            <Link href="/terms">Terms</Link>
+            <Link href="/privacy">Terms</Link>
           </div>
         </div>
         <div className="legal">
           <span>© 2026 {COMPANY.name} · {COMPANY.dha} · {COMPANY.mohap}</span>
           <span>
             <a href={COMPANY.phoneHref}>{COMPANY.phoneLabel}</a> ·{" "}
-            <a href={COMPANY.whatsapp} target="_blank" rel="noreferrer">WhatsApp</a> · <a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a>
+            <a href={COMPANY.whatsapp} target="_blank" rel="noreferrer">WhatsApp</a> · {COMPANY.email}
           </span>
         </div>
       </div>

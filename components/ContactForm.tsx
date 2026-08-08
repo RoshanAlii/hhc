@@ -1,65 +1,71 @@
 "use client";
 
 import { useState } from "react";
-import { COMPANY } from "@/lib/data";
 
 export default function ContactForm() {
   const [form, setForm] = useState({ name: "", mobile: "", service: "", message: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [sent, setSent] = useState(false);
 
-  function set(field: string, value: string) {
-    setForm((state) => ({ ...state, [field]: value }));
+  function set(f: string, v: string) {
+    setForm((s) => ({ ...s, [f]: v }));
   }
 
-  function submit(event: React.FormEvent) {
-    event.preventDefault();
-    const nextErrors: Record<string, string> = {};
-    if (!form.name.trim()) nextErrors.name = "Please enter your name.";
-    if (!/^[+\d][\d\s-]{7,}$/.test(form.mobile.trim())) nextErrors.mobile = "Enter a valid mobile number.";
-    if (!form.message.trim()) nextErrors.message = "Let us know how we can help.";
-    setErrors(nextErrors);
-    if (Object.keys(nextErrors).length) return;
+  function submit(e: React.FormEvent) {
+    e.preventDefault();
+    const err: Record<string, string> = {};
+    if (!form.name.trim()) err.name = "Please enter your name.";
+    if (!/^[+\d][\d\s]{7,}$/.test(form.mobile.trim())) err.mobile = "Enter a valid mobile number.";
+    if (!form.message.trim()) err.message = "Let us know how we can help.";
+    setErrors(err);
+    if (Object.keys(err).length === 0) setSent(true);
+  }
 
-    const text = [
-      "Hello HealthServe, I would like help arranging home care.",
-      `Name: ${form.name.trim()}`,
-      `Mobile: ${form.mobile.trim()}`,
-      form.service ? `Service: ${form.service}` : "",
-      `Message: ${form.message.trim()}`,
-    ].filter(Boolean).join("\n");
-    window.open(`${COMPANY.whatsapp}?text=${encodeURIComponent(text)}`, "_blank", "noopener,noreferrer");
+  if (sent) {
+    return (
+      <main className="panel">
+        <div className="notice" style={{ marginBottom: 12 }}>
+          <svg width="18" height="18" viewBox="0 0 24 24" style={{ stroke: "var(--green-600)", fill: "none", strokeWidth: 2 }}><path d="M5 12l5 5L20 6" /></svg>
+          Thanks, {form.name.split(" ")[0]} — your message is in.
+        </div>
+        <p className="muted" style={{ fontSize: 15 }}>
+          Our team will reply within 30 minutes during clinic hours. For anything urgent, message us on WhatsApp.
+        </p>
+      </main>
+    );
   }
 
   return (
-    <form className="panel concierge-form" onSubmit={submit} noValidate>
-      <div className="lbl">Speak to the care team</div>
-      <p className="form-intro">Complete the details below, then review and send them directly to HealthServe in WhatsApp.</p>
+    <form className="panel" onSubmit={submit} noValidate>
+      <div className="lbl">Send us a message</div>
       <div className={`field${errors.name ? " invalid" : ""}`}>
-        <label htmlFor="contact-name">Name</label>
-        <input id="contact-name" value={form.name} onChange={(event) => set("name", event.target.value)} autoComplete="name" aria-describedby={errors.name ? "contact-name-error" : undefined} />
-        {errors.name && <span className="err" id="contact-name-error" role="alert">{errors.name}</span>}
+        <label>Name</label>
+        <input value={form.name} onChange={(e) => set("name", e.target.value)} placeholder="Your name" />
+        {errors.name && <span className="err">{errors.name}</span>}
       </div>
       <div className={`field${errors.mobile ? " invalid" : ""}`}>
-        <label htmlFor="contact-mobile">Mobile</label>
-        <input id="contact-mobile" value={form.mobile} onChange={(event) => set("mobile", event.target.value)} placeholder="+971" inputMode="tel" autoComplete="tel" aria-describedby={errors.mobile ? "contact-mobile-error" : undefined} />
-        {errors.mobile && <span className="err" id="contact-mobile-error" role="alert">{errors.mobile}</span>}
+        <label>Mobile</label>
+        <input value={form.mobile} onChange={(e) => set("mobile", e.target.value)} placeholder="+971" />
+        {errors.mobile && <span className="err">{errors.mobile}</span>}
       </div>
       <div className="field">
-        <label htmlFor="contact-service">Service needed</label>
-        <select id="contact-service" value={form.service} onChange={(event) => set("service", event.target.value)}>
-          <option value="">Not sure yet</option>
-          <option>Doctor visit</option><option>Home nursing</option><option>Physiotherapy</option>
-          <option>Lab tests</option><option>Elderly care</option><option>Mother, newborn & child care</option>
-          <option>Wellness / IV</option><option>Other</option>
+        <label>Service needed</label>
+        <select value={form.service} onChange={(e) => set("service", e.target.value)}>
+          <option value="">Choose service</option>
+          <option>Doctor visit</option>
+          <option>Home nursing</option>
+          <option>Physiotherapy</option>
+          <option>Wellness / IV</option>
+          <option>Other</option>
         </select>
       </div>
       <div className={`field${errors.message ? " invalid" : ""}`}>
-        <label htmlFor="contact-message">How can we help?</label>
-        <textarea id="contact-message" rows={4} value={form.message} onChange={(event) => set("message", event.target.value)} placeholder="Briefly describe the care you are looking for" aria-describedby={errors.message ? "contact-message-error" : undefined} />
-        {errors.message && <span className="err" id="contact-message-error" role="alert">{errors.message}</span>}
+        <label>Message</label>
+        <textarea rows={4} value={form.message} onChange={(e) => set("message", e.target.value)} placeholder="How can we help?" />
+        {errors.message && <span className="err">{errors.message}</span>}
       </div>
-      <button className="btn btn-primary btn-full" type="submit">Review in WhatsApp</button>
-      <p className="form-privacy">Nothing is submitted on this website. WhatsApp opens with a draft that you choose whether to send.</p>
+      <button className="btn btn-primary btn-full" type="submit">Send</button>
+      <p className="muted" style={{ fontSize: 12, marginTop: 10 }}>We reply within 30 minutes during clinic hours.</p>
     </form>
   );
 }

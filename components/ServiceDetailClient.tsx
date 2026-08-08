@@ -3,12 +3,12 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import ServiceVisual from "@/components/ServiceVisual";
+import Placeholder from "@/components/Placeholder";
 import OptionPicker from "@/components/OptionPicker";
 import ProductCatalog from "@/components/ProductCatalog";
 import { useCart } from "@/lib/cart";
 import { COMPANY, formatAED, formatSlot, localDate, type Service } from "@/lib/data";
-import { addonsFor, customerOptionLabel, customerProductName, productsFor } from "@/lib/variants";
+import { productsFor, addonsFor } from "@/lib/variants";
 
 export default function ServiceDetailClient({ service }: { service: Service }) {
   const router = useRouter();
@@ -33,6 +33,7 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
   const option = singleOptions[optIndex] ?? singleOptions[0];
   const activePrice = option?.price ?? service.price;
   const bookable = service.cta === "book" && (isCatalog ? true : activePrice != null);
+  const optionLabel = option ? [option.name, option.label].filter(Boolean).join(" · ") : undefined;
 
   useEffect(() => {
     setToday(localDate());
@@ -64,8 +65,8 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
     addItem({
       key: `${service.slug}:${optIndex}`,
       slug: service.slug,
-      name: option ? `${service.shortName} — ${customerProductName(option.name)}` : service.name,
-      meta: customerOptionLabel(option?.label),
+      name: option ? `${service.shortName} — ${option.name}` : service.name,
+      meta: option?.label,
       price: activePrice!,
       kind: "service",
       date,
@@ -93,7 +94,7 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
           </span>
           {isCatalog && <span className="tag orange"><span className="dot" />{products.length} options</span>}
           {!isCatalog && singleOptions.length > 1 && <span className="tag orange"><span className="dot" />{singleOptions.length} options</span>}
-          <span className="tag"><span className="dot" />{comingSoon ? "Phase 2 · coming soon" : bookable && !isCatalog ? slotLabel : "Availability confirmed on request"}</span>
+          <span className="tag"><span className="dot" />{comingSoon ? "Phase 2 · coming soon" : bookable && !isCatalog ? slotLabel : `Next: ${service.nextSlot}`}</span>
           <div className="cta">
             {comingSoon ? (
               <button className="btn btn-primary btn-lg" type="button" disabled>Coming soon</button>
@@ -105,10 +106,10 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
             ) : (
               <>
                 <button className="btn btn-primary btn-lg" onClick={() => addSingle("checkout")} type="button">
-                  {bookable ? "Request this visit" : "Enquire now"}
+                  {bookable ? "Book now" : "Enquire now"}
                 </button>
                 {bookable && (
-                  <button className="btn btn-outline btn-lg" onClick={() => addSingle("stay")} type="button">Add to care request</button>
+                  <button className="btn btn-outline btn-lg" onClick={() => addSingle("stay")} type="button">Add to booking</button>
                 )}
                 <a className="btn btn-quiet btn-lg" href={COMPANY.whatsapp} target="_blank" rel="noreferrer">WhatsApp</a>
               </>
@@ -116,13 +117,13 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
           </div>
         </div>
         <p className="muted" style={{ fontSize: 13, marginBottom: 20 }}>
-          Final availability, suitability and price are confirmed by our care team before the visit.
+          Card · Tabby · Pay on visit &nbsp;·&nbsp; Serving most of Dubai
         </p>
       </div>
 
       <div className="wrap detail">
-        <section className="panel" aria-label={`${service.shortName} details`}>
-          <ServiceVisual icon={service.icon} eyebrow="Home healthcare · Dubai" title={service.shortName} tone={service.category === "Medical" ? "copper" : service.category === "Nursing & care" ? "forest" : "plum"} large />
+        <main className="panel">
+          <Placeholder caption={service.photo ?? `Service photography — ${service.shortName}`} tone="orange" style={{ borderRadius: "var(--radius-md)", marginBottom: 26 }} />
 
           {isCatalog ? (
             <div id="catalogue" style={{ scrollMarginTop: 90 }}>
@@ -150,24 +151,24 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
 
           <h2 className="blk">Good to know</h2>
           <p className="muted" style={{ fontSize: 15 }}>
-            Male and female clinicians are available on request. Keep your Emirates ID and current
-            medications handy. Claim-ready invoices are available; reimbursement depends on your insurer and policy.
+            Male and female clinicians available on request. Keep your Emirates ID and current
+            medications handy. We issue claim-ready invoices, with direct billing for partner insurers.
           </p>
 
           <h2 className="blk">Frequently asked</h2>
           {service.faqs.map((f) => (
             <details key={f.q}><summary>{f.q}</summary><p>{f.a}</p></details>
           ))}
-        </section>
+        </main>
 
         <aside className="aside">
           {isCatalog ? (
             <>
-              <div className="lbl">Your care request</div>
+              <div className="lbl">Your booking</div>
               <div className="srow"><span>From</span><b>{priceMain}</b></div>
-              <div className="srow"><span>Selected</span><b>{count} item{count === 1 ? "" : "s"}</b></div>
+              <div className="srow"><span>In your booking</span><b>{count} item{count === 1 ? "" : "s"}</b></div>
               {count > 0 ? (
-                <Link className="btn btn-primary btn-full" style={{ marginTop: 12 }} href="/checkout">Continue request</Link>
+                <Link className="btn btn-primary btn-full" style={{ marginTop: 12 }} href="/checkout">Go to checkout</Link>
               ) : (
                 <a className="btn btn-primary btn-full" style={{ marginTop: 12 }} href="#catalogue">Choose a service</a>
               )}
@@ -175,7 +176,7 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
             </>
           ) : comingSoon ? (
             <>
-              <div className="lbl">Service status</div>
+              <div className="lbl">Booking summary</div>
               <div className="srow"><span>Service</span><b>{service.shortName}</b></div>
               <div className="srow"><span>Status</span><b>Phase 2 · pending DHA/MOHAP</b></div>
               <button className="btn btn-primary btn-full" style={{ marginTop: 12 }} type="button" disabled>Coming soon</button>
@@ -185,32 +186,32 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
             </>
           ) : bookable ? (
             <>
-              <div className="lbl">Request an appointment</div>
-              <div className="srow"><span>Service</span><b>{option ? customerProductName(option.name) : service.shortName}</b></div>
+              <div className="lbl">Book your appointment</div>
+              <div className="srow"><span>Service</span><b>{option?.name ?? service.shortName}</b></div>
               <div className="srow"><span>Price</span><b>{priceMain}</b></div>
               <div className="field" style={{ marginTop: 12, marginBottom: 10 }}>
-                <label htmlFor="appointment-date">Appointment date</label>
-                <input id="appointment-date" type="date" min={today} value={date} onChange={(e) => setDate(e.target.value)} />
+                <label>Appointment date</label>
+                <input type="date" min={today} value={date} onChange={(e) => setDate(e.target.value)} />
               </div>
               <div className="field" style={{ marginBottom: 4 }}>
-                <label htmlFor="appointment-time">Preferred time</label>
-                <input id="appointment-time" type="time" value={time} onChange={(e) => setTime(e.target.value)} />
+                <label>Preferred time</label>
+                <input type="time" value={time} onChange={(e) => setTime(e.target.value)} />
               </div>
               <p className="muted" style={{ fontSize: 12, marginBottom: 8 }}>Selected: <b>{slotLabel}</b></p>
               {error && <p className="err" style={{ color: "var(--danger)", fontSize: 13, marginBottom: 8 }}>{error}</p>}
-              <button className="btn btn-primary btn-full" onClick={() => addSingle("checkout")} type="button">Continue care request</button>
-              <button className="btn btn-outline btn-full" style={{ marginTop: 8 }} onClick={() => addSingle("stay")} type="button">Add another service</button>
+              <button className="btn btn-primary btn-full" onClick={() => addSingle("checkout")} type="button">Book now &amp; check out</button>
+              <button className="btn btn-outline btn-full" style={{ marginTop: 8 }} onClick={() => addSingle("stay")} type="button">Add to booking</button>
             </>
           ) : (
             <>
-              <div className="lbl">Care enquiry</div>
+              <div className="lbl">Booking summary</div>
               <div className="srow"><span>Service</span><b>{service.shortName}</b></div>
               <div className="srow"><span>Pricing</span><b>{priceMain}</b></div>
               <div className="srow"><span>Next slot</span><b>{service.nextSlot}</b></div>
               <a className="btn btn-primary btn-full" style={{ marginTop: 12 }} href={COMPANY.whatsapp} target="_blank" rel="noreferrer">Enquire on WhatsApp</a>
             </>
           )}
-          <p className="muted" style={{ textAlign: "center", fontSize: 12, marginTop: 10 }}>No payment is taken until your care request is confirmed.</p>
+          <p className="muted" style={{ textAlign: "center", fontSize: 12, marginTop: 10 }}>Card · Tabby · Pay on visit</p>
           <div className="truststrip">{COMPANY.dha} · MOHAP approved<br />Caring for Dubai homes since {COMPANY.since}</div>
         </aside>
       </div>
@@ -222,11 +223,11 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
               <svg width="16" height="16" viewBox="0 0 24 24" style={{ stroke: "var(--green-600)", fill: "none", strokeWidth: 2 }}><path d="M5 12l5 5L20 6" /></svg>
             </div>
             <div>
-              <div className="t">Added to your care request</div>
+              <div className="t">Added to your booking</div>
               <div className="s">
-                {option ? customerProductName(option.name) : service.shortName} · {slotLabel}
+                {option?.name ?? service.shortName} · {slotLabel}
                 <br />
-                <Link href="/checkout">Continue request</Link> · <Link href="/cart">Review selections</Link>
+                <Link href="/checkout">Check out</Link> · <Link href="/cart">View cart</Link>
               </div>
             </div>
           </div>

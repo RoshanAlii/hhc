@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import ServiceVisual from "@/components/ServiceVisual";
+import Placeholder from "@/components/Placeholder";
 import { articles } from "@/lib/data";
 
 const FILTERS = ["All", "Health guides", "News & press"] as const;
@@ -27,7 +27,7 @@ export default function JournalGrid() {
       <div className="grid3" style={{ paddingBottom: 80 }}>
         {visible.map((a) => (
           <Link className="pcard" key={a.slug} href={`/journal/${a.slug}`}>
-            <ServiceVisual icon="doc" eyebrow={`${a.readMins} min read`} title="Clinical insight" tone={a.category === "News & press" ? "copper" : "ink"} />
+            <Placeholder caption={a.photo} tone="neutral" />
             <div className="body">
               <span className={`tag${a.category === "News & press" ? " orange" : ""}`} style={{ alignSelf: "flex-start", marginBottom: 8 }}>
                 <span className="dot" />{a.category}

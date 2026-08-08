@@ -1,48 +1,6 @@
 // Full purchasable options / SKUs, imported from the HealthServe finance master.
 // One entry per buyable option. price = live Offer (AED); mrp = strike-through.
 export interface ServiceOption { name: string; label?: string; price: number; mrp?: number; addon?: boolean }
-
-// The finance-master labels are operational. These helpers keep their source
-// keys intact while presenting concise, customer-facing catalogue names.
-export function customerProductName(name: string): string {
-  return name
-    .replace(/Physiotherapy Assessment \(on taking 6 sessions, assessment is free\)/gi, "Initial physiotherapy assessment")
-    .replace(/Healthy Heart IV Drip or Cardio Support IV Drip/gi, "Cardio Support IV Drip")
-    .replace(/Healthy GUT IV Drip or GUT Support IV Therapy/gi, "Gut Support IV Therapy")
-    .replace(/Glowing and radiant skin IV Drip/gi, "Skin Radiance IV Drip")
-    .replace(/Hair Regeneration IV Drip/gi, "Hair Support IV Drip")
-    .replace(/Immunity Booster IV drip/gi, "Immune Support IV Drip")
-    .replace(/Antistress and Antioxidant IV Drip/gi, "Stress & Antioxidant Support IV Drip")
-    .replace(/Energy booster and fitness support IV Drip/gi, "Energy & Fitness Support IV Drip")
-    .replace(/Memory Boost IV Drip/gi, "Cognitive Support IV Drip")
-    .replace(/Healthy Liver IV Drip/gi, "Liver Support IV Drip")
-    .replace(/Diabetic Support IV Drip/gi, "Metabolic Support IV Drip")
-    .replace(/Blood and Iron Boost IV Drip/gi, "Iron Support IV Drip")
-    .replace(/Comprehensive Anti-Aging IV Drip/gi, "Comprehensive Ageing Support IV Drip")
-    .replace(/Anti-aging IV Drip/gi, "Ageing Support IV Drip")
-    .replace(/Men Fertility Boost IV Drip/gi, "Men's Fertility Support IV Drip")
-    .replace(/Female Fertility Boost IV Drip/gi, "Women's Fertility Support IV Drip")
-    .replace(/Female balance IV Drip/gi, "Women's Balance Support IV Drip")
-    .replace(/\s*\(others same\)/gi, "")
-    .replace(/\bAt Home\b/g, "at home")
-    .replace(/\(SC, im, iv\)/g, "(SC, IM or IV)")
-    .replace(/\s{2,}/g, " ")
-    .trim();
-}
-
-export function customerOptionLabel(label?: string): string | undefined {
-  if (!label) return undefined;
-  return label
-    .replace(/(\d+) session\(s\)/gi, "$1 sessions")
-    .replace(/^1 sessions$/i, "1 session")
-    .replace(/5 s sessions/gi, "5 sessions")
-    .replace(/Lasting upto 1 hour/gi, "Up to 1 hour")
-    .replace(/(\d+)hr\b/gi, "$1 hours")
-    .replace(/medical report from consumer/gi, "clinical report required")
-    .replace(/Nurse Visit - /gi, "")
-    .replace(/\s{2,}/g, " ")
-    .trim();
-}
 export const serviceOptions: Record<string, ServiceOption[]> = {
   "flu-vaccination": [
     { name:"Flu Vaccine At Home", label:"Nurse Visit - Lasting upto 1 hour", price:299, mrp:349 },
@@ -53,7 +11,7 @@ export const serviceOptions: Record<string, ServiceOption[]> = {
     { name:"Vitamin B12 Injection At Home", label:"Nurse Visit - Lasting upto 1 hour", price:349, mrp:349 },
   ],
   "iv-therapy": [
-    { name:"Skin Glow Drip - Glutathione 600 mg", label:"1 session(s)", price:399, mrp:479 },
+    { name:"Elara Skin Glow Drip - Glutathione 600 mg", label:"1 session(s)", price:399, mrp:479 },
     { name:"Glowing and radiant skin IV Drip", label:"1 session(s)", price:749, mrp:969 },
     { name:"Healthy Heart IV Drip or Cardio Support IV Drip", label:"1 session(s)", price:749, mrp:969 },
     { name:"Healthy GUT IV Drip or GUT Support IV Therapy", label:"1 session(s)", price:749, mrp:969 },
@@ -65,12 +23,12 @@ export const serviceOptions: Record<string, ServiceOption[]> = {
     { name:"Immunity Booster IV drip", label:"1 session(s)", price:749, mrp:969 },
     { name:"Antistress and Antioxidant IV Drip", label:"1 session(s)", price:749, mrp:969 },
     { name:"Energy booster and fitness support IV Drip", label:"1 session(s)", price:749, mrp:969 },
-    { name:"Skin Glow Drip - Glutathione 600 mg", label:"2 session(s)", price:779, mrp:929 },
+    { name:"Elara Skin Glow Drip - Glutathione 600 mg", label:"2 session(s)", price:779, mrp:929 },
     { name:"Hair Regeneration IV Drip", label:"1 session(s)", price:800, mrp:1000 },
     { name:"Blood and Iron Boost IV Drip (others same)", label:"1 session(s)", price:800, mrp:1000 },
     { name:"Anti-aging IV Drip", label:"1 session(s)", price:1100, mrp:1500 },
     { name:"Comprehensive Anti-Aging IV Drip", label:"1 session(s)", price:1100, mrp:1500 },
-    { name:"Skin Glow Drip - Glutathione 600 mg", label:"4 session(s)", price:1119, mrp:1399 },
+    { name:"Elara Skin Glow Drip - Glutathione 600 mg", label:"4 session(s)", price:1119, mrp:1399 },
     { name:"Glowing and radiant skin IV Drip", label:"2 session(s)", price:1478, mrp:1920 },
     { name:"Healthy Heart IV Drip or Cardio Support IV Drip", label:"2 session(s)", price:1478, mrp:1920 },
     { name:"Healthy GUT IV Drip or GUT Support IV Therapy", label:"2 session(s)", price:1478, mrp:1920 },
@@ -84,7 +42,7 @@ export const serviceOptions: Record<string, ServiceOption[]> = {
     { name:"Energy booster and fitness support IV Drip", label:"2 session(s)", price:1478, mrp:1920 },
     { name:"Hair Regeneration IV Drip", label:"2 session(s)", price:1578, mrp:1980 },
     { name:"Blood and Iron Boost IV Drip (others same)", label:"2 session(s)", price:1578, mrp:1980 },
-    { name:"Skin Glow Drip - Glutathione 600 mg", label:"6 session(s)", price:1619, mrp:1999 },
+    { name:"Elara Skin Glow Drip - Glutathione 600 mg", label:"6 session(s)", price:1619, mrp:1999 },
     { name:"Anti-aging IV Drip", label:"2 session(s)", price:2150, mrp:2900 },
     { name:"Comprehensive Anti-Aging IV Drip", label:"2 session(s)", price:2150, mrp:2900 },
     { name:"Glowing and radiant skin IV Drip", label:"4 session(s)", price:2916, mrp:3796 },

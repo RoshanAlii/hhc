@@ -4,12 +4,12 @@ import { COMPANY } from "@/lib/data";
 export const metadata: Metadata = { title: "Privacy policy" };
 
 const sections = [
-  { id: "collect", title: "Information you choose to share", body: "The website lets you prepare a care request. Contact forms open a draft in WhatsApp; nothing is sent until you choose to send it. Selected services may remain in your browser so you can review the request." },
-  { id: "use", title: "How HealthServe uses information", body: "Information you send directly to HealthServe may be used to respond, assess the requested service, coordinate care, prepare documentation and meet applicable clinical or legal duties." },
-  { id: "health", title: "Health information", body: "Only share information needed for the care request. Clinical records and medical documents should be handled through the channel the HealthServe team confirms is appropriate for your care." },
-  { id: "sharing", title: "Service providers and insurers", body: "Information may be shared where needed to arrange care, meet a legal duty or support an insurance process you request. Ask the care team if you need details for a specific request." },
-  { id: "rights", title: "Questions and requests", body: "You can contact HealthServe to ask about access, correction or other requests relating to information held about you, subject to applicable record-keeping duties." },
-  { id: "retention", title: "Retention", body: "Information is kept for the period required for care, administration and applicable record-keeping obligations." },
+  { id: "collect", title: "Information we collect", body: "Contact details, address and booking information you provide; health information you volunteer so we can plan your care safely." },
+  { id: "use", title: "How we use it", body: "To deliver care, schedule visits, process payment and meet legal duties. Never sold. No advertising profiles." },
+  { id: "health", title: "Health data & consent", body: "Health information is collected with your explicit consent and accessed only by your treating team, in line with UAE health-data law. Clinical records are held in clinical systems — this website stores booking data only." },
+  { id: "sharing", title: "Sharing & insurers", body: "Shared with insurers only for direct billing you request." },
+  { id: "rights", title: "Your rights", body: "You may request access to, correction of, or deletion of your booking data at any time by contacting us." },
+  { id: "retention", title: "Retention", body: "Booking data is retained only as long as needed for care, billing and legal obligations, then securely deleted." },
   { id: "contact", title: "Contact", body: `Questions about your data? Email ${COMPANY.email} or call ${COMPANY.phoneLabel}.` },
 ];
 

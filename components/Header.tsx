@@ -6,16 +6,16 @@ import { useState } from "react";
 import Logo from "./Logo";
 import Icon from "./Icon";
 import { useCart } from "@/lib/cart";
-import { COMPANY } from "@/lib/data";
+import { COMPANY, PROMOS } from "@/lib/data";
 
-type NavItem = { label: string; href: string };
+type NavItem = { label: string; href?: string; parked?: string };
 
 const NAV: NavItem[] = [
-  { href: "/services", label: "Services" },
+  { href: "/", label: "Home Care" },
   { href: "/dispensary", label: "The Dispensary" },
-  { href: "/packages", label: "Care plans" },
-  { href: "/about", label: "Why HealthServe" },
-  { href: "/journal", label: "Insights" },
+  { href: "/services", label: "All Services" },
+  { href: "/your-health", label: "Your Health" },
+  { href: "/journal", label: "Journal" },
 ];
 
 export default function Header() {
@@ -28,19 +28,20 @@ export default function Header() {
 
   return (
     <>
-      {/* Quiet proof-and-contact utility bar. */}
+      {/* Top utility bar — single light row */}
       <div className="topbar">
         <div className="wrap topbar-in">
           <span className="tb-left">
-            DHA-licensed home healthcare <span className="hours">· Dubai · Since {COMPANY.since}</span>
+            <a className="ph" href={COMPANY.phoneHref}>{COMPANY.phoneLabel}</a> · 8:30 AM – 6:30 PM daily
           </span>
-          <span className="tb-right">
-            <a href={COMPANY.phoneHref}>{COMPANY.phoneLabel}</a>
-            <span className="sep">·</span>
-            <span>{COMPANY.hours}</span>
-            <span className="sep">·</span>
-            <a href={COMPANY.whatsapp} target="_blank" rel="noreferrer">WhatsApp</a>
-          </span>
+          <div className="tb-promo">
+            <div className="track">
+              {[...PROMOS, ...PROMOS].map((p, i) => (
+                <span key={i}>{p}<span className="b" aria-hidden="true" /></span>
+              ))}
+            </div>
+          </div>
+          <span className="tb-right">Dubai, UAE <span className="sep">·</span> English</span>
         </div>
       </div>
 
@@ -51,11 +52,17 @@ export default function Header() {
               <Logo width={150} />
             </Link>
             <div className="links">
-              {NAV.map((n) => (
-                <Link key={n.label} href={n.href} aria-current={isActive(n.href) ? "page" : undefined}>
-                  {n.label}
-                </Link>
-              ))}
+              {NAV.map((n) =>
+                n.href ? (
+                  <Link key={n.label} href={n.href} aria-current={isActive(n.href) ? "page" : undefined}>
+                    {n.label}
+                  </Link>
+                ) : (
+                  <a key={n.label} href="#" className="parked" title={n.parked} onClick={(e) => e.preventDefault()}>
+                    {n.label}
+                  </a>
+                ),
+              )}
             </div>
             <div className="navact">
               {count > 0 && (
@@ -64,7 +71,10 @@ export default function Header() {
                   <span className="cnt">{count}</span>
                 </Link>
               )}
-              <Link className="btn-booknow" href="/services">Find care <Icon name="arrow" size={15} /></Link>
+              <Link className="btn-booknow" href="/services">Book Now</Link>
+              <Link className="btn-login" href="/login">
+                <Icon name="user" size={16} /> Log in
+              </Link>
               <button
                 className="navtoggle"
                 type="button"
@@ -77,11 +87,17 @@ export default function Header() {
             </div>
           </div>
           <div className={`mobilemenu${open ? " open" : ""}`}>
-            {NAV.map((n) => (
-              <Link key={n.label} href={n.href} onClick={() => setOpen(false)}>
-                {n.label}
-              </Link>
-            ))}
+            {NAV.map((n) =>
+              n.href ? (
+                <Link key={n.label} href={n.href} onClick={() => setOpen(false)}>
+                  {n.label}
+                </Link>
+              ) : (
+                <a key={n.label} href="#" className="parked" title={n.parked} onClick={(e) => e.preventDefault()}>
+                  {n.label} <span className="muted" style={{ fontSize: 12 }}>· soon</span>
+                </a>
+              ),
+            )}
             <a href={COMPANY.whatsapp} target="_blank" rel="noreferrer" onClick={() => setOpen(false)}>WhatsApp us</a>
           </div>
         </div>
