@@ -315,6 +315,7 @@ export interface Article {
 export const articles: Article[] = [
   {
     slug: "home-nurses-diabetes-hypertension",
+    photo: "Home nurse supporting diabetes and hypertension care",
     title: "Why home care nurses are imperative for diabetes and hypertension control",
     category: "Health guide",
     readMins: 5,
@@ -328,6 +329,7 @@ export const articles: Article[] = [
   },
   {
     slug: "ultimate-guide-home-health-care",
+    photo: "Doctor providing professional home healthcare",
     title: "The ultimate guide to home health care services",
     category: "Health guide",
     readMins: 8,
@@ -341,6 +343,7 @@ export const articles: Article[] = [
   },
   {
     slug: "iv-drip-therapy-recovery",
+    photo: "Nurse preparing IV wellness care at home",
     title: "Why IV drip therapy is the new trend for recovery",
     category: "Health guide",
     readMins: 4,
@@ -354,6 +357,7 @@ export const articles: Article[] = [
   },
   {
     slug: "newborn-baby-jaundice",
+    photo: "Newborn and family care at home",
     title: "Understanding newborn baby jaundice",
     category: "Health guide",
     readMins: 6,
@@ -365,6 +369,7 @@ export const articles: Article[] = [
   },
   {
     slug: "healthserve-khaleej-times",
+    photo: "HealthServe clinical team providing home care",
     title: "HealthServe in Khaleej Times",
     category: "News & press",
     readMins: 2,
@@ -376,6 +381,7 @@ export const articles: Article[] = [
   },
   {
     slug: "clinical-skills-training",
+    photo: "Professional home nursing clinical training",
     title: "Clinical skills training for our nursing team",
     category: "News & press",
     readMins: 3,
