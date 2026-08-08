@@ -4,7 +4,7 @@ import BookingWidget from "@/components/BookingWidget";
 import Placeholder from "@/components/Placeholder";
 import Icon from "@/components/Icon";
 import { coreServiceList, priceLabel, articles, COMPANY, type Category } from "@/lib/data";
-import heroImage from "@/public/img/hero.png";
+import heroImage from "@/public/img/hero-v2.jpg";
 import esaadLogo from "@/public/img/insurance/esaad.png";
 import saicoLogo from "@/public/img/insurance/saico.webp";
 import almadallahLogo from "@/public/img/insurance/almadallah.png";
