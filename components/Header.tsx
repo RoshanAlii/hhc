@@ -27,10 +27,19 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const [emirate, setEmirate] = useState("Dubai");
   const [language, setLanguage] = useState("en");
+  const [checkoutProgress, setCheckoutProgress] = useState({ contactComplete: false, visitComplete: false });
 
   useEffect(() => {
     setEmirate(window.localStorage.getItem("healthserve-emirate") || "Dubai");
     setLanguage(window.localStorage.getItem("healthserve-language") || "en");
+  }, []);
+
+  useEffect(() => {
+    function updateProgress(event: Event) {
+      setCheckoutProgress((event as CustomEvent<{ contactComplete: boolean; visitComplete: boolean }>).detail);
+    }
+    window.addEventListener("healthserve-checkout-progress", updateProgress);
+    return () => window.removeEventListener("healthserve-checkout-progress", updateProgress);
   }, []);
 
   function changeEmirate(value: string) {
@@ -88,6 +97,19 @@ export default function Header() {
             <Link className="hs-logo" href="/" aria-label="HealthServe - Home Healthcare">
               <Logo width={150} />
             </Link>
+            {pathname.startsWith("/checkout") && (
+              <div className="checkout-progress checkout-nav-progress" aria-label="Checkout progress">
+                {[
+                  { number: 1, label: "Your details", complete: checkoutProgress.contactComplete, active: !checkoutProgress.contactComplete },
+                  { number: 2, label: "Visit details", complete: checkoutProgress.visitComplete, active: checkoutProgress.contactComplete && !checkoutProgress.visitComplete },
+                  { number: 3, label: "Payment", complete: false, active: checkoutProgress.contactComplete && checkoutProgress.visitComplete },
+                ].map((step, index) => (
+                  <div className={`checkout-progress-step${step.complete ? " complete" : ""}${step.active ? " active" : ""}`} key={step.label}>
+                    <span>{step.complete ? <Icon name="check" size={15} /> : step.number}</span><b>{step.label}</b>{index < 2 && <i />}
+                  </div>
+                ))}
+              </div>
+            )}
             <div className="links">
               {NAV.map((n) =>
                 n.href ? (

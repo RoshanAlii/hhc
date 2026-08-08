@@ -34,6 +34,10 @@ export default function CheckoutView() {
   const visitComplete = Boolean(form.address.trim() && appointments.every((item) => item.date && item.time));
   const confirmLabel = method === "onvisit" ? "Confirm booking" : `Pay ${formatAED(total)} securely`;
 
+  useEffect(() => {
+    window.dispatchEvent(new CustomEvent("healthserve-checkout-progress", { detail: { contactComplete, visitComplete } }));
+  }, [contactComplete, visitComplete]);
+
   if (ready && items.length === 0) {
     return <div className="wrap"><div className="empty checkout-empty"><span className="checkout-empty-icon"><Icon name="cart" size={25} /></span><h1>Nothing to check out</h1><p>Add a service to your booking and return when you&rsquo;re ready.</p><Link className="btn btn-primary" href="/services">Explore services</Link></div></div>;
   }
@@ -80,18 +84,6 @@ export default function CheckoutView() {
           <span className="kicker">Secure appointment booking</span>
           <h1>Complete your booking</h1>
           <p>Confirm your details and we&rsquo;ll arrange the rest.</p>
-        </div>
-
-        <div className="checkout-progress" aria-label="Checkout progress">
-          {[
-            { number: 1, label: "Your details", complete: contactComplete },
-            { number: 2, label: "Visit details", complete: visitComplete },
-            { number: 3, label: "Payment", complete: false, active: contactComplete && visitComplete },
-          ].map((step, index) => (
-            <div className={`checkout-progress-step${step.complete ? " complete" : ""}${step.active ? " active" : ""}`} key={step.label}>
-              <span>{step.complete ? <Icon name="check" size={15} /> : step.number}</span><b>{step.label}</b>{index < 2 && <i />}
-            </div>
-          ))}
         </div>
 
         <div className="checkout-layout">
