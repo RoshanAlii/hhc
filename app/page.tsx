@@ -1,8 +1,13 @@
 import Link from "next/link";
+import Image from "next/image";
 import BookingWidget from "@/components/BookingWidget";
 import Placeholder from "@/components/Placeholder";
 import Icon from "@/components/Icon";
 import { coreServiceList, priceLabel, articles, COMPANY, type Category } from "@/lib/data";
+import heroImage from "@/public/img/hero.png";
+import esaadLogo from "@/public/img/insurance/esaad.png";
+import saicoLogo from "@/public/img/insurance/saico.webp";
+import almadallahLogo from "@/public/img/insurance/almadallah.png";
 
 const toneFor = (c: Category): "orange" | "green" | "red" =>
   c === "Medical" ? "orange" : c === "Nursing & care" ? "green" : "red";
@@ -21,9 +26,12 @@ export default function HomePage() {
     <>
       {/* HERO */}
       <section className="hero-lite">
+        <div className="hero-bg" aria-hidden="true">
+          <Image src={heroImage} alt="" fill priority sizes="100vw" />
+        </div>
         <div className="wrap">
           <div className="hero-lite-inner">
-            <div>
+            <div className="hero-copy">
               <span className="kick2"><span className="d" />Home Healthcare · Dubai · Since {COMPANY.since}</span>
               <h1>Hospital-grade care, <em>in the comfort of home.</em></h1>
               <p className="lead">Licensed doctors, nurses and physiotherapists at your door. No queues, no waiting rooms.</p>
@@ -37,23 +45,18 @@ export default function HomePage() {
                 <a className="btn btn-secondary btn-lg" href={COMPANY.whatsapp} target="_blank" rel="noreferrer">WhatsApp us</a>
               </div>
             </div>
-            <div className="hero-art">
-              <div className="hero-ph">
-                <svg className="ph-ic" viewBox="0 0 24 24" aria-hidden="true">
-                  <rect x="3" y="4" width="18" height="16" rx="2" /><circle cx="9" cy="10" r="2" /><path d="M4 18l5-4 4 3 3-3 4 4" />
-                </svg>
-                <span className="ph-cap">Cut-out home healthcare photo (transparent PNG works best)</span>
-                <span className="ph-sub">or browse files</span>
-              </div>
-            </div>
           </div>
 
           <div className="hero-book"><BookingWidget /></div>
 
-          <div className="hero-strip-lite">
+          <div className="hero-strip-lite insurance-capsule">
             <span className="lbl2">Insurance &amp; direct billing</span>
             <div className="ins">
-              <span>ESAAD</span><span>Al Sanad</span><span>Al Saada</span><span>Saico</span><span>Almadallah</span>
+              <span className="ins-brand esaad"><Image src={esaadLogo} alt="ESAAD" /></span>
+              <span className="ins-brand wordmark sanad"><b>سند</b><small>AL SANAD</small></span>
+              <span className="ins-brand wordmark saada"><b>السعادة</b><small>AL SAADA</small></span>
+              <span className="ins-brand saico"><Image src={saicoLogo} alt="SAICO" /></span>
+              <span className="ins-brand almadallah"><Image src={almadallahLogo} alt="Almadallah Healthcare Management" /></span>
             </div>
           </div>
         </div>

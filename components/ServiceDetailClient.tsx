@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Placeholder from "@/components/Placeholder";
+import Icon from "@/components/Icon";
 import OptionPicker from "@/components/OptionPicker";
 import ProductCatalog from "@/components/ProductCatalog";
 import { useCart } from "@/lib/cart";
@@ -122,18 +123,25 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
       </div>
 
       <div className="wrap detail">
-        <main className="panel">
-          <Placeholder caption={service.photo ?? `Service photography - ${service.shortName}`} tone="orange" style={{ borderRadius: "var(--radius-md)", marginBottom: 26 }} />
+        <main className={`panel${isCatalog ? " catalogue-panel" : ""}`}>
+          {isCatalog ? (
+            <div className="catalogue-banner">
+              <span><Icon name={service.icon} size={24} /></span>
+              <div><b>Guided service finder</b><small>Browse by care goal, then choose the right package.</small></div>
+            </div>
+          ) : (
+            <Placeholder caption={service.photo ?? `Service photography - ${service.shortName}`} tone="orange" style={{ borderRadius: "var(--radius-md)", marginBottom: 26 }} />
+          )}
 
           {isCatalog ? (
             <div id="catalogue" style={{ scrollMarginTop: 90 }}>
-              <h2 className="blk">{bookable ? "Choose a service" : "Options & prices"} <span style={{ color: "var(--text-muted)", fontWeight: 400 }}>· {products.length}</span></h2>
+              <h2 className="blk">{bookable ? "Find your service" : "Explore your options"} <span style={{ color: "var(--text-muted)", fontWeight: 400 }}>· {products.length}</span></h2>
               <ProductCatalog service={service} products={products} canBook={bookable} />
               {addons.length > 0 && (
-                <>
-                  <h2 className="blk">Add-on tests <span style={{ color: "var(--text-muted)", fontWeight: 400 }}>· {addons.length}</span></h2>
+                <details className="addon-browser">
+                  <summary><span><b>Looking for an individual test?</b><small>Browse and search {addons.length} optional add-on tests</small></span><span>View tests</span></summary>
                   <OptionPicker options={addons} />
-                </>
+                </details>
               )}
             </div>
           ) : singleOptions.length > 1 ? (
