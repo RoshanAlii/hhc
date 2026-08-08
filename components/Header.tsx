@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import Logo from "./Logo";
 import Icon from "./Icon";
+import NavSearch from "./NavSearch";
 import { useCart } from "@/lib/cart";
 import { COMPANY, PROMOS } from "@/lib/data";
 
@@ -65,6 +66,7 @@ export default function Header() {
               )}
             </div>
             <div className="navact">
+              <NavSearch />
               {count > 0 && (
                 <Link className="navcart" href="/cart" aria-label={`Cart, ${count} items`}>
                   <Icon name="cart" size={16} />

@@ -156,6 +156,29 @@ nav.main{position:sticky;top:0;z-index:50;background:rgba(253,252,250,.92);backd
 .links a.parked:hover{color:#4A4A4A;background:transparent}
 .mobilemenu a.parked{cursor:default}
 .navact{display:flex;gap:12px;align-items:center;flex-shrink:0}
+.nav-search{position:relative;display:flex;align-items:center}
+.nav-search-trigger{width:40px;height:40px;border:1px solid var(--border-subtle);border-radius:999px;background:var(--surface-card);color:var(--gray-700);display:grid;place-items:center;cursor:pointer;transition:border-color var(--dur-fast) var(--ease-out),background var(--dur-fast) var(--ease-out),box-shadow var(--dur-fast) var(--ease-out)}
+.nav-search-trigger:hover,.nav-search.open .nav-search-trigger{border-color:var(--orange-300);background:var(--orange-50);box-shadow:var(--shadow-sm)}
+.nav-search.open::after{content:"";position:absolute;top:100%;left:-14px;right:-14px;height:14px}
+.nav-search-panel{position:absolute;z-index:80;top:calc(100% + 10px);right:0;width:min(440px,calc(100vw - 32px));padding:12px;background:rgba(255,255,255,.98);border:1px solid var(--border-subtle);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);backdrop-filter:blur(18px)}
+.nav-search-field{display:flex;align-items:center;gap:10px;padding:0 12px;height:48px;border:1px solid var(--border-default);border-radius:var(--radius-md);background:var(--gray-25);color:var(--text-muted)}
+.nav-search-field:focus-within{border-color:var(--brand-primary);background:var(--surface-card);box-shadow:0 0 0 3px var(--ring-brand)}
+.nav-search-field input{min-width:0;flex:1;border:0;outline:0;background:transparent;color:var(--text-strong);font:inherit;font-size:14px}
+.nav-search-field input::placeholder{color:var(--text-muted)}
+.nav-search-clear{border:0;background:transparent;color:var(--text-muted);font-size:20px;line-height:1;cursor:pointer;padding:5px}
+.nav-search-hint{margin:10px 4px 2px;color:var(--text-muted);font-size:12px;line-height:1.5}
+.nav-search-results{display:grid;gap:4px;margin-top:10px;max-height:390px;overflow:auto;overscroll-behavior:contain}
+.nav-search-result{display:grid;grid-template-columns:36px minmax(0,1fr) auto;align-items:center;gap:10px;padding:10px;border-radius:var(--radius-md);color:var(--text-strong);text-decoration:none!important;transition:background var(--dur-fast) var(--ease-out),color var(--dur-fast) var(--ease-out)}
+.nav-search-result:hover,.nav-search-result.active{background:var(--surface-brand-soft);color:var(--brand-primary)}
+.nav-search-result-icon{width:36px;height:36px;border-radius:10px;background:var(--orange-50);display:grid;place-items:center;color:var(--brand-primary)}
+.nav-search-result>span:nth-child(2){min-width:0;display:grid;gap:2px}
+.nav-search-result b{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nav-search-result small{font-size:11px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nav-search-result>svg:last-child{color:var(--text-muted)}
+.nav-search-count{padding:8px 10px 2px;color:var(--text-muted);font-size:11px;text-align:center}
+.nav-search-empty{padding:20px 12px 12px;text-align:center;color:var(--text-muted);font-size:13px;display:grid;gap:6px}
+.nav-search-empty b{color:var(--text-strong)}
+.nav-search-empty a{color:var(--brand-primary);font-weight:700;text-decoration:none}
 /* top utility bar (single light row) */
 .topbar{background:var(--gray-25);border-bottom:1px solid var(--border-subtle)}
 .topbar-in{display:flex;align-items:center;gap:20px;padding:8px 0;font-size:13px;color:var(--text-muted)}
@@ -180,6 +203,7 @@ nav.main{position:sticky;top:0;z-index:50;background:rgba(253,252,250,.92);backd
 .svgi{stroke:var(--gray-700);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 .navtoggle{display:none;width:40px;height:40px;border:1px solid var(--border-subtle);border-radius:var(--radius-md);background:var(--surface-card);align-items:center;justify-content:center;cursor:pointer}
 @media(max-width:900px){.links{display:none}.navtoggle{display:flex}}
+@media(max-width:900px){.nav-search-panel{position:fixed;top:108px;left:16px;right:16px;width:auto}.nav-search-results{max-height:min(390px,55vh)}}
 .mobilemenu{display:none;flex-direction:column;gap:4px;padding:12px 0 8px;border-top:1px solid var(--border-subtle)}
 .mobilemenu.open{display:flex}
 .mobilemenu a{padding:10px 4px;font-size:var(--fs-sm);font-weight:var(--fw-bold);color:var(--text-body);text-decoration:none!important}
