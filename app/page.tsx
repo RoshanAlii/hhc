@@ -39,7 +39,6 @@ export default function HomePage() {
             </div>
             <div className="hero-art">
               <div className="hero-ph">
-                <span className="pill-hl"><Icon name="heartSolid" size={14} /> Healing Lives</span>
                 <svg className="ph-ic" viewBox="0 0 24 24" aria-hidden="true">
                   <rect x="3" y="4" width="18" height="16" rx="2" /><circle cx="9" cy="10" r="2" /><path d="M4 18l5-4 4 3 3-3 4 4" />
                 </svg>
@@ -57,18 +56,6 @@ export default function HomePage() {
               <span>ESAAD</span><span>Al Sanad</span><span>Al Saada</span><span>Saico</span><span>Almadallah</span>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* FEATURES */}
-      <section className="wrap home-sec">
-        <div className="features">
-          {features.map((f) => (
-            <div className="feature" key={f.t}>
-              <span className={`ic ${f.cat}`}><Icon name={f.icon} /></span>
-              <h4>{f.t}</h4>
-            </div>
-          ))}
         </div>
       </section>
 
@@ -94,7 +81,6 @@ export default function HomePage() {
                     {priceLabel(s)}
                     <small>{s.priceType === "from" ? s.unit : "quote"}</small>
                   </span>
-                  <span className="slot"><span className="dot" />{s.nextSlot.split(" ")[0]}</span>
                 </div>
               </div>
             </Link>
@@ -105,6 +91,18 @@ export default function HomePage() {
           <div className="how-s"><span className="n">1</span><div><b>Choose service &amp; time</b><span>Pick what you need and a slot that suits you.</span></div></div>
           <div className="how-s"><span className="n">2</span><div><b>Confirm address</b><span>Pay now or on the visit - your choice.</span></div></div>
           <div className="how-s"><span className="n">3</span><div><b>Open the door</b><span>A friendly, licensed clinician arrives.</span></div></div>
+        </div>
+      </section>
+
+      {/* FEATURES */}
+      <section className="wrap home-sec tight">
+        <div className="features">
+          {features.map((f) => (
+            <div className="feature" key={f.t}>
+              <span className={`ic ${f.cat}`}><Icon name={f.icon} /></span>
+              <h4>{f.t}</h4>
+            </div>
+          ))}
         </div>
       </section>
 

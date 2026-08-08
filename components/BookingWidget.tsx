@@ -23,7 +23,6 @@ export default function BookingWidget() {
   }
 
   return (
-    <>
       <div className="book" role="group" aria-label="Book a visit">
         <div className="f">
           <label htmlFor="bw-service">Service</label>
@@ -57,9 +56,5 @@ export default function BookingWidget() {
           See available times
         </button>
       </div>
-      <p className="avail">
-        <span className="dot" /> Next availability: today 6:00 PM · serves most of Dubai
-      </p>
-    </>
   );
 }

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Logo from "./Logo";
 import Icon from "./Icon";
 import NavSearch from "./NavSearch";
@@ -19,10 +19,30 @@ const NAV: NavItem[] = [
   { href: "/journal", label: "Journal" },
 ];
 
+const EMIRATES = ["Dubai", "Abu Dhabi", "Sharjah", "Ajman", "Umm Al Quwain", "Ras Al Khaimah", "Fujairah"];
+
 export default function Header() {
   const pathname = usePathname();
   const { count } = useCart();
   const [open, setOpen] = useState(false);
+  const [emirate, setEmirate] = useState("Dubai");
+  const [language, setLanguage] = useState("en");
+
+  useEffect(() => {
+    setEmirate(window.localStorage.getItem("healthserve-emirate") || "Dubai");
+    setLanguage(window.localStorage.getItem("healthserve-language") || "en");
+  }, []);
+
+  function changeEmirate(value: string) {
+    setEmirate(value);
+    window.localStorage.setItem("healthserve-emirate", value);
+  }
+
+  function changeLanguage(value: string) {
+    setLanguage(value);
+    window.localStorage.setItem("healthserve-language", value);
+    document.documentElement.lang = value;
+  }
 
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
@@ -42,7 +62,18 @@ export default function Header() {
               ))}
             </div>
           </div>
-          <span className="tb-right">Dubai, UAE <span className="sep">·</span> English</span>
+          <div className="tb-right">
+            <label className="sr-only" htmlFor="emirate-select">Emirate</label>
+            <select id="emirate-select" value={emirate} onChange={(event) => changeEmirate(event.target.value)}>
+              {EMIRATES.map((item) => <option key={item} value={item}>{item}</option>)}
+            </select>
+            <span className="sep">·</span>
+            <label className="sr-only" htmlFor="language-select">Language</label>
+            <select id="language-select" value={language} onChange={(event) => changeLanguage(event.target.value)}>
+              <option value="en">English</option>
+              <option value="ar">العربية</option>
+            </select>
+          </div>
         </div>
       </div>
 

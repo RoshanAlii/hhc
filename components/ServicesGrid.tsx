@@ -42,7 +42,7 @@ export default function ServicesGrid() {
               <h3 style={{ fontSize: 24, fontWeight: "var(--fw-extra)", marginTop: 10 }}>{featured.name}</h3>
               <p className="muted" style={{ marginTop: 8, maxWidth: "44ch" }}>{featured.blurb}</p>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 22 }}>
-                <span className="price">{priceLabel(featured)}<small>{featured.unit} · next: {featured.nextSlot}</small></span>
+                <span className="price">{priceLabel(featured)}<small>{featured.unit}</small></span>
                 <span className="btn btn-primary">View &amp; book</span>
               </div>
             </div>

@@ -94,7 +94,7 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
           </span>
           {isCatalog && <span className="tag orange"><span className="dot" />{products.length} options</span>}
           {!isCatalog && singleOptions.length > 1 && <span className="tag orange"><span className="dot" />{singleOptions.length} options</span>}
-          <span className="tag"><span className="dot" />{comingSoon ? "Phase 2 · coming soon" : bookable && !isCatalog ? slotLabel : `Next: ${service.nextSlot}`}</span>
+          <span className="tag"><span className="dot" />{comingSoon ? "Phase 2 · coming soon" : "Care delivered at home"}</span>
           <div className="cta">
             {comingSoon ? (
               <button className="btn btn-primary btn-lg" type="button" disabled>Coming soon</button>
@@ -207,7 +207,6 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
               <div className="lbl">Booking summary</div>
               <div className="srow"><span>Service</span><b>{service.shortName}</b></div>
               <div className="srow"><span>Pricing</span><b>{priceMain}</b></div>
-              <div className="srow"><span>Next slot</span><b>{service.nextSlot}</b></div>
               <a className="btn btn-primary btn-full" style={{ marginTop: 12 }} href={COMPANY.whatsapp} target="_blank" rel="noreferrer">Enquire on WhatsApp</a>
             </>
           )}
