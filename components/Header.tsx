@@ -53,7 +53,7 @@ export default function Header() {
       <div className="topbar">
         <div className="wrap topbar-in">
           <span className="tb-left">
-            <a className="ph" href={COMPANY.phoneHref}>{COMPANY.phoneLabel}</a> · 8:30 AM – 6:30 PM daily
+            <a className="ph" href={COMPANY.phoneHref}>{COMPANY.phoneLabel}</a><span className="tb-hours"> · 8:30 AM – 6:30 PM daily</span>
           </span>
           <div className="tb-promo">
             <div className="track">

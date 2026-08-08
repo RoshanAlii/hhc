@@ -60,7 +60,7 @@ export default function HomePage() {
       </section>
 
       {/* SERVICES */}
-      <section className="wrap home-sec tight">
+      <section className="wrap home-sec tight home-services">
         <div className="sec-hd" style={{ marginBottom: 24 }}>
           <div>
             <span className="kicker">What we offer</span>

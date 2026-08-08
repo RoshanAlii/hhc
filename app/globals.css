@@ -827,3 +827,115 @@ body{overflow-x:clip}
 .pagehd::before{content:"";position:absolute;top:0;bottom:0;left:calc(50% - 50vw);width:100vw;z-index:-1;pointer-events:none;
   background:linear-gradient(180deg,#FEF3E8 0%,var(--surface-page) 100%)}
 .pagehd.warmtop{background:none;border-radius:0}
+
+/* Responsive experience - phone, tablet and compact laptop polish */
+@media(max-width:1100px){
+  :root{--container-pad:24px;--section-y:64px}
+  .links a{padding-inline:11px;font-size:13.5px}
+  .navact{gap:8px}
+  .btn-booknow,.btn-login{padding-inline:14px}
+}
+@media(max-width:900px){
+  :root{--section-y:56px}
+  .navrow{gap:14px}
+  .mobilemenu{padding:10px 0 16px;gap:2px}
+  .mobilemenu a{min-height:46px;display:flex;align-items:center;padding:10px 12px;border-radius:var(--radius-md)}
+  .mobilemenu a:hover{background:var(--orange-50)}
+  .pagehd{padding-top:36px;padding-bottom:28px}
+  .pagehd h1{font-size:clamp(32px,7vw,44px)}
+  .detail,.two{gap:20px}
+  .aside{position:static!important}
+}
+@media(max-width:600px){
+  :root{--container-pad:16px;--section-y:48px;--grid-gutter:16px}
+  body{font-size:16px}
+  .topbar-in{min-height:42px;padding-block:6px;gap:8px;justify-content:space-between}
+  .tb-left{font-size:12px}
+  .tb-hours,.tb-right .sep{display:none}
+  .tb-right{gap:2px;min-width:0}
+  .tb-right select{font-size:12px;max-width:92px;min-height:30px;padding-inline-end:14px;background-position:calc(100% - 7px) 50%,calc(100% - 3px) 50%}
+  .tb-right select:last-child{max-width:67px}
+  nav.main{backdrop-filter:blur(16px);background:rgba(253,252,250,.96)}
+  .navrow{min-height:66px;padding:8px 0;gap:8px}
+  .hs-logo{width:128px;max-width:38vw}
+  .hs-logo img{width:100%;height:auto}
+  .navact{gap:7px}
+  .btn-login{display:none}
+  .btn-booknow{min-height:40px;padding-inline:13px;font-size:13px}
+  .nav-search-trigger,.navtoggle{width:40px;height:40px;flex:none}
+  .nav-search-panel{top:116px;border-radius:16px;padding:10px;box-shadow:0 22px 60px rgba(48,43,38,.2)}
+  .nav-search-field{height:50px}
+  .mobilemenu.open{animation:mobileMenuIn .24s var(--ease-out) both}
+  .hero-lite{padding:28px 0 30px;background:radial-gradient(circle at 88% 12%,rgba(120,168,72,.14),transparent 30%),linear-gradient(180deg,#FEF3E8 0%,var(--surface-page) 68%)}
+  .hero-lite-inner{gap:26px;padding-bottom:20px}
+  .hero-lite .kick2{font-size:10px;letter-spacing:.1em;padding:7px 11px;margin-bottom:15px}
+  .hero-lite h1{font-size:clamp(35px,10.4vw,43px);line-height:1.04;margin-bottom:14px;max-width:12ch}
+  .hero-lite .lead{font-size:16px;line-height:1.55;margin-bottom:16px}
+  .hero-lite .trust{gap:6px;margin-bottom:18px}
+  .hero-lite .trust span{padding:6px 10px;font-size:11px}
+  .hero-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+  .hero-actions .btn{width:100%;min-height:48px;padding-inline:10px;font-size:14px}
+  .hero-art{max-width:290px;margin-top:2px}
+  .hero-ph{border-radius:24px;aspect-ratio:1/.72;box-shadow:0 18px 44px rgba(48,43,38,.1)}
+  .hero-book{margin-top:12px}
+  .hero-book .book{margin-top:0;padding:8px;border-radius:16px;gap:0}
+  .book .f{min-width:0;padding:9px 8px}
+  .book .btn{min-height:48px;margin-top:8px}
+  .hero-strip-lite{margin-top:16px;gap:9px;align-items:flex-start}
+  .hero-strip-lite .lbl2{width:100%;font-size:10px}
+  .hero-strip-lite .ins{display:grid;grid-template-columns:repeat(3,1fr);width:100%;gap:6px}
+  .hero-strip-lite .ins span{text-align:center;padding:6px 4px;font-size:10px}
+  .home-sec,.home-sec.tight{padding-block:34px}
+  .sec-hd{align-items:flex-start;gap:14px;margin-bottom:20px!important}
+  .sec-hd>div{width:100%}
+  h2.sec{font-size:30px;line-height:1.12}
+  .sec-hd p{font-size:14px;line-height:1.5}
+  .sec-hd>.btn{width:100%}
+  .home-services{padding-inline:0}
+  .home-services>.sec-hd,.home-services>.howrow{margin-inline:16px}
+  .home-services .grid3{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:2px 16px 18px;scroll-padding-inline:16px;-webkit-overflow-scrolling:touch}
+  .home-services .grid3::-webkit-scrollbar{display:none}
+  .home-services .icard{flex:0 0 min(82vw,330px);scroll-snap-align:start;border-radius:20px;box-shadow:0 12px 30px rgba(48,43,38,.08)}
+  .home-services .icard .b{padding:16px}
+  .home-services .icard .ph-shape{aspect-ratio:16/8.5}
+  .howrow{padding:20px 18px;border-radius:18px;gap:18px}
+  .how-s{position:relative}
+  .how-s:not(:last-child)::after{content:"";position:absolute;top:34px;left:14px;width:1px;height:calc(100% + 8px);background:var(--orange-100)}
+  .features{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .features .feature{min-height:112px;align-items:flex-start;flex-direction:column;justify-content:space-between;padding:15px;border-radius:16px}
+  .features .feature .ic{width:38px;height:38px}
+  .features .feature h4{font-size:14px;line-height:1.25}
+  .promoband{padding:26px 22px;border-radius:20px;gap:18px}
+  .promoband h2{font-size:27px;line-height:1.12}
+  .promoband .btn{width:100%;min-height:48px}
+  .band{padding:22px 18px}
+  .band.soft{display:grid;grid-template-columns:1fr 1fr;gap:20px 12px}
+  .band.soft .stat{min-width:0}
+  .band.soft .stat .big{font-size:22px}
+  .band.soft .stat .lb{font-size:11px}
+  .jgrid{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:16px;-webkit-overflow-scrolling:touch}
+  .jgrid::-webkit-scrollbar{display:none}
+  .jgrid .icard{flex:0 0 min(82vw,330px);scroll-snap-align:start}
+  .quoteband{padding:26px 22px}
+  .quoteband p{font-size:20px}
+  .grid3,.grid4,.grid2{gap:16px}
+  .pcard,.panel,.aside,.receipt{border-radius:16px}
+  .buybar{padding:16px;gap:12px}
+  .buybar .bigprice{width:100%}
+  .buybar .cta{display:grid;grid-template-columns:1fr;width:100%}
+  .buybar .cta .btn{width:100%}
+  .filters{gap:8px;overflow-x:auto;flex-wrap:nowrap;padding-bottom:8px}
+  .filters .chip{flex:none}
+  .filters .count{display:none}
+  footer.site{padding:42px 0 24px;margin-top:30px}
+  .fcols{grid-template-columns:1fr;gap:28px}
+  .legal{align-items:flex-start;flex-direction:column;gap:8px}
+}
+@media(max-width:370px){
+  .hs-logo{width:116px}
+  .navact{gap:5px}
+  .btn-booknow{padding-inline:10px;font-size:12px}
+  .hero-actions{grid-template-columns:1fr}
+  .hero-lite h1{font-size:34px}
+}
+@keyframes mobileMenuIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
