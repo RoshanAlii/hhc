@@ -92,7 +92,7 @@ export default function CartView() {
               <button className="btn btn-quiet btn-sm" onClick={applyPromo} type="button">Apply</button>
             </div>
             {error && <span className="err">{error}</span>}
-            {applied && !error && <span className="err" style={{ color: "var(--green-700)" }}>Code applied — {Math.round(applied.rate * 100)}% off.</span>}
+            {applied && !error && <span className="err" style={{ color: "var(--green-700)" }}>Code applied - {Math.round(applied.rate * 100)}% off.</span>}
           </div>
           <div className="srow total"><span>Total</span><b>{formatAED(total)}</b></div>
           <Link className="btn btn-primary btn-full btn-lg" style={{ marginTop: 12 }} href="/checkout">Checkout</Link>

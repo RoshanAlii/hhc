@@ -78,7 +78,7 @@ export default function HomePage() {
           <div>
             <span className="kicker">What we offer</span>
             <h2 className="sec">Care that comes to you</h2>
-            <p>Licensed care at your doorstep — transparent prices, same-day slots.</p>
+            <p>Licensed care at your doorstep - transparent prices, same-day slots.</p>
           </div>
           <Link className="btn btn-primary btn-sm" href="/services">All services <Icon name="arrow" size={14} /></Link>
         </div>
@@ -103,7 +103,7 @@ export default function HomePage() {
 
         <div className="howrow">
           <div className="how-s"><span className="n">1</span><div><b>Choose service &amp; time</b><span>Pick what you need and a slot that suits you.</span></div></div>
-          <div className="how-s"><span className="n">2</span><div><b>Confirm address</b><span>Pay now or on the visit — your choice.</span></div></div>
+          <div className="how-s"><span className="n">2</span><div><b>Confirm address</b><span>Pay now or on the visit - your choice.</span></div></div>
           <div className="how-s"><span className="n">3</span><div><b>Open the door</b><span>A friendly, licensed clinician arrives.</span></div></div>
         </div>
       </section>
@@ -113,7 +113,7 @@ export default function HomePage() {
         <div className="promoband green">
           <div className="txt">
             <span className="k">The Dispensary</span>
-            <h2>IV drips, NAD+ and vitamin shots — without leaving the sofa.</h2>
+            <h2>IV drips, NAD+ and vitamin shots - without leaving the sofa.</h2>
             <p>Clinician-administered wellness, delivered to your door.</p>
           </div>
           <Link className="btn btn-primary btn-lg" href="/dispensary">Explore the Dispensary</Link>
@@ -172,7 +172,7 @@ export default function HomePage() {
         <div className="promoband green">
           <div className="txt">
             <h2>For your organisation</h2>
-            <p>Corporate wellness days, on-site nurses and group vaccinations — one provider, one invoice.</p>
+            <p>Corporate wellness days, on-site nurses and group vaccinations - one provider, one invoice.</p>
           </div>
           <Link className="btn btn-primary btn-lg" href="/organizations">Inquire</Link>
         </div>

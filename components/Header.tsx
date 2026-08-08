@@ -29,7 +29,7 @@ export default function Header() {
 
   return (
     <>
-      {/* Top utility bar — single light row */}
+      {/* Top utility bar - single light row */}
       <div className="topbar">
         <div className="wrap topbar-in">
           <span className="tb-left">
@@ -49,7 +49,7 @@ export default function Header() {
       <nav className="main">
         <div className="wrap">
           <div className="navrow">
-            <Link className="hs-logo" href="/" aria-label="HealthServe — Home Healthcare">
+            <Link className="hs-logo" href="/" aria-label="HealthServe - Home Healthcare">
               <Logo width={150} />
             </Link>
             <div className="links">

@@ -18,12 +18,12 @@ export default function AboutPage() {
       </header>
       <div className="wrap">
         <div className="grid2" style={{ marginTop: 24 }}>
-          <div className="imgph" style={{ minHeight: 260 }}>Care photography — team</div>
+          <div className="imgph" style={{ minHeight: 260 }}>Care photography - team</div>
           <div className="panel">
             <h2 className="blk">Our story</h2>
             <p className="muted" style={{ fontSize: 15 }}>
               Since {COMPANY.since} our doctors, nurses and physiotherapists have brought hospital-grade care into
-              thousands of Dubai homes — with the standards of a licensed facility and the warmth of a house call.
+              thousands of Dubai homes - with the standards of a licensed facility and the warmth of a house call.
             </p>
             <h2 className="blk">Our standards</h2>
             <ul className="inc">

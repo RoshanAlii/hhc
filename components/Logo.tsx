@@ -12,7 +12,7 @@ export default function Logo({ width = 186 }: { width?: number; tagline?: boolea
       src={logo}
       width={width}
       height={height}
-      alt="HealthServe — Home Healthcare"
+      alt="HealthServe - Home Healthcare"
       priority
       style={{ width, height: "auto" }}
     />

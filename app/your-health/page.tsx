@@ -3,9 +3,9 @@ import Link from "next/link";
 import HealthTools from "@/components/HealthTools";
 
 export const metadata: Metadata = {
-  title: "Your Health — free health tools & calculators",
+  title: "Your Health - free health tools & calculators",
   description:
-    "Handy health calculators — BMI, daily calories, healthy weight range, water intake, waist-to-height ratio and heart-rate zones. Quick, private and free.",
+    "Handy health calculators - BMI, daily calories, healthy weight range, water intake, waist-to-height ratio and heart-rate zones. Quick, private and free.",
 };
 
 export default function YourHealthPage() {
@@ -15,7 +15,7 @@ export default function YourHealthPage() {
         <span className="crumb"><Link href="/">Home</Link> / <b>Your Health</b></span>
         <span className="tag" style={{ marginTop: 10 }}><span className="dot" />Free tools · nothing to sign up for</span>
         <h1>Little tools for a healthier you.</h1>
-        <p>Quick, private health calculators you can use right now — no login, nothing stored. For a full picture, book a check-up with one of our clinicians.</p>
+        <p>Quick, private health calculators you can use right now - no login, nothing stored. For a full picture, book a check-up with one of our clinicians.</p>
       </header>
 
       <div className="wrap" style={{ paddingBottom: 24 }}>
@@ -31,7 +31,7 @@ export default function YourHealthPage() {
         <div className="ctaband">
           <div className="txt">
             <h2>Want the full picture?</h2>
-            <p>Book a home health check — panels, vitals and a doctor review, all without leaving your door.</p>
+            <p>Book a home health check - panels, vitals and a doctor review, all without leaving your door.</p>
           </div>
           <div className="actions">
             <Link className="btn btn-white btn-lg" href="/services/lab-tests">Book a health check</Link>

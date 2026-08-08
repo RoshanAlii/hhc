@@ -30,8 +30,8 @@ export default function ProfilePage() {
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
           <div className="panel">
             <div className="lbl">Saved addresses</div>
-            <div className="pay"><span>Home · Oud Metha, Villa —</span><a href="#" style={{ fontSize: 13 }}>Edit</a></div>
-            <div className="pay"><span>Office · DIFC —</span><a href="#" style={{ fontSize: 13 }}>Edit</a></div>
+            <div className="pay"><span>Home · Oud Metha, Villa -</span><a href="#" style={{ fontSize: 13 }}>Edit</a></div>
+            <div className="pay"><span>Office · DIFC -</span><a href="#" style={{ fontSize: 13 }}>Edit</a></div>
             <button className="btn btn-quiet btn-sm" style={{ marginTop: 8 }} type="button">+ Add address</button>
           </div>
           <div className="panel">
@@ -42,12 +42,12 @@ export default function ProfilePage() {
         </div>
       </div>
 
-      {/* Your health — moved here from the Your Health page */}
+      {/* Your health - moved here from the Your Health page */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", margin: "40px 0 4px", gap: 12, flexWrap: "wrap" }}>
         <h2 className="sec" style={{ fontSize: 22 }}>Your health</h2>
         <Link href="/your-health" style={{ fontSize: 13 }}>Health tools &amp; calculators →</Link>
       </div>
-      <p className="muted" style={{ fontSize: 14, marginBottom: 16 }}>Your records, results, care plans and reminders — all in one secure place.</p>
+      <p className="muted" style={{ fontSize: 14, marginBottom: 16 }}>Your records, results, care plans and reminders - all in one secure place.</p>
       <div className="grid3">
         {health.map((x) => (
           <article className="svc" style={{ minHeight: 0 }} key={x.t}>

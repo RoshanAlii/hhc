@@ -4,7 +4,7 @@ import JournalGrid from "@/components/JournalGrid";
 
 export const metadata: Metadata = {
   title: "Journal",
-  description: "Practical health guidance and news from HealthServe's clinical team — a decade of caring for Dubai homes.",
+  description: "Practical health guidance and news from HealthServe's clinical team - a decade of caring for Dubai homes.",
 };
 
 export default function JournalPage() {

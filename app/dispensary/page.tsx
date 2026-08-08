@@ -4,9 +4,9 @@ import Placeholder from "@/components/Placeholder";
 import { COMPANY, dispensaryList, priceLabel } from "@/lib/data";
 
 export const metadata: Metadata = {
-  title: "The Dispensary — IV, NAD+, shots & more",
+  title: "The Dispensary - IV, NAD+, shots & more",
   description:
-    "HealthServe's dispensary: IV therapy, NAD+ IV therapy, oxygen therapy, IM shots, flu vaccination and genetic testing — administered at home or delivered to your door. Peptides coming soon.",
+    "HealthServe's dispensary: IV therapy, NAD+ IV therapy, oxygen therapy, IM shots, flu vaccination and genetic testing - administered at home or delivered to your door. Peptides coming soon.",
 };
 
 const live = dispensaryList.filter((s) => !s.phase2);
@@ -19,7 +19,7 @@ export default function DispensaryPage() {
         <span className="crumb"><Link href="/">Home</Link> / <b>The Dispensary</b></span>
         <span className="tag orange" style={{ marginTop: 10 }}><span className="dot" />IV · NAD+ · Shots · delivered or at home</span>
         <h1>The Dispensary.</h1>
-        <p>IV drips, NAD+ therapy, oxygen, vitamin shots, flu vaccination and genetic testing — administered at home or delivered to your door across Dubai.</p>
+        <p>IV drips, NAD+ therapy, oxygen, vitamin shots, flu vaccination and genetic testing - administered at home or delivered to your door across Dubai.</p>
       </header>
 
       <div className="wrap" style={{ paddingBottom: 24 }}>
@@ -42,7 +42,7 @@ export default function DispensaryPage() {
         {soon.length > 0 && (
           <>
             <h2 className="sec" style={{ fontSize: 22, marginTop: 36 }}>Peptides</h2>
-            <p className="muted" style={{ margin: "4px 0 16px" }}>Prescription peptide therapies — launching once DHA/MOHAP cleared.</p>
+            <p className="muted" style={{ margin: "4px 0 16px" }}>Prescription peptide therapies - launching once DHA/MOHAP cleared.</p>
             <div className="grid4">
               {soon.map((s) => (
                 <article className="svc" style={{ minHeight: 0, opacity: 0.9 }} key={s.slug}>
@@ -66,7 +66,7 @@ export default function DispensaryPage() {
           <div style={{ flex: 1, minWidth: 240 }}>
             <div className="lbl">Home pharmacy</div>
             <b style={{ color: "var(--text-strong)", fontSize: 18 }}>Prescriptions &amp; refills, delivered.</b>
-            <p className="muted" style={{ fontSize: 14, marginTop: 4 }}>Send us your prescription and our pharmacists prepare and deliver it — with cold-chain handling where needed.</p>
+            <p className="muted" style={{ fontSize: 14, marginTop: 4 }}>Send us your prescription and our pharmacists prepare and deliver it - with cold-chain handling where needed.</p>
           </div>
           <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
             <a className="btn btn-primary" href={COMPANY.whatsapp} target="_blank" rel="noreferrer">Send a prescription</a>

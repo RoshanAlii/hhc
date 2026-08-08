@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import Logo from "./Logo";
 
-// Demo OTP flow — no backend. A fixed demo code is shown to the user.
+// Demo OTP flow - no backend. A fixed demo code is shown to the user.
 const DEMO_CODE = "4242";
 
 export default function LoginFlow() {
@@ -54,12 +54,12 @@ export default function LoginFlow() {
 
   return (
     <div className="wrap" style={{ paddingBlock: 56, maxWidth: 880 }}>
-      <span className="tag dark" style={{ marginBottom: 16 }}><span className="dot" />R2 preview — passwordless login</span>
+      <span className="tag dark" style={{ marginBottom: 16 }}><span className="dot" />R2 preview - passwordless login</span>
       <div className="grid2">
         <div className="panel" style={{ textAlign: "center" }}>
           <Link className="hs-logo" href="/" style={{ justifyContent: "center", display: "inline-flex" }}><Logo width={160} tagline={false} /></Link>
           <h1 style={{ fontSize: 24, fontWeight: "var(--fw-extra)", margin: "16px 0 6px" }}>Welcome back</h1>
-          <p className="muted" style={{ fontSize: 14 }}>Log in with your mobile — no passwords.</p>
+          <p className="muted" style={{ fontSize: 14 }}>Log in with your mobile - no passwords.</p>
           <div className={`field${step === "mobile" && error ? " invalid" : ""}`} style={{ textAlign: "start", marginTop: 18 }}>
             <label>Mobile number</label>
             <input placeholder="+971" value={mobile} onChange={(e) => setMobile(e.target.value)} disabled={step === "code"} />

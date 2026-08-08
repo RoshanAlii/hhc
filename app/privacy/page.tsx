@@ -6,7 +6,7 @@ export const metadata: Metadata = { title: "Privacy policy" };
 const sections = [
   { id: "collect", title: "Information we collect", body: "Contact details, address and booking information you provide; health information you volunteer so we can plan your care safely." },
   { id: "use", title: "How we use it", body: "To deliver care, schedule visits, process payment and meet legal duties. Never sold. No advertising profiles." },
-  { id: "health", title: "Health data & consent", body: "Health information is collected with your explicit consent and accessed only by your treating team, in line with UAE health-data law. Clinical records are held in clinical systems — this website stores booking data only." },
+  { id: "health", title: "Health data & consent", body: "Health information is collected with your explicit consent and accessed only by your treating team, in line with UAE health-data law. Clinical records are held in clinical systems - this website stores booking data only." },
   { id: "sharing", title: "Sharing & insurers", body: "Shared with insurers only for direct billing you request." },
   { id: "rights", title: "Your rights", body: "You may request access to, correction of, or deletion of your booking data at any time by contacting us." },
   { id: "retention", title: "Retention", body: "Booking data is retained only as long as needed for care, billing and legal obligations, then securely deleted." },

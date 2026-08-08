@@ -3,7 +3,7 @@
 
 export const COMPANY = {
   name: "Healthserve Home Healthcare LLC",
-  phoneLabel: "04 357 7657",
+  phoneLabel: "+971 4 357 7657",
   phoneHref: "tel:+97143577657",
   whatsapp: "https://wa.me/971543061896",
   whatsappLabel: "+971 54 306 1896",
@@ -320,9 +320,9 @@ export const articles: Article[] = [
     readMins: 5,
     excerpt: "Consistent monitoring at home is one of the strongest predictors of good long-term control.",
     body: [
-      "Diabetes and hypertension are marathon conditions, not sprints. The difference between good and poor long-term control often comes down to consistency — regular monitoring, medication adherence and timely adjustments.",
+      "Diabetes and hypertension are marathon conditions, not sprints. The difference between good and poor long-term control often comes down to consistency - regular monitoring, medication adherence and timely adjustments.",
       "A home care nurse brings that consistency into the home. Regular visits mean readings are taken in a familiar environment, medications are reviewed, and small problems are caught before they become emergencies.",
-      "For families juggling work and caregiving, this continuity is invaluable — and it keeps the treating physician informed with reliable, real-world data.",
+      "For families juggling work and caregiving, this continuity is invaluable - and it keeps the treating physician informed with reliable, real-world data.",
     ],
     relatedServiceSlug: "home-nursing",
   },
@@ -333,7 +333,7 @@ export const articles: Article[] = [
     readMins: 8,
     excerpt: "What home health care covers, who it's for, and how to choose a licensed provider in Dubai.",
     body: [
-      "Home health care brings clinical services — doctor visits, nursing, physiotherapy and lab tests — into the place people recover best: their own home.",
+      "Home health care brings clinical services - doctor visits, nursing, physiotherapy and lab tests - into the place people recover best: their own home.",
       "This guide walks through what's covered, how licensing works in Dubai, and the questions to ask before choosing a provider.",
       "The right provider is DHA-licensed, transparent about pricing, and coordinates care with your existing physician.",
     ],
@@ -344,11 +344,11 @@ export const articles: Article[] = [
     title: "Why IV drip therapy is the new trend for recovery",
     category: "Health guide",
     readMins: 4,
-    excerpt: "IV therapy can support hydration and recovery — but only when it's clinically administered.",
+    excerpt: "IV therapy can support hydration and recovery - but only when it's clinically administered.",
     body: [
       "IV drip therapy has moved from hospitals into homes and offices. Done well, it can support hydration, recovery and immunity.",
       "The key word is clinical. Every drip should follow a screening, be tailored to the individual, and be administered by a licensed nurse.",
-      "At HealthServe, IV therapy is never a spa menu — it's a clinician-delivered service.",
+      "At HealthServe, IV therapy is never a spa menu - it's a clinician-delivered service.",
     ],
     relatedServiceSlug: "iv-therapy",
   },
@@ -357,9 +357,9 @@ export const articles: Article[] = [
     title: "Understanding newborn baby jaundice",
     category: "Health guide",
     readMins: 6,
-    excerpt: "A common, usually harmless condition — but knowing when to seek help matters.",
+    excerpt: "A common, usually harmless condition - but knowing when to seek help matters.",
     body: [
-      "Newborn jaundice is a yellow tint to a newborn's skin and the whites of the eyes — a sign of elevated bilirubin. It usually appears in the first five days of life, and in most cases resolves safely with monitoring.",
+      "Newborn jaundice is a yellow tint to a newborn's skin and the whites of the eyes - a sign of elevated bilirubin. It usually appears in the first five days of life, and in most cases resolves safely with monitoring.",
     ],
     relatedServiceSlug: "newborn-child-care",
   },
@@ -382,7 +382,7 @@ export const articles: Article[] = [
     excerpt: "Continuous training keeps our clinical standards high and our care compassionate.",
     body: [
       "Since 2022 we've run a structured clinical and soft-skills training program for our nursing team.",
-      "It's how we keep standards high — and how our people grow their careers with us.",
+      "It's how we keep standards high - and how our people grow their careers with us.",
     ],
   },
 ];
@@ -405,8 +405,8 @@ export function getArticle(slug: string): Article | undefined {
 const jaundice = getArticle("newborn-baby-jaundice");
 if (jaundice) {
   jaundice.body = [
-    "Newborn jaundice is a yellow tint to a newborn's skin and the whites of the eyes — a sign of elevated bilirubin. It usually appears in the first five days of life, and in most cases resolves safely with monitoring.",
-    "Most jaundice is physiological — a normal part of a newborn's liver maturing. It typically peaks around day three to five and fades over the following week or two.",
+    "Newborn jaundice is a yellow tint to a newborn's skin and the whites of the eyes - a sign of elevated bilirubin. It usually appears in the first five days of life, and in most cases resolves safely with monitoring.",
+    "Most jaundice is physiological - a normal part of a newborn's liver maturing. It typically peaks around day three to five and fades over the following week or two.",
     "Persistent or deepening yellowing, poor feeding, or unusual drowsiness warrant a clinical check. A home visit avoids exposing your newborn to clinic waiting rooms, and lets a clinician assess feeding and hydration in your own environment.",
   ];
 }
@@ -424,7 +424,7 @@ export interface Job {
 export const jobs: Job[] = [
   {
     slug: "registered-nurse",
-    title: "Female Registered Nurse — DHA license/eligibility",
+    title: "Female Registered Nurse - DHA license/eligibility",
     type: "Full-time",
     location: "Dubai",
     summary: "Deliver skilled home nursing care to patients across Dubai as part of a supportive clinical team.",
@@ -440,7 +440,7 @@ export const jobs: Job[] = [
   },
   {
     slug: "admin-hr-assistant",
-    title: "Admin / HR Assistant — UAE experience",
+    title: "Admin / HR Assistant - UAE experience",
     type: "Full-time",
     location: "Dubai",
     summary: "Keep our operations running smoothly and support the team with HR and administrative work.",
@@ -448,7 +448,7 @@ export const jobs: Job[] = [
   },
   {
     slug: "business-development-officer",
-    title: "Business Development Officer — Healthcare",
+    title: "Business Development Officer - Healthcare",
     type: "Full-time",
     location: "Dubai",
     summary: "Grow our corporate and partner relationships across the Dubai healthcare landscape.",

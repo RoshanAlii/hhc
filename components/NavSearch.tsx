@@ -54,7 +54,7 @@ export default function NavSearch() {
     <div
       className={`nav-search${open ? " open" : ""}`}
       ref={containerRef}
-      onMouseEnter={() => reveal(false)}
+      onMouseEnter={() => reveal(true)}
       onMouseLeave={() => {
         if (!containerRef.current?.contains(document.activeElement)) close();
       }}

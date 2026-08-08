@@ -37,7 +37,7 @@ export default function ConfirmationView() {
       </div>
       <h1 style={{ fontSize: 30, fontWeight: "var(--fw-extra)" }}>You&rsquo;re booked.</h1>
       <p className="muted" style={{ marginTop: 8 }}>
-        Confirmation sent on WhatsApp. Your clinician arrives on <b>{order.slot}</b> — we&rsquo;ll message when they&rsquo;re on the way.
+        Confirmation sent on WhatsApp. Your clinician arrives on <b>{order.slot}</b> - we&rsquo;ll message when they&rsquo;re on the way.
       </p>
 
       <div className="receipt">
@@ -54,7 +54,7 @@ export default function ConfirmationView() {
           </div>
         ))}
         <div className="srow"><span>VAT (5%)</span><span>{formatAED(order.vat)}</span></div>
-        <div className="srow"><span>Paid · {order.card ? `Card ${order.card}` : order.payment}</span><span>{order.card ? formatAED(order.total) : "—"}</span></div>
+        <div className="srow"><span>Paid · {order.card ? `Card ${order.card}` : order.payment}</span><span>{order.card ? formatAED(order.total) : "-"}</span></div>
         <div className="srow total"><span>Total paid</span><b>{formatAED(order.total)}</b></div>
       </div>
 

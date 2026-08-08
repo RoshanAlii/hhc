@@ -26,7 +26,7 @@ export default function OrgForm() {
       <main className="panel">
         <div className="notice">
           <svg width="18" height="18" viewBox="0 0 24 24" style={{ stroke: "var(--green-600)", fill: "none", strokeWidth: 2 }}><path d="M5 12l5 5L20 6" /></svg>
-          Request received — thank you.
+          Request received - thank you.
         </div>
         <p className="muted" style={{ fontSize: 15, marginTop: 12 }}>
           Our business team will reply within one working day with a tailored proposal for {form.company}.

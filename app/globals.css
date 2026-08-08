@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&family=Caveat:wght@600;700&display=swap');
 
 /* ==========================================================================
-   HEALTHSERVE — Brand tokens (v1.0) ported from tokens.css
+   HEALTHSERVE - Brand tokens (v1.0) ported from tokens.css
    ========================================================================== */
 :root {
   /* Brand primary: Healthserve Orange */
@@ -52,7 +52,7 @@
 }
 
 /* ==========================================================================
-   DESIGN-EXACT OVERRIDES — match the "Health Serve Home" design precisely
+   DESIGN-EXACT OVERRIDES - match the "Health Serve Home" design precisely
    (Poppins/Nunito Sans/Caveat; brighter #F07800/#78A848/#E1231D; #302B26 ink).
    ========================================================================== */
 :root {
@@ -454,7 +454,7 @@ footer.site{background:var(--surface-card);border-top:1px solid var(--border-sub
 @media(max-width:900px){.has-mbar-page{padding-bottom:74px}}
 
 /* ==========================================================================
-   Welcoming warmth — soft brand-palette tints only (Orange / Green / Warm White)
+   Welcoming warmth - soft brand-palette tints only (Orange / Green / Warm White)
    ========================================================================== */
 /* Gentle warm glow behind the top of key pages */
 .homehero{
@@ -519,7 +519,7 @@ footer.site{position:relative}
 footer.site::before{content:"";position:absolute;top:0;inset-inline:0;height:4px;background:linear-gradient(90deg,var(--orange-500),var(--red-500) 55%,var(--green-500))}
 
 /* ==========================================================================
-   Beautiful home hero — layered brand-colour blobs, dot pattern, depth
+   Beautiful home hero - layered brand-colour blobs, dot pattern, depth
    ========================================================================== */
 .homehero{position:relative;overflow:hidden;padding-block:36px 20px}
 /* soft, blurred brand-colour blobs */
@@ -548,7 +548,7 @@ footer.site::before{content:"";position:absolute;top:0;inset-inline:0;height:4px
 .kicker::before{content:"";width:22px;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--orange-500),var(--green-500))}
 
 /* ==========================================================================
-   WOW home — immersive dark hero + dense, colourful sections
+   WOW home - immersive dark hero + dense, colourful sections
    ========================================================================== */
 .hero-x{position:relative;overflow:hidden;color:#fff;padding:56px 0 0;
   background:
@@ -630,7 +630,7 @@ footer.site::before{content:"";position:absolute;top:0;inset-inline:0;height:4px
 .hero-search .avail .dot{background:var(--green-400)}
 
 /* ==========================================================================
-   Official design — light warm hero + real illustration + image cards
+   Official design - light warm hero + real illustration + image cards
    ========================================================================== */
 .hero-lite{position:relative;overflow:hidden;background:linear-gradient(180deg,#FEF3E8 0%,var(--surface-page) 64%);padding:44px 0 40px}
 .hero-lite-inner{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;padding-bottom:26px}
@@ -733,7 +733,7 @@ h1,h2,h3,h4{font-weight:700}
 h1.display,.hero-lite h1,.hero-x h1,h2.sec,.promoband h2,.ctaband h2{font-weight:800}
 
 /* ==========================================================================
-   POLISH PASS — crisp text, one control system, real depth
+   POLISH PASS - crisp text, one control system, real depth
    ========================================================================== */
 html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
 

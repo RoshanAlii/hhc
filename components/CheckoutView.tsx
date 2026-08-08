@@ -8,8 +8,8 @@ import { formatAED, formatSlot, localDate } from "@/lib/data";
 
 const METHODS = [
   { id: "card", label: "Card · Visa / Mastercard" },
-  { id: "tabby", label: "Tabby — 4 interest-free payments" },
-  { id: "onvisit", label: "Pay on visit — cash or card at the door" },
+  { id: "tabby", label: "Tabby - 4 interest-free payments" },
+  { id: "onvisit", label: "Pay on visit - cash or card at the door" },
 ];
 
 export default function CheckoutView() {

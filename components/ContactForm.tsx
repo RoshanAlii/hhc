@@ -26,7 +26,7 @@ export default function ContactForm() {
       <main className="panel">
         <div className="notice" style={{ marginBottom: 12 }}>
           <svg width="18" height="18" viewBox="0 0 24 24" style={{ stroke: "var(--green-600)", fill: "none", strokeWidth: 2 }}><path d="M5 12l5 5L20 6" /></svg>
-          Thanks, {form.name.split(" ")[0]} — your message is in.
+          Thanks, {form.name.split(" ")[0]} - your message is in.
         </div>
         <p className="muted" style={{ fontSize: 15 }}>
           Our team will reply within 30 minutes during clinic hours. For anything urgent, message us on WhatsApp.

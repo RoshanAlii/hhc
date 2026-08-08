@@ -6,11 +6,11 @@ import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: {
-    default: "HealthServe — Home healthcare in Dubai",
+    default: "HealthServe - Home healthcare in Dubai",
     template: "%s | HealthServe",
   },
   description:
-    "Hospital-grade care in the comfort of home. DHA-licensed doctors, nurses and physiotherapists at your door across Dubai — often the same day.",
+    "Hospital-grade care in the comfort of home. DHA-licensed doctors, nurses and physiotherapists at your door across Dubai - often the same day.",
   metadataBase: new URL("https://healthservehhc.co"),
 };
 

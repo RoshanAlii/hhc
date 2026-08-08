@@ -5,7 +5,7 @@ import { COMPANY } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Talk to us — WhatsApp or call and a human answers during clinic hours, 8:30 AM – 6:30 PM daily.",
+  description: "Talk to us - WhatsApp or call and a human answers during clinic hours, 8:30 AM – 6:30 PM daily.",
 };
 
 export default function ContactPage() {
@@ -14,7 +14,7 @@ export default function ContactPage() {
       <header className="pagehd wrap">
         <span className="crumb"><Link href="/">Home</Link> / <b>Contact</b></span>
         <h1>Talk to us.</h1>
-        <p>Fastest: WhatsApp or call — a human answers during clinic hours (8:30 AM – 6:30 PM daily).</p>
+        <p>Fastest: WhatsApp or call - a human answers during clinic hours (8:30 AM – 6:30 PM daily).</p>
       </header>
       <div className="wrap detail" style={{ marginTop: 16 }}>
         <ContactForm />

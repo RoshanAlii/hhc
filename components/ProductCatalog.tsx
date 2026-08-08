@@ -31,7 +31,7 @@ export default function ProductCatalog({ service, products, canBook = true }: { 
     addItem({
       key: `${service.slug}:${p.name}:${i}`,
       slug: service.slug,
-      name: `${service.shortName} — ${p.name}`,
+      name: `${service.shortName} - ${p.name}`,
       meta: o.label,
       price: o.price,
       kind: "service",
@@ -69,7 +69,7 @@ export default function ProductCatalog({ service, products, canBook = true }: { 
                   aria-label={`${p.name} option`}
                 >
                   {p.options.map((op, idx) => (
-                    <option key={idx} value={idx}>{op.label || "1 session"} — {formatAED(op.price)}</option>
+                    <option key={idx} value={idx}>{op.label || "1 session"} - {formatAED(op.price)}</option>
                   ))}
                 </select>
               )}

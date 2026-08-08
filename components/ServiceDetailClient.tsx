@@ -65,7 +65,7 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
     addItem({
       key: `${service.slug}:${optIndex}`,
       slug: service.slug,
-      name: option ? `${service.shortName} — ${option.name}` : service.name,
+      name: option ? `${service.shortName} - ${option.name}` : service.name,
       meta: option?.label,
       price: activePrice!,
       kind: "service",
@@ -123,7 +123,7 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
 
       <div className="wrap detail">
         <main className="panel">
-          <Placeholder caption={service.photo ?? `Service photography — ${service.shortName}`} tone="orange" style={{ borderRadius: "var(--radius-md)", marginBottom: 26 }} />
+          <Placeholder caption={service.photo ?? `Service photography - ${service.shortName}`} tone="orange" style={{ borderRadius: "var(--radius-md)", marginBottom: 26 }} />
 
           {isCatalog ? (
             <div id="catalogue" style={{ scrollMarginTop: 90 }}>

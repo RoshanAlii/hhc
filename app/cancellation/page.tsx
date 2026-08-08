@@ -10,7 +10,7 @@ export default function CancellationPage() {
       <header className="pagehd wrap">
         <span className="crumb">Home / Legal / <b>Cancellation &amp; Refund</b></span>
         <h1>Clear, fair windows.</h1>
-        <p>Shown again at checkout — no surprises.</p>
+        <p>Shown again at checkout - no surprises.</p>
       </header>
       <div className="wrap" style={{ paddingBottom: 60 }}>
         <div className="kpi" style={{ marginTop: 20 }}>

@@ -5,7 +5,7 @@ import { COMPANY } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "For organizations",
-  description: "Corporate wellness days, on-site nurses, group vaccinations and travel medical support — one provider, one invoice.",
+  description: "Corporate wellness days, on-site nurses, group vaccinations and travel medical support - one provider, one invoice.",
 };
 
 const tiles = [
@@ -21,7 +21,7 @@ export default function OrganizationsPage() {
       <header className="pagehd wrap">
         <span className="crumb"><Link href="/">Home</Link> / <b>For Organizations</b></span>
         <h1>Healthcare where your people are.</h1>
-        <p>Corporate wellness days, on-site nurses, group vaccinations and travel medical support — one provider, one invoice.</p>
+        <p>Corporate wellness days, on-site nurses, group vaccinations and travel medical support - one provider, one invoice.</p>
       </header>
       <div className="wrap">
         <div className="grid4" style={{ marginTop: 20 }}>

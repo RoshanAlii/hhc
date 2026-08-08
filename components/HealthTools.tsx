@@ -141,7 +141,7 @@ function WaistTool() {
         <div className="field" style={{ marginBottom: 8 }}><label>Waist (cm)</label><input inputMode="decimal" value={waist} onChange={(e) => setWaist(e.target.value)} placeholder="80" /></div>
         <div className="field" style={{ marginBottom: 8 }}><label>Height (cm)</label><input inputMode="decimal" value={h} onChange={(e) => setH(e.target.value)} placeholder="170" /></div>
       </div>
-      {out ?? <p className="muted" style={{ fontSize: 13 }}>A quick indicator of metabolic health — aim below 0.5.</p>}
+      {out ?? <p className="muted" style={{ fontSize: 13 }}>A quick indicator of metabolic health - aim below 0.5.</p>}
     </Tool>
   );
 }

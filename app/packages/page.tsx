@@ -4,7 +4,7 @@ import PackagesGrid from "@/components/PackagesGrid";
 
 export const metadata: Metadata = {
   title: "Care packages",
-  description: "Better value for ongoing care — every package delivered by the same DHA-licensed team, with priority scheduling.",
+  description: "Better value for ongoing care - every package delivered by the same DHA-licensed team, with priority scheduling.",
 };
 
 export default function PackagesPage() {

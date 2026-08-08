@@ -23,7 +23,7 @@ export default function CareersPage() {
             <h2 className="blk">Why HealthServe</h2>
             <p className="muted" style={{ fontSize: 15 }}>
               Structured clinical and soft-skills training, real career progression, and a team that
-              celebrates its people — from talent shows to service awards.
+              celebrates its people - from talent shows to service awards.
             </p>
           </div>
         </div>
