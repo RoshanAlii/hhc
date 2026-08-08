@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { formatAED } from "@/lib/data";
-import type { ServiceOption } from "@/lib/variants";
+import { customerOptionLabel, customerProductName, type ServiceOption } from "@/lib/variants";
 
 // A selectable list of purchasable options. Adds a search box + count when the
 // list is long (lab panels, IV drips, etc.). Selectable when `onSelect` given;
@@ -23,7 +23,7 @@ export default function OptionPicker({
   const filtered = useMemo(() => {
     const term = q.trim().toLowerCase();
     if (!term) return indexed;
-    return indexed.filter(({ o }) => (o.name + " " + (o.label ?? "")).toLowerCase().includes(term));
+    return indexed.filter(({ o }) => (customerProductName(o.name) + " " + (customerOptionLabel(o.label) ?? "")).toLowerCase().includes(term));
   }, [indexed, q]);
 
   const searchable = options.length > 10;
@@ -48,8 +48,8 @@ export default function OptionPicker({
           const inner = (
             <>
               <span className="optname">
-                {o.name}
-                {o.label ? <span className="optlabel"> · {o.label}</span> : null}
+                {customerProductName(o.name)}
+                {o.label ? <span className="optlabel"> · {customerOptionLabel(o.label)}</span> : null}
               </span>
               <span className="optprice">
                 {formatAED(o.price)}

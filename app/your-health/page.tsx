@@ -34,8 +34,8 @@ export default function YourHealthPage() {
             <p>Book a home health check — panels, vitals and a doctor review, all without leaving your door.</p>
           </div>
           <div className="actions">
-            <Link className="btn btn-white btn-lg" href="/services/lab-tests">Book a health check</Link>
-            <Link className="btn btn-clear btn-lg" href="/account/profile">Your health records</Link>
+            <Link className="btn btn-white btn-lg" href="/services/lab-tests">Explore health checks</Link>
+            <Link className="btn btn-clear btn-lg" href="/contact">Ask the care team</Link>
           </div>
         </div>
       </section>

@@ -26,8 +26,8 @@ export default async function JobPage({ params }: { params: Promise<{ slug: stri
         <p>{job.type} · {job.location}</p>
       </header>
       <div className="wrap detail" style={{ marginTop: 16 }}>
-        <main className="panel">
-          <h2 className="blk">About the role</h2>
+        <section className="panel" aria-labelledby="role-title">
+          <h2 className="blk" id="role-title">About the role</h2>
           <p className="muted" style={{ fontSize: 15 }}>{job.summary}</p>
           <h2 className="blk">What you&rsquo;ll do</h2>
           <ul className="inc">{job.responsibilities.map((r) => <li key={r}>{r}</li>)}</ul>
@@ -35,7 +35,7 @@ export default async function JobPage({ params }: { params: Promise<{ slug: stri
           <p className="muted" style={{ fontSize: 15 }}>
             A DHA-licensed employer, structured training, real progression, and a team that celebrates its people.
           </p>
-        </main>
+        </section>
         <ApplyForm role={job.title} />
       </div>
     </>

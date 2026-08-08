@@ -1,17 +1,24 @@
+import Image from "next/image";
 import Link from "next/link";
-import BookingWidget from "@/components/BookingWidget";
-import Placeholder from "@/components/Placeholder";
+import heroPremium from "@/public/img/hero-premium-v2.jpg";
 import Icon from "@/components/Icon";
-import { coreServiceList, priceLabel, articles, COMPANY, type Category } from "@/lib/data";
+import ServiceVisual from "@/components/ServiceVisual";
+import { homeServiceList, articles, COMPANY, priceLabel, type Category } from "@/lib/data";
 
-const toneFor = (c: Category): "orange" | "green" | "red" =>
-  c === "Medical" ? "orange" : c === "Nursing & care" ? "green" : "red";
+const toneFor = (category: Category): "forest" | "copper" | "plum" =>
+  category === "Medical" ? "copper" : category === "Nursing & care" ? "forest" : "plum";
 
-const features = [
-  { icon: "calendar", cat: "cat-medical", t: "Same-day slots" },
-  { icon: "shield", cat: "cat-nursing", t: "DHA-licensed team" },
-  { icon: "wellness", cat: "cat-therapy", t: "Transparent pricing" },
-  { icon: "refresh", cat: "cat-medical", t: "We follow up" },
+const popularCare = [
+  { name: "Comprehensive health profiles", meta: "Home sample collection", price: "from AED 89", href: "/services/lab-tests", icon: "lab" },
+  { name: "Sports injury physiotherapy", meta: "Single visits & recovery plans", price: "from AED 289", href: "/services/physiotherapy/#sports-performance", icon: "physio" },
+  { name: "NAD+ clinician-led programmes", meta: "Dose and suitability assessment", price: "from AED 449", href: "/services/nad-therapy", icon: "wellness" },
+  { name: "Home nurse visit", meta: "Focused clinical support", price: "from AED 149", href: "/services/home-nursing", icon: "nursing" },
+];
+
+const careStandards = [
+  { icon: "shield", title: "Licensed clinical teams", body: "Care is delivered by appropriately licensed professionals, with credentials available on request." },
+  { icon: "calendar", title: "Coordinated around you", body: "A care coordinator confirms availability, location and preparation before the visit." },
+  { icon: "doc", title: "Clear records & next steps", body: "Understand what is included, what happens next and when follow-up is required." },
 ];
 
 export default function HomePage() {
@@ -19,138 +26,66 @@ export default function HomePage() {
 
   return (
     <>
-      {/* HERO */}
-      <section className="hero-lite">
-        <div className="wrap">
-          <div className="hero-lite-inner">
-            <div>
-              <span className="kick2"><span className="d" />Home Healthcare · Dubai · Since {COMPANY.since}</span>
-              <h1>Hospital-grade care, <em>in the comfort of home.</em></h1>
-              <p className="lead">Licensed doctors, nurses and physiotherapists at your door. No queues, no waiting rooms.</p>
-              <div className="trust">
-                <span><b>DHA</b> licensed</span>
-                <span><b>MOHAP</b> approved</span>
-                <span><Icon name="star" size={14} /> <b>4.9</b> · 25,000+ families</span>
-              </div>
-              <div className="hero-actions">
-                <Link className="btn btn-primary btn-lg" href="/services">Book a visit <Icon name="arrow" size={17} /></Link>
-                <a className="btn btn-secondary btn-lg" href={COMPANY.whatsapp} target="_blank" rel="noreferrer">WhatsApp us</a>
-              </div>
+      <section className="premium-hero">
+        <Image
+          className="premium-hero-image"
+          src={heroPremium}
+          alt="A home healthcare clinician speaking with an older patient in a Dubai residence"
+          fill
+          priority
+          sizes="100vw"
+        />
+        <div className="premium-hero-shade" />
+        <div className="wrap premium-hero-inner">
+          <div className="premium-hero-copy">
+            <span className="premium-kicker"><span />Home healthcare · Dubai · Since {COMPANY.since}</span>
+            <h1>Advanced care.<br /><em>Deeply personal.</em></h1>
+            <p>Licensed doctors, nurses and physiotherapists bringing attentive, hospital-grade care into the comfort of your home.</p>
+            <div className="premium-hero-actions">
+              <Link className="btn btn-primary btn-lg" href="#primary-care">Explore home care <Icon name="arrow" size={17} /></Link>
+              <a className="btn btn-glass btn-lg" href={COMPANY.whatsapp} target="_blank" rel="noreferrer">Speak to our care team</a>
             </div>
-            <div className="hero-art">
-              <div className="hero-ph">
-                <span className="pill-hl"><Icon name="heartSolid" size={14} /> Healing Lives</span>
-                <svg className="ph-ic" viewBox="0 0 24 24" aria-hidden="true">
-                  <rect x="3" y="4" width="18" height="16" rx="2" /><circle cx="9" cy="10" r="2" /><path d="M4 18l5-4 4 3 3-3 4 4" />
-                </svg>
-                <span className="ph-cap">Cut-out home healthcare photo (transparent PNG works best)</span>
-                <span className="ph-sub">or browse files</span>
-              </div>
+            <div className="premium-hero-proof" aria-label="HealthServe credentials">
+              <span><b>DHA</b> licensed facility</span>
+              <span><b>MOHAP</b> approved</span>
+              <span><b>10 years</b> caring in Dubai</span>
             </div>
           </div>
-
-          <div className="hero-book"><BookingWidget /></div>
-
-          <div className="hero-strip-lite">
-            <span className="lbl2">Insurance &amp; direct billing</span>
-            <div className="ins">
-              <span>ESAAD</span><span>Al Sanad</span><span>Al Saada</span><span>Saico</span><span>Almadallah</span>
-            </div>
+        </div>
+        <div className="premium-hero-status">
+          <div className="wrap">
+            <span><i />Care requests reviewed during clinic hours</span>
+            <span>Dubai-wide coverage confirmed before booking</span>
+            <a href={COMPANY.phoneHref}>Call {COMPANY.phoneLabel}</a>
           </div>
         </div>
       </section>
 
-      {/* FEATURES */}
-      <section className="wrap home-sec">
-        <div className="features">
-          {features.map((f) => (
-            <div className="feature" key={f.t}>
-              <span className={`ic ${f.cat}`}><Icon name={f.icon} /></span>
-              <h4>{f.t}</h4>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* SERVICES */}
-      <section className="wrap home-sec tight">
-        <div className="sec-hd" style={{ marginBottom: 24 }}>
+      <section className="wrap premium-section" id="primary-care">
+        <div className="premium-section-head">
           <div>
-            <span className="kicker">What we offer</span>
-            <h2 className="sec">Care that comes to you</h2>
-            <p>Licensed care at your doorstep — transparent prices, same-day slots.</p>
+            <span className="kicker">Primary home care</span>
+            <h2 className="sec">The care you need, brought home.</h2>
+            <p>Start with the type of support you need. We will help you choose the right visit or programme.</p>
           </div>
-          <Link className="btn btn-primary btn-sm" href="/services">All services <Icon name="arrow" size={14} /></Link>
+          <Link className="text-link" href="/services">Explore all care <Icon name="arrow" size={15} /></Link>
         </div>
-        <div className="grid3">
-          {coreServiceList.map((s) => (
-            <Link className="icard" key={s.slug} href={`/services/${s.slug}`}>
-              <Placeholder caption={s.photo} tone={toneFor(s.category)} />
-              <div className="b">
-                <h3>{s.shortName}</h3>
-                <p>{s.blurb}</p>
-                <div className="foot">
-                  <span className="price">
-                    {priceLabel(s)}
-                    <small>{s.priceType === "from" ? s.unit : "quote"}</small>
-                  </span>
-                  <span className="slot"><span className="dot" />{s.nextSlot.split(" ")[0]}</span>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
-
-        <div className="howrow">
-          <div className="how-s"><span className="n">1</span><div><b>Choose service &amp; time</b><span>Pick what you need and a slot that suits you.</span></div></div>
-          <div className="how-s"><span className="n">2</span><div><b>Confirm address</b><span>Pay now or on the visit — your choice.</span></div></div>
-          <div className="how-s"><span className="n">3</span><div><b>Open the door</b><span>A friendly, licensed clinician arrives.</span></div></div>
-        </div>
-      </section>
-
-      {/* WELLNESS BAND */}
-      <section className="wrap home-sec tight">
-        <div className="promoband green">
-          <div className="txt">
-            <span className="k">The Dispensary</span>
-            <h2>IV drips, NAD+ and vitamin shots — without leaving the sofa.</h2>
-            <p>Clinician-administered wellness, delivered to your door.</p>
-          </div>
-          <Link className="btn btn-primary btn-lg" href="/dispensary">Explore the Dispensary</Link>
-        </div>
-      </section>
-
-      {/* STATS */}
-      <section className="wrap home-sec tight">
-        <div className="band soft">
-          <div className="stat"><div className="big">{COMPANY.since}</div><div className="lb">Serving Dubai homes</div></div>
-          <div className="stat"><div className="big">DHA</div><div className="lb">Licence FL-0064861</div></div>
-          <div className="stat"><div className="big">MOHAP</div><div className="lb">ZM0ETT1A-090224</div></div>
-          <div className="stat"><div className="big">25,000+</div><div className="lb">Families cared for</div></div>
-        </div>
-      </section>
-
-      {/* JOURNAL */}
-      <section className="wrap home-sec tight">
-        <div className="sec-hd" style={{ marginBottom: 24 }}>
-          <div>
-            <span className="kicker">From our journal</span>
-            <h2 className="sec">Health guidance from our team</h2>
-          </div>
-          <Link className="btn btn-primary btn-sm" href="/journal">Read the journal <Icon name="arrow" size={14} /></Link>
-        </div>
-        <div className="jgrid">
-          {latest.map((a) => (
-            <Link className="icard" key={a.slug} href={`/journal/${a.slug}`}>
-              <Placeholder caption={a.photo} tone="neutral" />
-              <div className="b">
-                <span className={`tag${a.category === "News & press" ? " orange" : ""}`} style={{ alignSelf: "flex-start", marginBottom: 8 }}>
-                  <span className="dot" />{a.category}
-                </span>
-                <h3 style={{ fontSize: 16 }}>{a.title}</h3>
-                <div className="foot">
-                  <span className="muted" style={{ fontSize: 12 }}>{a.readMins} min read</span>
-                  <span className="btn btn-quiet btn-sm">Read</span>
+        <div className="primary-care-grid">
+          {homeServiceList.map((service, index) => (
+            <Link className={`primary-care-card ${index === 0 ? "feature" : ""}`} key={service.slug} href={`/services/${service.slug}`}>
+              <ServiceVisual
+                icon={service.icon}
+                eyebrow={`0${index + 1}`}
+                title={service.shortName}
+                tone={toneFor(service.category)}
+                large={index === 0}
+              />
+              <div className="primary-care-body">
+                <h3>{service.shortName}</h3>
+                <p>{service.blurb}</p>
+                <div className="primary-care-foot">
+                  <span>{priceLabel(service)}</span>
+                  <span>View care <Icon name="arrow" size={14} /></span>
                 </div>
               </div>
             </Link>
@@ -158,23 +93,121 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* TESTIMONIAL */}
-      <section className="wrap home-sec tight">
-        <div className="quoteband">
-          <span className="stars" aria-label="5 out of 5 stars">{[0,1,2,3,4].map(i=><Icon key={i} name="star" size={15} />)}</span>
-          <p>&ldquo;The nurse arrived the same evening we called. Professional, kind, and my mother felt completely at ease.&rdquo;</p>
-          <cite>Google review · verified family</cite>
+      <section className="premium-dark-section">
+        <div className="wrap premium-dark-grid">
+          <div className="premium-dark-intro">
+            <span className="kicker light">A calmer care journey</span>
+            <h2>Clinical precision, with a human at every step.</h2>
+            <p>No anonymous marketplace hand-offs. Our care team helps clarify the service, confirms the visit and remains available for follow-up.</p>
+            <a className="btn btn-white btn-lg" href={COMPANY.whatsapp} target="_blank" rel="noreferrer">Talk to a care coordinator</a>
+          </div>
+          <div className="premium-steps">
+            {[
+              ["01", "Tell us what you need", "Choose a service or describe the situation to our care team."],
+              ["02", "Confirm the care plan", "We confirm suitability, location, timing and the final price."],
+              ["03", "Welcome your clinician", "Your licensed professional arrives prepared, with follow-up arranged."],
+            ].map(([n, title, body]) => (
+              <div className="premium-step" key={n}>
+                <span>{n}</span><div><h3>{title}</h3><p>{body}</p></div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* FOR YOUR ORGANISATION */}
-      <section className="wrap home-sec">
-        <div className="promoband green">
-          <div className="txt">
-            <h2>For your organisation</h2>
-            <p>Corporate wellness days, on-site nurses and group vaccinations — one provider, one invoice.</p>
+      <section className="wrap premium-section">
+        <div className="premium-section-head">
+          <div>
+            <span className="kicker">Popular care options</span>
+            <h2 className="sec">Specific services. Clear starting prices.</h2>
+            <p>Browse commonly requested treatments and profiles, then confirm suitability with the clinical team.</p>
           </div>
-          <Link className="btn btn-primary btn-lg" href="/organizations">Inquire</Link>
+        </div>
+        <div className="product-rail">
+          {popularCare.map((item) => (
+            <Link className="product-rail-card" href={item.href} key={item.name}>
+              <span className="product-rail-icon"><Icon name={item.icon} size={23} /></span>
+              <div><h3>{item.name}</h3><p>{item.meta}</p></div>
+              <b>{item.price}</b>
+              <Icon name="arrow" size={16} />
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="wrap premium-section compact">
+        <div className="dispensary-feature">
+          <div className="dispensary-visual" aria-hidden="true">
+            <span className="orb orb-one" /><span className="orb orb-two" />
+            <Icon name="wellness" size={58} />
+            <small>Clinician-led wellness</small>
+          </div>
+          <div className="dispensary-copy">
+            <span className="kicker">The Dispensary</span>
+            <h2>Wellness, diagnostics and home treatment—clinically guided.</h2>
+            <p>Explore IV therapy, NAD+, vitamin shots, vaccinations and genetic testing with suitability reviewed before care.</p>
+            <div className="inline-actions">
+              <Link className="btn btn-primary btn-lg" href="/dispensary">Explore the Dispensary</Link>
+              <a className="text-link" href={COMPANY.whatsapp} target="_blank" rel="noreferrer">Ask a clinician <Icon name="arrow" size={15} /></a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="wrap premium-section compact">
+        <div className="premium-section-head">
+          <div>
+            <span className="kicker">Our care standard</span>
+            <h2 className="sec">Confidence before the door opens.</h2>
+          </div>
+        </div>
+        <div className="standards-grid">
+          {careStandards.map((item) => (
+            <article key={item.title}>
+              <span><Icon name={item.icon} size={23} /></span>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </article>
+          ))}
+        </div>
+        <div className="licence-line">
+          <span><b>DHA</b> {COMPANY.dha.replace("DHA ", "")}</span>
+          <span><b>MOHAP</b> {COMPANY.mohap.replace("MOHAP ", "")}</span>
+          <span><b>Clinic</b> {COMPANY.address}</span>
+          <Link href="/about">Our standards <Icon name="arrow" size={14} /></Link>
+        </div>
+      </section>
+
+      <section className="wrap premium-section compact">
+        <div className="premium-section-head">
+          <div>
+            <span className="kicker">Clinical journal</span>
+            <h2 className="sec">Guidance for care at home.</h2>
+          </div>
+          <Link className="text-link" href="/journal">View all insights <Icon name="arrow" size={15} /></Link>
+        </div>
+        <div className="journal-editorial-grid">
+          {latest.map((article, index) => (
+            <Link href={`/journal/${article.slug}`} key={article.slug}>
+              <span className="journal-number">0{index + 1}</span>
+              <small>{article.category} · {article.readMins} min</small>
+              <h3>{article.title}</h3>
+              <span className="text-link">Read insight <Icon name="arrow" size={14} /></span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="wrap premium-section">
+        <div className="final-concierge">
+          <div>
+            <span className="kicker light">Not sure where to begin?</span>
+            <h2>Tell us what is happening. We’ll guide the next step.</h2>
+          </div>
+          <div className="inline-actions">
+            <a className="btn btn-white btn-lg" href={COMPANY.whatsapp} target="_blank" rel="noreferrer">WhatsApp our care team</a>
+            <Link className="btn btn-clear btn-lg" href="/contact">Contact HealthServe</Link>
+          </div>
         </div>
       </section>
     </>

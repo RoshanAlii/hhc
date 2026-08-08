@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Icon from "@/components/Icon";
+import ServiceVisual from "@/components/ServiceVisual";
 import { jobs } from "@/lib/data";
 
 export const metadata: Metadata = {
@@ -18,7 +19,7 @@ export default function CareersPage() {
       </header>
       <div className="wrap">
         <div className="grid2" style={{ marginTop: 20 }}>
-          <div className="imgph" style={{ minHeight: 200 }}>Team culture photo</div>
+          <ServiceVisual icon="nursing" eyebrow="Careers at HealthServe" title="Grow with a clinical team that cares" tone="forest" large />
           <div className="panel">
             <h2 className="blk">Why HealthServe</h2>
             <p className="muted" style={{ fontSize: 15 }}>

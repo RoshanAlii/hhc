@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Icon from "@/components/Icon";
 import { COMPANY } from "@/lib/data";
+import Image from "next/image";
+import heroPremium from "@/public/img/hero-premium-v2.jpg";
 
 export const metadata: Metadata = {
   title: "About us",
@@ -18,12 +20,14 @@ export default function AboutPage() {
       </header>
       <div className="wrap">
         <div className="grid2" style={{ marginTop: 24 }}>
-          <div className="imgph" style={{ minHeight: 260 }}>Care photography — team</div>
+          <div className="about-image">
+            <Image src={heroPremium} alt="A HealthServe clinician discussing care with a patient at home" fill sizes="(max-width: 900px) 100vw, 50vw" />
+          </div>
           <div className="panel">
             <h2 className="blk">Our story</h2>
             <p className="muted" style={{ fontSize: 15 }}>
               Since {COMPANY.since} our doctors, nurses and physiotherapists have brought hospital-grade care into
-              thousands of Dubai homes — with the standards of a licensed facility and the warmth of a house call.
+              Dubai homes — with the standards of a licensed facility and the warmth of a house call.
             </p>
             <h2 className="blk">Our standards</h2>
             <ul className="inc">
@@ -37,12 +41,11 @@ export default function AboutPage() {
           <div className="stat"><div className="big">DHA</div><div className="lb">FL-0064861 · licensed facility</div></div>
           <div className="stat"><div className="big">MOHAP</div><div className="lb">ZM0ETT1A-090224</div></div>
           <div className="stat"><div className="big">10 yrs</div><div className="lb">In Dubai homes</div></div>
-          <div className="stat"><div className="big" style={{display:"inline-flex",alignItems:"center",gap:6}}>4.9 <Icon name="star" size={20} style={{color:"var(--star)"}} /></div><div className="lb">Google rating</div></div>
+          <div className="stat"><div className="big" style={{display:"inline-flex",alignItems:"center",gap:6}}><Icon name="heart" size={24} /> Care</div><div className="lb">Coordinated by a human team</div></div>
         </div>
-        <h2 className="blk" style={{ marginTop: 40 }}>Partners &amp; insurance</h2>
-        <div className="insurers" style={{ marginBottom: 60 }}>
-          <span>ESAAD</span><span>Al Sanad</span><span>Al Saada</span><span>Saico</span><span>Almadallah</span>
-          <span>As featured in Khaleej Times</span>
+        <h2 className="blk" style={{ marginTop: 40 }}>Insurance documentation</h2>
+        <div className="policy-note" style={{ marginBottom: 60 }}>
+          Claim-ready invoices are available on request. Reimbursement and direct-billing eligibility depend on your insurer and policy; our care team can explain what documentation is available before your visit.
         </div>
       </div>
     </>

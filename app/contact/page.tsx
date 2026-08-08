@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import ContactForm from "@/components/ContactForm";
 import { COMPANY } from "@/lib/data";
+import Icon from "@/components/Icon";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -24,7 +25,10 @@ export default function ContactPage() {
           <div className="srow"><span>WhatsApp</span><b>{COMPANY.whatsappLabel}</b></div>
           <div className="srow"><span>Email</span><b>{COMPANY.email}</b></div>
           <div className="srow"><span>Office</span><b>{COMPANY.address}</b></div>
-          <div className="imgph" style={{ height: 130, marginTop: 12 }}>Map</div>
+          <div className="contact-location">
+            <Icon name="heart" size={22} />
+            <div><b>HealthServe Home Healthcare</b><span>{COMPANY.address}</span><span>{COMPANY.hours}</span></div>
+          </div>
         </aside>
       </div>
     </>
