@@ -28,10 +28,18 @@ export default function Header() {
   const [emirate, setEmirate] = useState("Dubai");
   const [language, setLanguage] = useState("en");
   const [checkoutProgress, setCheckoutProgress] = useState({ contactComplete: false, visitComplete: false });
+  const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
     setEmirate(window.localStorage.getItem("healthserve-emirate") || "Dubai");
     setLanguage(window.localStorage.getItem("healthserve-language") || "en");
+    setLoggedIn(Boolean(window.localStorage.getItem("healthserve.session.v1")));
+  }, []);
+
+  useEffect(() => {
+    const updateSession = () => setLoggedIn(Boolean(window.localStorage.getItem("healthserve.session.v1")));
+    window.addEventListener("healthserve-session-change", updateSession);
+    return () => window.removeEventListener("healthserve-session-change", updateSession);
   }, []);
 
   useEffect(() => {
@@ -132,8 +140,8 @@ export default function Header() {
                 </Link>
               )}
               <Link className="btn-booknow" href="/services">Book Now</Link>
-              <Link className="btn-login" href="/login">
-                <Icon name="user" size={16} /> Log in
+              <Link className="btn-login" href={loggedIn ? "/account" : "/login"}>
+                <Icon name="user" size={16} /> {loggedIn ? "My account" : "Log in"}
               </Link>
               <button
                 className="navtoggle"

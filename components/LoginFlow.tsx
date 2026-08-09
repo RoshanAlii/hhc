@@ -4,9 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import Logo from "./Logo";
-
-// Demo OTP flow - no backend. A fixed demo code is shown to the user.
-const DEMO_CODE = "4242";
+import Icon from "./Icon";
 
 export default function LoginFlow() {
   const router = useRouter();
@@ -15,6 +13,7 @@ export default function LoginFlow() {
   const [digits, setDigits] = useState(["", "", "", ""]);
   const [error, setError] = useState("");
   const [seconds, setSeconds] = useState(0);
+  const [previewCode, setPreviewCode] = useState("");
   const inputs = useRef<(HTMLInputElement | null)[]>([]);
 
   useEffect(() => {
@@ -29,6 +28,7 @@ export default function LoginFlow() {
       return;
     }
     setError("");
+    setPreviewCode(String(Math.floor(1000 + Math.random() * 9000)));
     setStep("code");
     setSeconds(24);
     setTimeout(() => inputs.current[0]?.focus(), 50);
@@ -43,10 +43,12 @@ export default function LoginFlow() {
   }
 
   function verify() {
-    if (digits.join("") === DEMO_CODE) {
+    if (digits.join("") === previewCode) {
+      localStorage.setItem("healthserve.session.v1", JSON.stringify({ mobile, createdAt: Date.now() }));
+      window.dispatchEvent(new Event("healthserve-session-change"));
       router.push("/account");
     } else {
-      setError("That code isn't right. (Demo code: " + DEMO_CODE + ")");
+      setError("That code isn't right. Please check the four digits and try again.");
     }
   }
 
@@ -54,7 +56,6 @@ export default function LoginFlow() {
 
   return (
     <div className="wrap" style={{ paddingBlock: 56, maxWidth: 880 }}>
-      <span className="tag dark" style={{ marginBottom: 16 }}><span className="dot" />R2 preview - passwordless login</span>
       <div className="grid2">
         <div className="panel" style={{ textAlign: "center" }}>
           <Link className="hs-logo" href="/" style={{ justifyContent: "center", display: "inline-flex" }}><Logo width={160} tagline={false} /></Link>
@@ -74,6 +75,7 @@ export default function LoginFlow() {
         <div className="panel" style={{ textAlign: "center", opacity: step === "code" ? 1 : 0.55 }}>
           <h2 style={{ fontSize: 20, fontWeight: "var(--fw-bold)", marginBottom: 4 }}>Enter the code</h2>
           <p className="muted" style={{ fontSize: 13 }}>{step === "code" ? `Sent to ${masked || "your mobile"}` : "We'll text you a 4-digit code"}</p>
+          {step === "code" && <div className="portal-info" style={{ textAlign: "start", marginTop: 14 }}><Icon name="shield" size={18} /><div><b>Preview verification code</b><span>Enter {previewCode} to continue in this website demo.</span></div></div>}
           <div style={{ display: "flex", gap: 10, justifyContent: "center", margin: "18px 0" }}>
             {digits.map((d, i) => (
               <input
@@ -97,7 +99,6 @@ export default function LoginFlow() {
           </p>
         </div>
       </div>
-      <p className="muted" style={{ fontSize: 12, marginTop: 16, textAlign: "center" }}>Demo: enter code <b>{DEMO_CODE}</b> to view the account area.</p>
     </div>
   );
 }

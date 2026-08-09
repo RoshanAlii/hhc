@@ -28,6 +28,20 @@ export default function ConfirmationView() {
     );
   }
 
+  function downloadInvoice() {
+    if (!order) return;
+    const content = [`HealthServe VAT Invoice`, `Order: ${order.id}`, ...order.items.map((item) => `${item.name} x ${item.qty}: ${formatAED(item.price * item.qty)}`), `VAT: ${formatAED(order.vat)}`, `Total: ${formatAED(order.total)}`].join("\n");
+    const url = URL.createObjectURL(new Blob([content], { type: "text/plain" }));
+    const anchor = document.createElement("a"); anchor.href = url; anchor.download = `${order.id}-invoice.txt`; anchor.click(); URL.revokeObjectURL(url);
+  }
+
+  function addToCalendar() {
+    if (!order) return;
+    const content = ["BEGIN:VCALENDAR", "VERSION:2.0", "BEGIN:VEVENT", `SUMMARY:HealthServe - ${order.items[0]?.name ?? "Home visit"}`, `DESCRIPTION:Booking ${order.id} - ${order.slot}`, "END:VEVENT", "END:VCALENDAR"].join("\r\n");
+    const url = URL.createObjectURL(new Blob([content], { type: "text/calendar" }));
+    const anchor = document.createElement("a"); anchor.href = url; anchor.download = `${order.id}.ics`; anchor.click(); URL.revokeObjectURL(url);
+  }
+
   return (
     <div className="confirm">
       <div className="checkic">
@@ -59,9 +73,9 @@ export default function ConfirmationView() {
       </div>
 
       <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap" }}>
-        <Link className="btn btn-primary" href="/account">Track booking</Link>
-        <Link className="btn btn-outline" href="/account">Add to calendar</Link>
-        <Link className="btn btn-quiet" href="/account">Download invoice</Link>
+        <Link className="btn btn-primary" href="/account/bookings">Track booking</Link>
+        <button className="btn btn-outline" onClick={addToCalendar} type="button">Add to calendar</button>
+        <button className="btn btn-quiet" onClick={downloadInvoice} type="button">Download invoice</button>
       </div>
 
       <div className="band" style={{ marginTop: 32, textAlign: "start" }}>
